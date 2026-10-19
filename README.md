@@ -1,12 +1,12 @@
 # Episteme AI — Autonomous Self-Healing Learning Path Engine
 
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.4.2-black?logo=next.js)](https://nextjs.org/)
-[![React 19](https://img.shields.io/badge/React-19.3.0-blue?logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.0%20Flash-8E75B2?logo=google)](https://aistudio.google.com/)
-[![SQLite WAL](https://img.shields.io/badge/SQLite-WAL%20Stateful-003B57?logo=sqlite)](https://sqlite.org/)
-[![Verification Suite](https://img.shields.io/badge/Tests-4%2F4%20Passed-22c55e)](#official-scenarios--verification-evidence)
-[![RFC 5545](https://img.shields.io/badge/Calendar-RFC--5545%20.ics-amber)](#calendar-export--idempotent-scheduling)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.4.2-111110?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19.3.0-111110?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-111110?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.0%20Flash-111110?logo=google&logoColor=white)](https://aistudio.google.com/)
+[![SQLite WAL](https://img.shields.io/badge/SQLite-WAL%20Stateful-111110?logo=sqlite&logoColor=white)](https://sqlite.org/)
+[![Verification Suite](https://img.shields.io/badge/Tests-4%2F4%20Passed-111110)](#official-scenarios--verification-evidence)
+[![RFC 5545](https://img.shields.io/badge/Calendar-RFC--5545%20.ics-111110)](#calendar-export--idempotent-scheduling)
 
 > **Episteme** (Ancient Greek: *ἐπιστήμη* — justified, verified truth vs *δόξα* / unverified opinion) is an autonomous, agentic curriculum engineer. It transforms ambiguous career goals into strictly constrained, prerequisite-ordered weekly roadmaps powered exclusively by **100% verified free public courseware**, backed by **autonomous link self-healing** and **human-governed calendar scheduling**.
 
