@@ -2,7 +2,8 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 
-const DB_DIR = path.join(process.cwd(), 'data');
+const isServerless = process.env.VERCEL === '1' || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DB_DIR = isServerless ? '/tmp' : path.join(process.cwd(), 'data');
 const DB_PATH = path.join(DB_DIR, 'learningpath.db');
 
 let db: Database.Database | null = null;
@@ -10,12 +11,27 @@ let db: Database.Database | null = null;
 export function getDb(): Database.Database {
   if (db) return db;
 
-  if (!fs.existsSync(DB_DIR)) {
-    fs.mkdirSync(DB_DIR, { recursive: true });
+  if (isServerless) {
+    const seedPath = path.join(process.cwd(), 'data', 'learningpath.db');
+    if (fs.existsSync(seedPath) && !fs.existsSync(DB_PATH)) {
+      try {
+        fs.copyFileSync(seedPath, DB_PATH);
+      } catch (e) {
+        console.warn('Could not copy seed database to /tmp:', e);
+      }
+    }
+  } else {
+    if (!fs.existsSync(DB_DIR)) {
+      fs.mkdirSync(DB_DIR, { recursive: true });
+    }
   }
 
   db = new Database(DB_PATH);
-  db.pragma('journal_mode = WAL');
+  try {
+    db.pragma('journal_mode = WAL');
+  } catch {
+    db.pragma('journal_mode = DELETE');
+  }
   initSchema(db);
   return db;
 }
@@ -32,6 +48,7 @@ function initSchema(db: Database.Database) {
       total_hours INTEGER NOT NULL,
       status TEXT NOT NULL DEFAULT 'pending',
       test_case TEXT,
+      source TEXT DEFAULT 'rule_based',
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       updated_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
@@ -103,6 +120,9 @@ function initSchema(db: Database.Database) {
   try {
     db.exec(`ALTER TABLE actions ADD COLUMN mock_execution INTEGER NOT NULL DEFAULT 1`);
   } catch { /* column already exists */ }
+  try {
+    db.exec(`ALTER TABLE runs ADD COLUMN source TEXT DEFAULT 'rule_based'`);
+  } catch { /* column already exists */ }
 }
 
 export type Run = {
@@ -115,6 +135,7 @@ export type Run = {
   total_hours: number;
   status: string;
   test_case: string | null;
+  source?: string;
   created_at: string;
   updated_at: string;
 };

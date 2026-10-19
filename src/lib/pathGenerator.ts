@@ -19,6 +19,7 @@ export interface LearningPath {
   weeks: WeekPlan[];
   total_hours_used: number;
   prerequisites_note: string;
+  source: 'gemini' | 'rule_based';
 }
 
 const FREE_COURSE_DATABASE: Record<string, { title: string; url: string; platform: string }[]> = {
@@ -133,6 +134,7 @@ JSON schema:
         if (errors.length === 0) {
           // Recalculate to ensure consistency
           parsed.total_hours_used = parsed.weeks.reduce((s, w) => s + w.hours_allocated, 0);
+          parsed.source = 'gemini';
           return parsed;
         } else {
           console.warn(`Gemini output failed validation (${errors.length} error(s)), using fallback:`, errors);
@@ -295,5 +297,6 @@ function generateRuleBasedPath(
     weeks,
     total_hours_used: totalHours,
     prerequisites_note: `Path ordered from ${level}-level foundations to applied practice, fitting ${weeklyHours}h/week over ${horizonWeeks} weeks.`,
+    source: 'rule_based',
   };
 }

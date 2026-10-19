@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import {
   CheckCircle2, AlertTriangle,
   XCircle, Target, BarChart3, ExternalLink,
@@ -66,6 +67,7 @@ interface Run {
   total_hours: number;
   status: string;
   test_case: string | null;
+  source?: string;
   created_at: string;
 }
 
@@ -442,6 +444,26 @@ export default function Home() {
     }
   };
 
+  const handleInjectDemo = async (type: 'udemy' | 'broken') => {
+    if (!currentDetail) return;
+    try {
+      const res = await fetch(`/api/runs/${currentDetail.id}/inject-demo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type }),
+      });
+      const data = await res.json() as { message: string; week_id?: string };
+      if (!res.ok) { addToast('Failed to inject demo resource', 'error'); return; }
+      addToast(data.message, 'info');
+      await loadRunDetail(currentDetail.id);
+      if (data.week_id) {
+        setExpandedWeeks(prev => new Set([...prev, data.week_id!]));
+      }
+    } catch {
+      addToast('Failed to inject demo resource', 'error');
+    }
+  };
+
   const handleApprove = async (actionId: string, decision: 'approve' | 'reject') => {
     if (!currentDetail) return;
     setApproving(actionId);
@@ -533,19 +555,17 @@ export default function Home() {
               >
                 Official Test Cases (4/4)
               </button>
+              <Link
+                href="/presentation"
+                className="nav-link-btn"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}
+              >
+                <span>Presentation</span>
+                <span style={{ fontSize: 9, padding: '1px 5px', borderRadius: 4, background: '#111110', color: '#fff', fontWeight: 800 }}>SLIDES</span>
+              </Link>
             </nav>
 
             <div className="header-cta-group">
-              <a
-                href="/presentation"
-                className="nav-link-btn"
-                style={{ fontWeight: 600, color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}
-                title="View Hackathon Slide Deck"
-              >
-                <Layers size={14} color="#38bdf8" />
-                <span>Pitch Deck</span>
-              </a>
-
               <button
                 id="header-view-tests"
                 className="nav-link-btn"
@@ -912,20 +932,43 @@ export default function Home() {
                   <div className="roadmap-header">
                     <div className="roadmap-title-row">
                       <div className="roadmap-main-title">{currentDetail.run.label}</div>
-                      <RunStatusBadge status={currentDetail.run.status} />
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                        {currentDetail.run.source === 'gemini' ? (
+                          <span className="engine-badge-gemini" title="Plan generated via Google Gemini 2.0 Flash AI Reasoning DAG">
+                            <Sparkles size={11} /> Gemini 2.0 Flash (AI Reasoning Active)
+                          </span>
+                        ) : (
+                          <span className="engine-badge-fallback" title="Deterministic rule-based DAG fallback is active. Set GEMINI_API_KEY in .env.local (or Vercel environment variables) to enable full Gemini AI reasoning.">
+                            <Cpu size={11} /> Deterministic Fallback (set GEMINI_API_KEY to enable AI reasoning)
+                          </span>
+                        )}
+                        <RunStatusBadge status={currentDetail.run.status} />
+                      </div>
                     </div>
                     <div className="roadmap-goal-text">{currentDetail.run.goal}</div>
 
                     <div className="roadmap-controls-bar">
-                      <div style={{ display: 'flex', gap: 10 }}>
+                      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                         <button
                           id="verify-button"
-                          className="btn-secondary-light"
+                          className="btn-primary-dark"
                           style={{ padding: '8px 16px', fontSize: 13 }}
                           onClick={handleVerify}
                           disabled={verifying}
                         >
-                          {verifying ? <><span className="spinner-icon" style={{ borderColor: 'rgba(0,0,0,0.2)', borderTopColor: '#000' }} />Auditing Links…</> : <><Search size={13} />Verify Links &amp; Self-Heal</>}
+                          {verifying ? <><span className="spinner-icon" style={{ borderColor: 'rgba(255,255,255,0.3)', borderTopColor: '#fff' }} />Auditing Links…</> : <><Search size={13} />Verify Links &amp; Self-Heal</>}
+                        </button>
+
+                        <button
+                          id="demo-inject-udemy-btn"
+                          className="btn-secondary-light"
+                          style={{ padding: '8px 14px', fontSize: 12.5, borderColor: '#f59e0b', color: '#b45309', background: '#fffbeb' }}
+                          title="Inject a real Udemy course URL into Week 1 to demonstrate live paywall detection & autonomous self-healing"
+                          onClick={() => handleInjectDemo('udemy')}
+                          disabled={verifying}
+                        >
+                          <AlertTriangle size={13} color="#d97706" />
+                          <span>Demo: Inject Udemy Paywall</span>
                         </button>
 
                         <button
@@ -1137,7 +1180,18 @@ export default function Home() {
                 {selectedRunId && currentDetail && currentDetail.id === selectedRunId && (
                   <div className="surface-card" style={{ maxHeight: '85vh', overflowY: 'auto' }}>
                     <div className="surface-card-header">
-                      <h3 className="surface-card-title"><BarChart3 size={15} />Run Detail: {currentDetail.run.label}</h3>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                        <h3 className="surface-card-title"><BarChart3 size={15} />Run Detail: {currentDetail.run.label}</h3>
+                        {currentDetail.run.source === 'gemini' ? (
+                          <span className="engine-badge-gemini" style={{ fontSize: 10, padding: '2px 8px' }}>
+                            <Sparkles size={10} /> Gemini 2.0 Flash (AI Active)
+                          </span>
+                        ) : (
+                          <span className="engine-badge-fallback" style={{ fontSize: 10, padding: '2px 8px' }}>
+                            <Cpu size={10} /> Deterministic Fallback (set GEMINI_API_KEY)
+                          </span>
+                        )}
+                      </div>
                       <button className="nav-link-btn" onClick={() => setSelectedRunId(null)}>Close</button>
                     </div>
                     <div style={{ padding: 20 }}>

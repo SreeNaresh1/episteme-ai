@@ -1236,3 +1236,331 @@ code, pre, .mono {
   .tc-grid-editorial { grid-template-columns: 1fr; }
   .header-nav { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ENGINE BADGE (Gemini vs Deterministic Fallback)
+═══════════════════════════════════════════════════════════ */
+.engine-badge-gemini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.engine-badge-fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRESENTATION SLIDE DECK
+═══════════════════════════════════════════════════════════ */
+.pres-slide-stage {
+  background: #ffffff;
+  border: 2px solid #111110;
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 580px;
+  position: relative;
+}
+
+.pres-slide-header {
+  margin-bottom: 24px;
+}
+
+.pres-tag-badge {
+  display: inline-block;
+  background: #eaeae6;
+  border: 1px solid #111110;
+  color: #111110;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 12px;
+}
+
+.pres-slide-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111110;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 6px 0;
+}
+
+.pres-slide-subtitle {
+  font-size: 15px;
+  color: #666666;
+  margin: 0 0 16px 0;
+}
+
+.pres-divider {
+  border: none;
+  border-top: 1px solid #e5e5e0;
+  margin: 16px 0 0 0;
+}
+
+.pres-slide-content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pres-quote-box {
+  background: #fbfbf9;
+  border: 1px solid #111110;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.pres-quote-text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+.pres-card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pres-card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.pres-card {
+  background: #ffffff;
+  border: 1px solid #111110;
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+
+.pres-card-alert {
+  border-color: #fca5a5;
+  background: #fffafa;
+}
+
+.pres-card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pres-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.pres-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111110;
+  margin: 0 0 6px 0;
+}
+
+.pres-card-desc {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #555555;
+  margin: 0;
+}
+
+.pres-sub-badge {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #111110;
+  background: #f4f4f1;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid #d5d5d0;
+}
+
+.pres-code-box {
+  background: #111110;
+  color: #f4f4f1;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  margin-top: 20px;
+}
+
+.pres-code-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888888;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.pres-code-snippet {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a7f3d0;
+  display: block;
+  white-space: pre-wrap;
+}
+
+.pres-arch-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.pres-arch-visual {
+  background: #fbfbf9;
+  border: 1px solid #111110;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pres-arch-img {
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+}
+
+.pres-arch-link-bar {
+  margin-top: 12px;
+}
+
+.pres-arch-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pres-step-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #333333;
+}
+
+.pres-step-badge {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #111110;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pres-table-container {
+  overflow-x: auto;
+  border: 1px solid #111110;
+  border-radius: var(--radius-sm);
+}
+
+.pres-test-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.pres-test-table th {
+  background: #111110;
+  color: #ffffff;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pres-test-table td {
+  padding: 12px 14px;
+  border-top: 1px solid #e5e5e0;
+  color: #333333;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.pres-test-table tr:nth-child(even) td {
+  background: #fbfbf9;
+}
+
+.pres-test-table code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: #eaeae6;
+  padding: 2px 5px;
+  border-radius: 3px;
+  display: block;
+}
+
+.pres-slide-footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pres-dot-btn {
+  width: 28px;
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+  background: #d5d5d0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pres-dot-btn.active {
+  background: #111110;
+  width: 44px;
+}
+
+@media (max-width: 900px) {
+  .pres-card-grid-3, .pres-card-grid-2, .pres-arch-container {
+    grid-template-columns: 1fr;
+  }
+}
+

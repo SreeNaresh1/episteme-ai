@@ -198,25 +198,7 @@ export async function checkLink(
 ): Promise<LinkCheckResult> {
   const checked_at = new Date().toISOString();
 
-  // Step 1: Known paid-platform heuristic (skip HTTP request)
-  if (isKnownPaidPlatform(url)) {
-    const rep = pickReplacement(url, topicHint);
-    return {
-      url,
-      status: 'paid',
-      http_status: null,
-      checked_at,
-      is_free: false,
-      classification_reason:
-        'URL matches a known paid-subscription platform. Content requires purchase or subscription.',
-      replacement: {
-        ...rep,
-        reason: `Original resource at ${url} requires payment. Replaced with a verified free alternative.`,
-      },
-    };
-  }
-
-  // Step 2: HTTP HEAD request with timeout
+  // Step 1: Perform live HTTP reachability check first for all URLs
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
@@ -225,7 +207,7 @@ export async function checkLink(
       method: 'HEAD',
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; LearningPathVerifier/1.0; +https://learnpath.app)',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       },
       redirect: 'follow',
     });
@@ -234,7 +216,42 @@ export async function checkLink(
     const http_status = response.status;
     const finalUrl = response.url || url;
 
-    // 4xx/5xx — resource unavailable
+    // 1. Explicit 404 or 5xx: Unreachable/broken regardless of domain
+    if (http_status === 404 || http_status >= 500) {
+      const rep = pickReplacement(url, topicHint);
+      return {
+        url,
+        status: 'broken',
+        http_status,
+        checked_at,
+        is_free: false,
+        classification_reason: `HTTP ${http_status} response. Resource is unavailable or does not exist.`,
+        replacement: {
+          ...rep,
+          reason: `Original resource returned HTTP ${http_status}. Replaced with a verified free alternative.`,
+        },
+      };
+    }
+
+    // 2. Paid platform heuristic (reachability verified: responded 2xx/3xx or 401/403 paywall)
+    if (isKnownPaidPlatform(url) || isKnownPaidPlatform(finalUrl)) {
+      const rep = pickReplacement(url, topicHint);
+      return {
+        url,
+        status: 'paid',
+        http_status,
+        checked_at,
+        is_free: false,
+        classification_reason:
+          'URL matches a known paid-subscription platform. Content requires purchase or subscription.',
+        replacement: {
+          ...rep,
+          reason: `Original resource at ${url} requires payment. Replaced with a verified free alternative.`,
+        },
+      };
+    }
+
+    // 3. Other 4xx responses on non-paid domains
     if (http_status >= 400) {
       const rep = pickReplacement(url, topicHint);
       return {
@@ -251,7 +268,7 @@ export async function checkLink(
       };
     }
 
-    // 2xx/3xx — resource accessible; now determine free vs unknown
+    // 4. 2xx/3xx: Accessible — check against verified free platform allow-list
     if (isKnownFreePlatform(url) || isKnownFreePlatform(finalUrl)) {
       return {
         url,
@@ -260,11 +277,11 @@ export async function checkLink(
         checked_at,
         is_free: true,
         classification_reason:
-          'URL matches a known free-access platform and responds with a successful HTTP status.',
+          `URL is reachable (HTTP ${http_status}) and matches a verified free platform.`,
       };
     }
 
-    // Accessible but not on free-platform allow-list
+    // 5. Accessible 2xx/3xx but not on verified-free allow-list
     return {
       url,
       status: 'live_unknown',
@@ -272,10 +289,10 @@ export async function checkLink(
       checked_at,
       is_free: false,
       classification_reason:
-        'URL responds successfully but the platform is not on the verified-free list. Manual review recommended.',
+        `URL is reachable (HTTP ${http_status}) but the platform is not on the verified-free list. Manual review recommended.`,
     };
   } catch (err) {
-    // Network error or timeout
+    // Network error, DNS failure (NXDOMAIN), or timeout
     const rep = pickReplacement(url, topicHint);
     const isTimeout = err instanceof Error && err.name === 'AbortError';
     return {

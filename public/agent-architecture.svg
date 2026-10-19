@@ -1,18 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%" style="background:#0e0e0e;font-family:-apple-system,BlinkMacSystemFont,'Plus Jakarta Sans','Inter',Helvetica,sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%" style="background:#fafaf8;font-family:-apple-system,BlinkMacSystemFont,'Plus Jakarta Sans','Inter',Helvetica,sans-serif;">
   <defs>
     <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.08"/>
     </filter>
-    <marker id="arrowGray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#888888" />
+    <marker id="arrowBlack" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#111110" />
     </marker>
-    <marker id="arrowWhite" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#e5e5e5" />
+    <marker id="arrowDashed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#444444" />
     </marker>
   </defs>
 
-  <!-- Subtle Minimalist Grid Pattern -->
-  <g opacity="0.04" stroke="#ffffff" stroke-width="1">
+  <!-- Editorial Architectural Grid Pattern -->
+  <g opacity="0.06" stroke="#111110" stroke-width="1">
     <line x1="80" y1="0" x2="80" y2="680" />
     <line x1="240" y1="0" x2="240" y2="680" />
     <line x1="400" y1="0" x2="400" y2="680" />
@@ -20,182 +20,182 @@
     <line x1="720" y1="0" x2="720" y2="680" />
     <line x1="880" y1="0" x2="880" y2="680" />
     <line x1="1040" y1="0" x2="1040" y2="680" />
-    <line x1="0" y1="100" x2="1200" y2="100" />
-    <line x1="0" y1="240" x2="1200" y2="240" />
-    <line x1="0" y1="380" x2="1200" y2="380" />
-    <line x1="0" y1="520" x2="1200" y2="520" />
+    <line x1="0" y1="90" x2="1200" y2="90" />
+    <line x1="0" y1="230" x2="1200" y2="230" />
+    <line x1="0" y1="370" x2="1200" y2="370" />
+    <line x1="0" y1="510" x2="1200" y2="510" />
   </g>
 
-  <!-- Header Section (Clean Monochrome) -->
-  <g transform="translate(60, 42)">
-    <!-- Minimalist Constellation Glyph -->
-    <circle cx="14" cy="14" r="14" fill="#202020" stroke="#333333" stroke-width="1" />
-    <circle cx="14" cy="14" r="4" fill="#f5f5f5" />
-    <circle cx="14" cy="5" r="1.5" fill="#a3a3a3" />
-    <circle cx="21" cy="8" r="1.5" fill="#a3a3a3" />
-    <circle cx="23" cy="14" r="1.5" fill="#a3a3a3" />
-    <circle cx="21" cy="20" r="1.5" fill="#a3a3a3" />
-    <circle cx="14" cy="23" r="1.5" fill="#a3a3a3" />
-    <circle cx="7" cy="20" r="1.5" fill="#a3a3a3" />
-    <circle cx="5" cy="14" r="1.5" fill="#a3a3a3" />
-    <circle cx="7" cy="8" r="1.5" fill="#a3a3a3" />
+  <!-- Header Section (Whitish Grey Canvas with Crisp Black Text) -->
+  <g transform="translate(60, 40)">
+    <!-- Geometric Dotted Brand Logo -->
+    <circle cx="14" cy="14" r="14" fill="#111110" />
+    <circle cx="14" cy="14" r="3.2" fill="#fafaf8" />
+    <circle cx="14" cy="4" r="1.5" fill="#fafaf8" />
+    <circle cx="21" cy="7" r="1.5" fill="#fafaf8" />
+    <circle cx="24" cy="14" r="1.5" fill="#fafaf8" />
+    <circle cx="21" cy="21" r="1.5" fill="#fafaf8" />
+    <circle cx="14" cy="24" r="1.5" fill="#fafaf8" />
+    <circle cx="7" cy="21" r="1.5" fill="#fafaf8" />
+    <circle cx="4" cy="14" r="1.5" fill="#fafaf8" />
+    <circle cx="7" cy="7" r="1.5" fill="#fafaf8" />
 
-    <text x="40" y="20" font-size="20" font-weight="700" fill="#f5f5f5" letter-spacing="0.4">EPISTEME AI — MULTI-AGENT ARCHITECTURE</text>
-    <text x="660" y="20" font-size="12" font-weight="500" fill="#888888" letter-spacing="0.3">AUTONOMOUS CURRICULUM ENGINE • 2026</text>
+    <text x="38" y="20" font-size="20" font-weight="800" fill="#111110" letter-spacing="0.3">EPISTEME AI — MULTI-AGENT ARCHITECTURE</text>
+    <text x="680" y="20" font-size="12" font-weight="600" fill="#47474d" letter-spacing="0.4">AUTONOMOUS CURRICULUM ENGINE • AGENTIC AI 2026</text>
   </g>
 
   <!-- ── 01. GOAL & CONSTRAINTS ───────────────────────────── -->
   <g transform="translate(60, 95)" filter="url(#cardShadow)">
-    <rect width="230" height="215" rx="8" fill="#141414" stroke="#282828" stroke-width="1" />
-    <rect width="230" height="38" rx="8" fill="#1b1b1b" />
-    <text x="16" y="24" font-size="11" font-weight="700" fill="#e5e5e5" letter-spacing="0.8">01 • GOAL &amp; CONSTRAINTS</text>
-    <text x="16" y="66" font-size="13" font-weight="600" fill="#ffffff">Learner Ambition Intake</text>
-    <text x="16" y="86" font-size="12" fill="#888888">"Become a Data Analyst"</text>
-    <line x1="16" y1="104" x2="214" y2="104" stroke="#262626" stroke-width="1" />
-    <text x="16" y="126" font-size="11" font-weight="600" fill="#d4d4d4">Mathematical Solver:</text>
-    <text x="16" y="146" font-size="11" fill="#888888">• Weekly Cap: 5 hours / week</text>
-    <text x="16" y="164" font-size="11" fill="#888888">• Time Horizon: 26 weeks</text>
-    <text x="16" y="184" font-size="11" font-weight="700" fill="#f5f5f5">• Total Budget: 130 Hours Exact</text>
-    <text x="16" y="202" font-size="10" fill="#737373">Constraint strictly enforced</text>
+    <rect width="230" height="215" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="230" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">01 • GOAL &amp; CONSTRAINTS</text>
+    <text x="16" y="66" font-size="14" font-weight="700" fill="#111110">Learner Ambition Intake</text>
+    <text x="16" y="86" font-size="12" font-style="italic" fill="#47474d">"Become a Data Analyst"</text>
+    <line x1="16" y1="104" x2="214" y2="104" stroke="#e6e6e2" stroke-width="1.5" />
+    <text x="16" y="126" font-size="12" font-weight="700" fill="#111110">Mathematical Solver:</text>
+    <text x="16" y="146" font-size="12" fill="#222222">• Weekly Cap: 5 hours / week</text>
+    <text x="16" y="166" font-size="12" fill="#222222">• Time Horizon: 26 weeks</text>
+    <text x="16" y="186" font-size="12" font-weight="800" fill="#111110">• Total Budget: 130 Hours Exact</text>
+    <text x="16" y="204" font-size="10" font-weight="600" fill="#555555">Strict constraint enforced</text>
   </g>
 
   <!-- Flow 1 -> 2 -->
-  <path d="M 290 202 L 335 202" stroke="#525252" stroke-width="1.5" marker-end="url(#arrowGray)" />
+  <path d="M 290 202 L 335 202" stroke="#111110" stroke-width="2" marker-end="url(#arrowBlack)" />
 
   <!-- ── 02. REASONING & PREREQUISITES ────────────────────── -->
   <g transform="translate(340, 95)" filter="url(#cardShadow)">
-    <rect width="250" height="215" rx="8" fill="#141414" stroke="#282828" stroke-width="1" />
-    <rect width="250" height="38" rx="8" fill="#1b1b1b" />
-    <text x="16" y="24" font-size="11" font-weight="700" fill="#e5e5e5" letter-spacing="0.8">02 • REASONING &amp; PREREQUISITES</text>
-    <text x="16" y="66" font-size="13" font-weight="600" fill="#ffffff">Gemini 2.0 Flash Engine</text>
-    <text x="16" y="86" font-size="12" fill="#888888">Topological Curriculum DAG</text>
-    <line x1="16" y1="104" x2="234" y2="104" stroke="#262626" stroke-width="1" />
-    <text x="16" y="126" font-size="11" fill="#d4d4d4">1. Foundations (Math &amp; Stats)</text>
-    <text x="16" y="146" font-size="11" fill="#d4d4d4">2. Core Python &amp; Data Structures</text>
-    <text x="16" y="166" font-size="11" fill="#d4d4d4">3. SQL &amp; Relational Databases</text>
-    <text x="16" y="186" font-size="11" fill="#d4d4d4">4. EDA, Pandas, Tableau, Capstone</text>
-    <text x="16" y="204" font-size="10" fill="#737373">Strict prerequisite order</text>
+    <rect width="250" height="215" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="250" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">02 • REASONING &amp; PREREQUISITES</text>
+    <text x="16" y="66" font-size="14" font-weight="700" fill="#111110">Gemini 2.0 Flash Engine</text>
+    <text x="16" y="86" font-size="12" fill="#47474d">Topological Curriculum DAG</text>
+    <line x1="16" y1="104" x2="234" y2="104" stroke="#e6e6e2" stroke-width="1.5" />
+    <text x="16" y="126" font-size="12" fill="#222222">1. Foundations (Math &amp; Stats)</text>
+    <text x="16" y="146" font-size="12" fill="#222222">2. Core Python &amp; Data Structures</text>
+    <text x="16" y="166" font-size="12" fill="#222222">3. SQL &amp; Relational Databases</text>
+    <text x="16" y="186" font-size="12" fill="#222222">4. EDA, Pandas, Tableau, Capstone</text>
+    <text x="16" y="204" font-size="10" font-weight="600" fill="#555555">Strict prerequisite order</text>
   </g>
 
   <!-- Flow 2 -> 3 -->
-  <path d="M 590 202 L 635 202" stroke="#525252" stroke-width="1.5" marker-end="url(#arrowGray)" />
+  <path d="M 590 202 L 635 202" stroke="#111110" stroke-width="2" marker-end="url(#arrowBlack)" />
 
   <!-- ── 03. LINK AUDITOR & PAYWALL HEURISTICS ─────────────── -->
   <g transform="translate(640, 95)" filter="url(#cardShadow)">
-    <rect width="260" height="215" rx="8" fill="#141414" stroke="#333333" stroke-width="1" />
-    <rect width="260" height="38" rx="8" fill="#1f1f1f" />
-    <text x="16" y="24" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.8">03 • LINK AUDIT &amp; PAYWALL</text>
-    <text x="16" y="66" font-size="13" font-weight="600" fill="#ffffff">Active HTTP Crawler</text>
-    <text x="16" y="86" font-size="12" fill="#888888">Heuristic Status Classifier</text>
-    <line x1="16" y1="104" x2="244" y2="104" stroke="#262626" stroke-width="1" />
-    <text x="16" y="126" font-size="11" fill="#d4d4d4">• Real-time HTTP header checks</text>
-    <text x="16" y="146" font-size="11" fill="#d4d4d4">• Detects 404 &amp; NXDOMAIN errors</text>
-    <text x="16" y="166" font-size="11" fill="#d4d4d4">• Detects Paid Subscriptions (Udemy)</text>
-    <text x="16" y="186" font-size="11" fill="#d4d4d4">• Validates Free Audits (Coursera)</text>
-    <text x="16" y="204" font-size="10" fill="#737373">Deterministic zero-cost rule</text>
+    <rect width="260" height="215" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="260" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">03 • LINK AUDIT &amp; PAYWALL</text>
+    <text x="16" y="66" font-size="14" font-weight="700" fill="#111110">Active HTTP Crawler</text>
+    <text x="16" y="86" font-size="12" fill="#47474d">Heuristic Status Classifier</text>
+    <line x1="16" y1="104" x2="244" y2="104" stroke="#e6e6e2" stroke-width="1.5" />
+    <text x="16" y="126" font-size="12" fill="#222222">• Real-time HTTP header checks</text>
+    <text x="16" y="146" font-size="12" fill="#222222">• Detects 404 &amp; NXDOMAIN errors</text>
+    <text x="16" y="166" font-size="12" fill="#222222">• Detects Paid Traps (Udemy/Skillshare)</text>
+    <text x="16" y="186" font-size="12" fill="#222222">• Validates Free Audits (Coursera/Kaggle)</text>
+    <text x="16" y="204" font-size="10" font-weight="600" fill="#555555">Deterministic zero-cost rule</text>
   </g>
 
-  <!-- Flow 3 -> 5 (Clean path) -->
-  <path d="M 900 202 L 945 202" stroke="#e5e5e5" stroke-width="1.5" marker-end="url(#arrowWhite)" />
+  <!-- Flow 3 -> 5 (Normal execution) -->
+  <path d="M 900 202 L 945 202" stroke="#111110" stroke-width="2" marker-end="url(#arrowBlack)" />
 
-  <!-- ── 04. AUTONOMOUS SELF-HEALING (MONOCHROME) ──────────── -->
-  <path d="M 770 310 L 770 380" stroke="#737373" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrowGray)" />
-  <text x="780" y="348" font-size="10" font-weight="600" fill="#a3a3a3">If 404 / Paid Detected</text>
+  <!-- ── 04. AUTONOMOUS SELF-HEALING ──────────────────────── -->
+  <path d="M 770 310 L 770 380" stroke="#444444" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrowDashed)" />
+  <text x="780" y="348" font-size="11" font-weight="700" fill="#111110">If 404 / Paid Detected</text>
 
   <g transform="translate(640, 390)" filter="url(#cardShadow)">
-    <rect width="260" height="225" rx="8" fill="#141414" stroke="#383838" stroke-width="1" />
-    <rect width="260" height="38" rx="8" fill="#1c1c1c" />
-    <text x="16" y="24" font-size="11" font-weight="700" fill="#f5f5f5" letter-spacing="0.8">04 • AUTONOMOUS SELF-HEALING</text>
-    <text x="16" y="66" font-size="13" font-weight="600" fill="#ffffff">Automated Replacement Loop</text>
-    <text x="16" y="86" font-size="12" fill="#888888">Topic-Tagged Repository Pool</text>
-    <line x1="16" y1="104" x2="244" y2="104" stroke="#262626" stroke-width="1" />
-    <text x="16" y="126" font-size="11" fill="#d4d4d4">1. Query matching free candidate</text>
-    <text x="16" y="146" font-size="11" fill="#d4d4d4">2. Re-ping replacement via HTTP</text>
-    <text x="16" y="166" font-size="11" fill="#d4d4d4">3. Verify free status &amp; relevance</text>
-    <text x="16" y="186" font-size="11" font-weight="700" fill="#ffffff">4. Hot-swap in DB &amp; store reason</text>
-    <text x="16" y="206" font-size="10" fill="#737373">Audit lineage preserved in SQLite</text>
+    <rect width="260" height="225" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="260" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">04 • AUTONOMOUS SELF-HEALING</text>
+    <text x="16" y="66" font-size="14" font-weight="700" fill="#111110">Automated Replacement Loop</text>
+    <text x="16" y="86" font-size="12" fill="#47474d">Topic-Tagged Repository Pool</text>
+    <line x1="16" y1="104" x2="244" y2="104" stroke="#e6e6e2" stroke-width="1.5" />
+    <text x="16" y="126" font-size="12" fill="#222222">1. Query matching free candidate</text>
+    <text x="16" y="146" font-size="12" fill="#222222">2. Re-ping replacement via HTTP</text>
+    <text x="16" y="166" font-size="12" fill="#222222">3. Verify free status &amp; relevance</text>
+    <text x="16" y="186" font-size="12" font-weight="800" fill="#111110">4. Hot-swap in DB &amp; store reason</text>
+    <text x="16" y="206" font-size="10" font-weight="600" fill="#555555">Audit lineage preserved in SQLite</text>
   </g>
 
   <!-- Re-entry from Step 4 into Step 5 -->
-  <path d="M 900 502 L 980 502 L 980 325" stroke="#737373" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrowGray)" />
+  <path d="M 900 502 L 980 502 L 980 325" stroke="#444444" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrowDashed)" />
 
   <!-- ── 05. HUMAN GATEWAY ─────────────────────────────────── -->
   <g transform="translate(950, 95)" filter="url(#cardShadow)">
-    <rect width="190" height="215" rx="8" fill="#141414" stroke="#282828" stroke-width="1" />
-    <rect width="190" height="38" rx="8" fill="#1b1b1b" />
-    <text x="14" y="24" font-size="11" font-weight="700" fill="#e5e5e5" letter-spacing="0.8">05 • HUMAN GATEWAY</text>
-    <text x="14" y="66" font-size="13" font-weight="600" fill="#ffffff">Explicit Approval</text>
-    <text x="14" y="86" font-size="12" fill="#888888">Safety &amp; Review Barrier</text>
-    <line x1="14" y1="104" x2="176" y2="104" stroke="#262626" stroke-width="1" />
-    <text x="14" y="126" font-size="11" fill="#d4d4d4">• Inspect Curriculum</text>
-    <text x="14" y="146" font-size="11" fill="#d4d4d4">• Review Replacements</text>
-    <text x="14" y="166" font-size="11" fill="#d4d4d4">• Check Total Hours</text>
-    <text x="14" y="188" font-size="11" font-weight="700" fill="#ffffff">• Authorize Dispatch</text>
-    <text x="14" y="206" font-size="10" fill="#737373">Zero blind execution</text>
+    <rect width="190" height="215" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="190" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="14" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">05 • HUMAN GATEWAY</text>
+    <text x="14" y="66" font-size="14" font-weight="700" fill="#111110">Explicit Approval</text>
+    <text x="14" y="86" font-size="12" fill="#47474d">Safety &amp; Review Barrier</text>
+    <line x1="14" y1="104" x2="176" y2="104" stroke="#e6e6e2" stroke-width="1.5" />
+    <text x="14" y="126" font-size="12" fill="#222222">• Inspect Curriculum</text>
+    <text x="14" y="146" font-size="12" fill="#222222">• Review Replacements</text>
+    <text x="14" y="166" font-size="12" fill="#222222">• Check Total Hours</text>
+    <text x="14" y="188" font-size="12" font-weight="800" fill="#111110">• Authorize Dispatch</text>
+    <text x="14" y="206" font-size="10" font-weight="600" fill="#555555">Zero blind execution</text>
   </g>
 
   <!-- Flow 5 -> 6 -->
-  <path d="M 1045 310 L 1045 380" stroke="#525252" stroke-width="1.5" marker-end="url(#arrowGray)" />
+  <path d="M 1045 310 L 1045 380" stroke="#111110" stroke-width="2" marker-end="url(#arrowBlack)" />
 
   <!-- ── 06. IDEMPOTENT EXECUTION & CALENDAR ──────────────── -->
   <g transform="translate(950, 390)" filter="url(#cardShadow)">
-    <rect width="190" height="225" rx="8" fill="#141414" stroke="#333333" stroke-width="1" />
-    <rect width="190" height="38" rx="8" fill="#1f1f1f" />
-    <text x="14" y="24" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.8">06 • DISPATCH &amp; EXPORT</text>
-    <text x="14" y="66" font-size="13" font-weight="600" fill="#ffffff">Idempotent Engine</text>
-    <text x="14" y="86" font-size="12" fill="#888888">RFC-5545 .ics Export</text>
-    <line x1="14" y1="104" x2="176" y2="104" stroke="#262626" stroke-width="1" />
-    <text x="14" y="126" font-size="11" fill="#d4d4d4">• Unique Idempotency Key</text>
-    <text x="14" y="146" font-size="11" fill="#d4d4d4">• Prevent duplicate runs</text>
-    <text x="14" y="166" font-size="11" fill="#d4d4d4">• Only missing sessions added</text>
-    <text x="14" y="186" font-size="11" font-weight="700" fill="#ffffff">• Universal .ics Export</text>
-    <text x="14" y="206" font-size="10" fill="#737373">Google/Apple/Outlook</text>
+    <rect width="190" height="225" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="190" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="14" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">06 • DISPATCH &amp; EXPORT</text>
+    <text x="14" y="66" font-size="14" font-weight="700" fill="#111110">Idempotent Engine</text>
+    <text x="14" y="86" font-size="12" fill="#47474d">RFC-5545 .ics Export</text>
+    <line x1="14" y1="104" x2="176" y2="104" stroke="#e6e6e2" stroke-width="1.5" />
+    <text x="14" y="126" font-size="12" fill="#222222">• Unique Idempotency Key</text>
+    <text x="14" y="146" font-size="12" fill="#222222">• Prevent duplicate runs</text>
+    <text x="14" y="166" font-size="12" fill="#222222">• Only missing added</text>
+    <text x="14" y="186" font-size="12" font-weight="800" fill="#111110">• Universal .ics Export</text>
+    <text x="14" y="206" font-size="10" font-weight="600" fill="#555555">Google/Apple/Outlook</text>
   </g>
 
   <!-- ── STATEFUL PERSISTENCE TIER (SQLITE WAL) ─────────────── -->
   <g transform="translate(60, 390)" filter="url(#cardShadow)">
-    <rect width="530" height="225" rx="8" fill="#121212" stroke="#262626" stroke-width="1" />
-    <rect width="530" height="38" rx="8" fill="#191919" />
-    <text x="18" y="24" font-size="11" font-weight="700" fill="#e5e5e5" letter-spacing="0.8">STATEFUL AUDIT TIER • SQLITE (WAL MODE)</text>
+    <rect width="530" height="225" rx="6" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="530" height="38" rx="6" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="18" y="24" font-size="11" font-weight="800" fill="#111110" letter-spacing="0.8">STATEFUL AUDIT TIER • SQLITE (WAL MODE)</text>
 
-    <g transform="translate(18, 56)">
-      <rect width="150" height="150" rx="6" fill="#161616" stroke="#2b2b2b" />
-      <text x="12" y="22" font-size="11" font-weight="700" fill="#f5f5f5">Table: runs</text>
-      <text x="12" y="44" font-size="10" fill="#888888">id (PK)</text>
-      <text x="12" y="64" font-size="10" fill="#888888">goal, level</text>
-      <text x="12" y="84" font-size="10" fill="#888888">weekly_hours</text>
-      <text x="12" y="104" font-size="10" fill="#888888">horizon_weeks</text>
-      <text x="12" y="124" font-size="10" fill="#888888">total_hours</text>
-      <text x="12" y="142" font-size="10" font-weight="600" fill="#e5e5e5">status = verified</text>
+    <g transform="translate(18, 54)">
+      <rect width="150" height="152" rx="4" fill="#fafaf8" stroke="#d5d5d0" stroke-width="1" />
+      <text x="12" y="22" font-size="12" font-weight="800" fill="#111110">Table: runs</text>
+      <text x="12" y="44" font-size="11" fill="#47474d">id (Primary Key)</text>
+      <text x="12" y="64" font-size="11" fill="#47474d">goal, level</text>
+      <text x="12" y="84" font-size="11" fill="#47474d">weekly_hours</text>
+      <text x="12" y="104" font-size="11" fill="#47474d">horizon_weeks</text>
+      <text x="12" y="124" font-size="11" fill="#47474d">total_hours</text>
+      <text x="12" y="142" font-size="11" font-weight="700" fill="#111110">status = verified</text>
     </g>
 
-    <g transform="translate(185, 56)">
-      <rect width="155" height="150" rx="6" fill="#161616" stroke="#2b2b2b" />
-      <text x="12" y="22" font-size="11" font-weight="700" fill="#f5f5f5">Table: resources</text>
-      <text x="12" y="44" font-size="10" fill="#888888">id, week_id</text>
-      <text x="12" y="64" font-size="10" fill="#888888">url, platform</text>
-      <text x="12" y="84" font-size="10" fill="#888888">is_free (1/0)</text>
-      <text x="12" y="104" font-size="10" fill="#888888">link_status = live_free</text>
-      <text x="12" y="124" font-size="10" fill="#888888">replaced_by</text>
-      <text x="12" y="142" font-size="10" font-weight="600" fill="#e5e5e5">classification_reason</text>
+    <g transform="translate(185, 54)">
+      <rect width="155" height="152" rx="4" fill="#fafaf8" stroke="#d5d5d0" stroke-width="1" />
+      <text x="12" y="22" font-size="12" font-weight="800" fill="#111110">Table: resources</text>
+      <text x="12" y="44" font-size="11" fill="#47474d">id, week_id</text>
+      <text x="12" y="64" font-size="11" fill="#47474d">url, platform</text>
+      <text x="12" y="84" font-size="11" fill="#47474d">is_free (1/0)</text>
+      <text x="12" y="104" font-size="11" fill="#47474d">link_status (live)</text>
+      <text x="12" y="124" font-size="11" fill="#47474d">replaced_by</text>
+      <text x="12" y="142" font-size="10" font-weight="700" fill="#111110">classification_reason</text>
     </g>
 
-    <g transform="translate(355, 56)">
-      <rect width="155" height="150" rx="6" fill="#161616" stroke="#2b2b2b" />
-      <text x="12" y="22" font-size="11" font-weight="700" fill="#f5f5f5">Table: actions &amp; tests</text>
-      <text x="12" y="44" font-size="10" fill="#888888">idempotency_key (UQ)</text>
-      <text x="12" y="64" font-size="10" fill="#888888">action_type</text>
-      <text x="12" y="84" font-size="10" fill="#888888">mock_execution = 1</text>
-      <text x="12" y="104" font-size="10" fill="#888888">tc_id (TC1 - TC4)</text>
-      <text x="12" y="124" font-size="10" fill="#888888">status = passed</text>
-      <text x="12" y="142" font-size="10" font-weight="600" fill="#e5e5e5">evidence (JSON)</text>
+    <g transform="translate(355, 54)">
+      <rect width="155" height="152" rx="4" fill="#fafaf8" stroke="#d5d5d0" stroke-width="1" />
+      <text x="12" y="22" font-size="12" font-weight="800" fill="#111110">Table: actions &amp; tests</text>
+      <text x="12" y="44" font-size="11" fill="#47474d">idempotency_key</text>
+      <text x="12" y="64" font-size="11" fill="#47474d">action_type</text>
+      <text x="12" y="84" font-size="11" fill="#47474d">mock_execution = 1</text>
+      <text x="12" y="104" font-size="11" fill="#47474d">tc_id (TC1 - TC4)</text>
+      <text x="12" y="124" font-size="11" fill="#47474d">status = passed</text>
+      <text x="12" y="142" font-size="11" font-weight="700" fill="#111110">evidence (JSON)</text>
     </g>
   </g>
 
   <!-- Connectors between DB and Modules -->
-  <path d="M 640 460 L 590 460" stroke="#3a3a3a" stroke-width="1.5" stroke-dasharray="3,3" />
-  <path d="M 950 560 L 590 560" stroke="#3a3a3a" stroke-width="1.5" stroke-dasharray="3,3" />
+  <path d="M 640 460 L 590 460" stroke="#888888" stroke-width="1.5" stroke-dasharray="3,3" />
+  <path d="M 950 560 L 590 560" stroke="#888888" stroke-width="1.5" stroke-dasharray="3,3" />
 
   <!-- Footer Tagline -->
-  <text x="60" y="650" font-size="11" fill="#666666" letter-spacing="0.2">Episteme AI Engine • Autonomous Link Auditing • Multi-Agent Verification • Zero Tuition Guarantee</text>
+  <text x="60" y="650" font-size="11" font-weight="600" fill="#666666" letter-spacing="0.2">Episteme AI Engine • Autonomous Link Auditing • Multi-Agent Verification • Zero Tuition Guarantee</text>
 </svg>

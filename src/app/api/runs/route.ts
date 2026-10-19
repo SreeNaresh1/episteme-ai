@@ -11,44 +11,98 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { goal, level, weekly_hours, horizon_weeks, label, test_case } = body;
 
-    // Validate
-    if (!goal || !level || !weekly_hours || !horizon_weeks) {
-      return NextResponse.json({ error: 'Missing required fields: goal, level, weekly_hours, horizon_weeks' }, { status: 400 });
+    // Validate all input fields before running agent
+    if (!goal || typeof goal !== 'string' || !goal.trim()) {
+      return NextResponse.json({ error: 'goal is required and cannot be blank' }, { status: 400 });
     }
-    if (weekly_hours < 1 || weekly_hours > 40) {
-      return NextResponse.json({ error: 'weekly_hours must be between 1 and 40' }, { status: 400 });
+    if (!level || typeof level !== 'string' || !['beginner', 'intermediate', 'advanced'].includes(level.toLowerCase())) {
+      return NextResponse.json({ error: 'level must be one of: beginner, intermediate, advanced' }, { status: 400 });
     }
-    if (horizon_weeks < 1 || horizon_weeks > 52) {
-      return NextResponse.json({ error: 'horizon_weeks must be between 1 and 52' }, { status: 400 });
+    if (typeof weekly_hours !== 'number' || isNaN(weekly_hours) || weekly_hours < 1 || weekly_hours > 40) {
+      return NextResponse.json({ error: 'weekly_hours must be a number between 1 and 40' }, { status: 400 });
+    }
+    if (typeof horizon_weeks !== 'number' || isNaN(horizon_weeks) || horizon_weeks < 1 || horizon_weeks > 52) {
+      return NextResponse.json({ error: 'horizon_weeks must be a number between 1 and 52' }, { status: 400 });
     }
 
     const runId = generateId();
     const totalHours = weekly_hours * horizon_weeks;
     const db = getDb();
 
-    // Check for duplicate runs (TC4: rerun — only add missing sessions)
+    // Check for duplicate runs (TC4: rerun — incremental append: only add missing sessions)
     interface ExistingRun { id: string; label: string; status: string; }
     const existingRun = label
-      ? (db.prepare('SELECT * FROM runs WHERE label = ? ORDER BY created_at DESC LIMIT 1').get(label) as ExistingRun | undefined)
+      ? (db.prepare('SELECT id, label, status FROM runs WHERE label = ? ORDER BY created_at DESC LIMIT 1').get(label) as ExistingRun | undefined)
       : null;
 
     if (existingRun && test_case === 'TC4') {
-      // Return existing run for TC4 rerun scenario
+      // 1. Query what sessions currently exist in the database for this run
+      const existingWeeks = db.prepare('SELECT week_number, status FROM weeks WHERE run_id = ?').all(existingRun.id) as { week_number: number; status: string }[];
+      const existingWeekNums = new Set(existingWeeks.map(w => w.week_number));
+
+      // 2. Generate the expected path
+      const path = await generateLearningPath(goal, level, weekly_hours, horizon_weeks);
+
+      // 3. Compute which weeks are missing
+      const missingWeeks = path.weeks.filter(w => !existingWeekNums.has(w.week_number));
+
+      // 4. Insert ONLY missing sessions
+      if (missingWeeks.length > 0) {
+        const insertWeek = db.prepare(`
+          INSERT INTO weeks (id, run_id, week_number, title, description, hours_allocated)
+          VALUES (?, ?, ?, ?, ?, ?)
+        `);
+        const insertResource = db.prepare(`
+          INSERT INTO resources (id, week_id, run_id, title, url, platform, is_free)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+        `);
+
+        db.transaction(() => {
+          for (const week of missingWeeks) {
+            const weekId = generateId();
+            insertWeek.run(weekId, existingRun.id, week.week_number, week.title, week.description, week.hours_allocated);
+            for (const resource of week.resources) {
+              insertResource.run(
+                generateId(), weekId, existingRun.id, resource.title, resource.url, resource.platform,
+                resource.is_free ? 1 : 0
+              );
+            }
+          }
+          db.prepare("UPDATE runs SET updated_at = datetime('now') WHERE id = ?").run(existingRun.id);
+        })();
+      }
+
+      // 5. Check action idempotency (prevent duplicate calendar block creation)
+      const existingAction = db.prepare(
+        'SELECT id, status FROM actions WHERE idempotency_key = ?'
+      ).get(`calendar-${existingRun.id}`) as { id: string; status: string } | undefined;
+
+      const sessionsBefore = existingWeeks.length;
+      const sessionsAdded = missingWeeks.length;
+      const sessionsAfter = sessionsBefore + sessionsAdded;
+
       return NextResponse.json({
         run_id: existingRun.id,
         reused: true,
-        message: 'Existing run found. Only missing sessions will be added.',
+        sessions_before: sessionsBefore,
+        missing_sessions_added: sessionsAdded,
+        sessions_after: sessionsAfter,
+        duplicate_prevented: !!existingAction,
+        source: path.source,
+        message: sessionsAdded > 0
+          ? `Existing run found. Appended ${sessionsAdded} missing session(s). Idempotency guard active.`
+          : `Existing run found. All ${sessionsBefore} sessions already exist; 0 duplicates added. Idempotency guard active.`,
       });
     }
 
-    // Insert run
-    db.prepare(`
-      INSERT INTO runs (id, label, goal, level, weekly_hours, horizon_weeks, total_hours, status, test_case)
-      VALUES (?, ?, ?, ?, ?, ?, ?, 'generating', ?)
-    `).run(runId, label || `Run ${new Date().toLocaleString()}`, goal, level, weekly_hours, horizon_weeks, totalHours, test_case || null);
-
     // Generate path
     const path = await generateLearningPath(goal, level, weekly_hours, horizon_weeks);
+
+    // Insert run with source engine
+    db.prepare(`
+      INSERT INTO runs (id, label, goal, level, weekly_hours, horizon_weeks, total_hours, status, test_case, source)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 'generating', ?, ?)
+    `).run(runId, label || `Run ${new Date().toLocaleString()}`, goal, level, weekly_hours, horizon_weeks, totalHours, test_case || null, path.source);
 
     // Insert weeks and resources
     const insertWeek = db.prepare(`
@@ -96,13 +150,14 @@ export async function POST(req: NextRequest) {
     );
 
     // Update run status
-    db.prepare('UPDATE runs SET status = ?, updated_at = datetime(\'now\') WHERE id = ?').run('ready', runId);
+    db.prepare("UPDATE runs SET status = ?, updated_at = datetime('now') WHERE id = ?").run('ready', runId);
 
     return NextResponse.json({
       run_id: runId,
       total_hours: totalHours,
       weeks_count: path.weeks.length,
       prerequisites_note: path.prerequisites_note,
+      source: path.source,
       reused: false,
     });
   } catch (err) {
