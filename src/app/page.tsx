@@ -536,6 +536,16 @@ export default function Home() {
             </nav>
 
             <div className="header-cta-group">
+              <a
+                href="/presentation"
+                className="nav-link-btn"
+                style={{ fontWeight: 600, color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}
+                title="View Hackathon Slide Deck"
+              >
+                <Layers size={14} color="#38bdf8" />
+                <span>Pitch Deck</span>
+              </a>
+
               <button
                 id="header-view-tests"
                 className="nav-link-btn"

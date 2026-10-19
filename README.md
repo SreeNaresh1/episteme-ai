@@ -34,6 +34,8 @@ The modern online learning landscape is saturated with *Doxa*:
 
 Episteme AI operates as a coordinated multi-phase agent loop:
 
+![Episteme AI Multi-Agent Architecture](public/agent-architecture.svg)
+
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        EPISTEME AGENTIC ENGINE                         │
