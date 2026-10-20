@@ -20,7 +20,12 @@ export const metadata: Metadata = {
     images: [{ url: "/brand-logo.jpg", width: 1024, height: 1024, alt: "Episteme AI Logo" }],
   },
   icons: {
-    icon: "/brand-logo.jpg",
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico' },
+      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-icon.png',
   },
 };
 
@@ -31,6 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

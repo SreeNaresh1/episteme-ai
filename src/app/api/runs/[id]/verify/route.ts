@@ -77,68 +77,89 @@ export async function POST(
       WHERE id = ?
     `);
 
-    for (const res of resources) {
-      const result = results.get(res.id);
-      if (!result) continue;
+    // Collect items needing replacement verification
+    const itemsNeedingReplacement = resources.filter(res => {
+      const r = results.get(res.id);
+      return r && r.replacement && (r.status === 'paid' || r.status === 'broken');
+    });
 
-      switch (result.status) {
-        case 'live_free':    summary.live_free++;    break;
-        case 'live_unknown': summary.live_unknown++; break;
-        case 'paid':         summary.paid++;         break;
-        case 'broken':       summary.broken++;       break;
-        default:             summary.unknown++;
-      }
-
-      updateResource.run(
-        result.status,
-        result.checked_at,
-        result.http_status ?? null,
-        result.is_free ? 1 : 0,
-        result.classification_reason,
-        res.id
+    // Verify all needed replacements in parallel
+    const verifiedReplacements = new Map<string, Awaited<ReturnType<typeof verifyReplacement>>>();
+    if (itemsNeedingReplacement.length > 0) {
+      await Promise.all(
+        itemsNeedingReplacement.map(async (res) => {
+          const r = results.get(res.id)!;
+          if (r.replacement) {
+            const verified = await verifyReplacement(r.replacement, res.week_title);
+            verifiedReplacements.set(res.id, verified);
+          }
+        })
       );
-
-      if (
-        result.replacement &&
-        (result.status === 'paid' || result.status === 'broken')
-      ) {
-        const verified = await verifyReplacement(result.replacement, res.week_title);
-
-        if (
-          verified.verification &&
-          (verified.verification.status === 'live_free' || verified.verification.status === 'live_unknown')
-        ) {
-          const replId = generateId();
-          insertReplacement.run(
-            replId,
-            res.week_id,
-            id,
-            verified.title,
-            verified.url,
-            verified.platform,
-            verified.verification.is_free ? 1 : 0,
-            verified.verification.status,
-            verified.verification.checked_at,
-            verified.verification.http_status ?? null,
-            verified.verification.classification_reason,
-            null,
-            null
-          );
-          markOriginalReplaced.run(verified.url, verified.reason, res.id);
-          summary.replacements_inserted++;
-        } else {
-          const failReason = verified.verification
-            ? `Replacement at ${verified.url} also unavailable (${verified.verification.status}). Manual review required.`
-            : 'Replacement could not be verified. Manual review required.';
-          markOriginalReplaced.run(null, failReason, res.id);
-        }
-      }
     }
 
-    // Determine run health
-    const needsReview = summary.paid + summary.broken + summary.live_unknown > 0;
-    db.prepare("UPDATE runs SET status = ?, updated_at = datetime('now') WHERE id = ?")
-      .run(needsReview ? 'needs_review' : 'verified', id);
+    let needsReview = false;
+
+    // Execute all DB writes inside a single atomic transaction
+    db.transaction(() => {
+      for (const res of resources) {
+        const result = results.get(res.id);
+        if (!result) continue;
+
+        switch (result.status) {
+          case 'live_free':    summary.live_free++;    break;
+          case 'live_unknown': summary.live_unknown++; break;
+          case 'paid':         summary.paid++;         break;
+          case 'broken':       summary.broken++;       break;
+          default:             summary.unknown++;
+        }
+
+        updateResource.run(
+          result.status,
+          result.checked_at,
+          result.http_status ?? null,
+          result.is_free ? 1 : 0,
+          result.classification_reason,
+          res.id
+        );
+
+        const verified = verifiedReplacements.get(res.id);
+        if (verified) {
+          if (
+            verified.verification &&
+            (verified.verification.status === 'live_free' || verified.verification.status === 'live_unknown')
+          ) {
+            const replId = generateId();
+            insertReplacement.run(
+              replId,
+              res.week_id,
+              id,
+              verified.title,
+              verified.url,
+              verified.platform,
+              verified.verification.is_free ? 1 : 0,
+              verified.verification.status,
+              verified.verification.checked_at,
+              verified.verification.http_status ?? null,
+              verified.verification.classification_reason,
+              null,
+              null
+            );
+            markOriginalReplaced.run(verified.url, verified.reason, res.id);
+            summary.replacements_inserted++;
+          } else {
+            const failReason = verified.verification
+              ? `Replacement at ${verified.url} also unavailable (${verified.verification.status}). Manual review required.`
+              : 'Replacement could not be verified. Manual review required.';
+            markOriginalReplaced.run(null, failReason, res.id);
+          }
+        }
+      }
+
+      // Determine run health
+      needsReview = summary.paid + summary.broken + summary.live_unknown > 0;
+      db.prepare("UPDATE runs SET status = ?, updated_at = datetime('now') WHERE id = ?")
+        .run(needsReview ? 'needs_review' : 'verified', id);
+    })();
 
     return NextResponse.json({
       summary,

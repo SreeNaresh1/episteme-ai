@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
-import { generateLearningPath } from '@/lib/pathGenerator';
+import { generateLearningPath, extractGoalParameters } from '@/lib/pathGenerator';
 
 function generateId() {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
@@ -9,24 +9,31 @@ function generateId() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { goal, level, weekly_hours, horizon_weeks, label, test_case } = body;
+    const { goal, level, weekly_hours, horizon_weeks, label, test_case, pace } = body;
 
-    // Validate all input fields before running agent
+    // Validate goal is present
     if (!goal || typeof goal !== 'string' || !goal.trim()) {
       return NextResponse.json({ error: 'goal is required and cannot be blank' }, { status: 400 });
     }
-    if (!level || typeof level !== 'string' || !['beginner', 'intermediate', 'advanced'].includes(level.toLowerCase())) {
-      return NextResponse.json({ error: 'level must be one of: beginner, intermediate, advanced' }, { status: 400 });
-    }
-    if (typeof weekly_hours !== 'number' || isNaN(weekly_hours) || weekly_hours < 1 || weekly_hours > 40) {
-      return NextResponse.json({ error: 'weekly_hours must be a number between 1 and 40' }, { status: 400 });
-    }
-    if (typeof horizon_weeks !== 'number' || isNaN(horizon_weeks) || horizon_weeks < 1 || horizon_weeks > 52) {
-      return NextResponse.json({ error: 'horizon_weeks must be a number between 1 and 52' }, { status: 400 });
-    }
+
+    // Infer smart defaults for parameters that may be omitted or empty
+    const inferred = extractGoalParameters(goal.trim());
+    const finalLevel = (level && ['beginner', 'intermediate', 'advanced'].includes(level.toLowerCase()))
+      ? level.toLowerCase()
+      : inferred.level;
+    const finalWeeklyHours = (typeof weekly_hours === 'number' && !isNaN(weekly_hours) && weekly_hours >= 1 && weekly_hours <= 40)
+      ? weekly_hours
+      : inferred.weekly_hours;
+    const finalHorizonWeeks = (typeof horizon_weeks === 'number' && !isNaN(horizon_weeks) && horizon_weeks >= 1 && horizon_weeks <= 52)
+      ? horizon_weeks
+      : inferred.horizon_weeks;
+    const finalPace = (pace && ['fast_track', 'balanced', 'deep_mastery'].includes(pace))
+      ? pace
+      : inferred.pace;
+    const finalLabel = label?.trim() || inferred.label;
 
     const runId = generateId();
-    const totalHours = weekly_hours * horizon_weeks;
+    const totalHours = finalWeeklyHours * finalHorizonWeeks;
     const db = getDb();
 
     // Check for duplicate runs (TC4: rerun — incremental append: only add missing sessions)
@@ -41,7 +48,7 @@ export async function POST(req: NextRequest) {
       const existingWeekNums = new Set(existingWeeks.map(w => w.week_number));
 
       // 2. Generate the expected path
-      const path = await generateLearningPath(goal, level, weekly_hours, horizon_weeks);
+      const path = await generateLearningPath(goal, finalLevel, finalWeeklyHours, finalHorizonWeeks, finalPace);
 
       // 3. Compute which weeks are missing
       const missingWeeks = path.weeks.filter(w => !existingWeekNums.has(w.week_number));
@@ -96,13 +103,13 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate path
-    const path = await generateLearningPath(goal, level, weekly_hours, horizon_weeks);
+    const path = await generateLearningPath(goal, finalLevel, finalWeeklyHours, finalHorizonWeeks, finalPace);
 
     // Insert run with source engine
     db.prepare(`
       INSERT INTO runs (id, label, goal, level, weekly_hours, horizon_weeks, total_hours, status, test_case, source)
       VALUES (?, ?, ?, ?, ?, ?, ?, 'generating', ?, ?)
-    `).run(runId, label || `Run ${new Date().toLocaleString()}`, goal, level, weekly_hours, horizon_weeks, totalHours, test_case || null, path.source);
+    `).run(runId, finalLabel, goal, finalLevel, finalWeeklyHours, finalHorizonWeeks, totalHours, test_case || null, path.source);
 
     // Insert weeks and resources
     const insertWeek = db.prepare(`
@@ -137,7 +144,7 @@ export async function POST(req: NextRequest) {
     `).run(
       actionId,
       runId,
-      `Create ${horizon_weeks} weekly calendar blocks for "${goal}"`,
+      `Create ${finalHorizonWeeks} weekly calendar blocks for "${goal}"`,
       JSON.stringify({
         weeks: path.weeks.map(w => ({
           week: w.week_number,

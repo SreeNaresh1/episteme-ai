@@ -11,6 +11,13 @@ import {
   Download, Layers, Cpu, ArrowRight
 } from 'lucide-react';
 import { generateIcsCalendar, downloadIcsFile } from '@/lib/calendarExport';
+import {
+  extractGoalParameters,
+  assessFeasibility,
+  SkillLevel,
+  LearnerPace,
+  LifeSituation
+} from '@/lib/pathGenerator';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Resource {
@@ -127,6 +134,66 @@ const PRESET_GOALS = [
     horizon_weeks: 20,
     label: 'Cybersecurity — 20 Weeks @ 5h/wk',
     icon: '🛡️',
+    featured: false,
+  },
+  {
+    badge: 'Programming Core',
+    title: 'Python Developer in 3mo @ 6h/wk',
+    desc: 'Python syntax, data structures, automation, OOP, and web APIs with Coursera, Kaggle & official docs.',
+    goal: 'I want to learn Python programming from scratch in 3 months with 6 hours a week',
+    level: 'beginner',
+    weekly_hours: 6,
+    horizon_weeks: 12,
+    label: 'Python Developer — 12 Weeks @ 6h/wk',
+    icon: '🐍',
+    featured: false,
+  },
+  {
+    badge: 'Cloud & Infrastructure',
+    title: 'Cloud DevOps in 4mo @ 6h/wk',
+    desc: 'Linux administration, Docker containers, Kubernetes, CI/CD pipelines, and Azure/AWS free tiers.',
+    goal: 'I want to become a cloud devops engineer in 4 months with 6 hours a week',
+    level: 'intermediate',
+    weekly_hours: 6,
+    horizon_weeks: 16,
+    label: 'Cloud DevOps — 16 Weeks @ 6h/wk',
+    icon: '☁️',
+    featured: false,
+  },
+  {
+    badge: 'Big Data & Pipelines',
+    title: 'Data Engineer in 5mo @ 6h/wk',
+    desc: 'PostgreSQL, Apache Spark, distributed computing, Delta Lake, Docker, and Apache Airflow pipelines.',
+    goal: 'I want to become a data engineer in 5 months with 6 hours a week',
+    level: 'beginner',
+    weekly_hours: 6,
+    horizon_weeks: 20,
+    label: 'Data Engineering — 20 Weeks @ 6h/wk',
+    icon: '⚡',
+    featured: false,
+  },
+  {
+    badge: 'Mobile Engineering',
+    title: 'Mobile App Developer in 4mo @ 6h/wk',
+    desc: 'Cross-platform app development with Flutter, Dart, Android Jetpack Compose, and state management.',
+    goal: 'I want to become a mobile app developer in 4 months with 6 hours a week',
+    level: 'beginner',
+    weekly_hours: 6,
+    horizon_weeks: 16,
+    label: 'Mobile App Dev — 16 Weeks @ 6h/wk',
+    icon: '📱',
+    featured: false,
+  },
+  {
+    badge: 'Product Experience',
+    title: 'UI/UX Designer in 3mo @ 5h/wk',
+    desc: 'User research, wireframing, interactive prototyping in Figma, Laws of UX, and design system tokens.',
+    goal: 'I want to learn UI/UX product design in 3 months with 5 hours a week',
+    level: 'beginner',
+    weekly_hours: 5,
+    horizon_weeks: 12,
+    label: 'UI/UX Design — 12 Weeks @ 5h/wk',
+    icon: '🎨',
     featured: false,
   },
 ] as const;
@@ -300,10 +367,12 @@ export default function Home() {
   }, []);
   const removeToast = useCallback((id: string) => setToasts(t => t.filter(x => x.id !== id)), []);
 
-  // Form State
+  // Form State with Human Learner Persona & Capacity Modeling
   const [form, setForm] = useState({
     goal: 'I want to become a data analyst in 6 months with 5 hours a week',
-    level: 'beginner',
+    level: 'beginner' as SkillLevel,
+    pace: 'balanced' as LearnerPace,
+    situation: 'working_professional' as LifeSituation,
     weekly_hours: 5,
     horizon_weeks: 26,
     label: 'Data Analyst — 6 Months @ 5h/wk (Official Entry)',
@@ -392,31 +461,51 @@ export default function Home() {
     };
   }, [tab, addToast]);
 
+  // Compute live smart parameters from user's input
+  const smartParams = extractGoalParameters(form.goal);
+
+  // Compute live workload feasibility and cognitive overload diagnostic
+  const feasibility = assessFeasibility(
+    smartParams.domain,
+    form.level as SkillLevel,
+    form.weekly_hours,
+    form.horizon_weeks,
+    form.pace
+  );
+
   const handleBuild = async () => {
     if (!form.goal.trim()) { addToast('Please enter your learning goal', 'error'); return; }
     setBuilding(true);
     setCurrentDetail(null);
     try {
+      const activeLabel = form.label.trim() && !form.label.includes('Official Entry')
+        ? form.label.trim()
+        : smartParams.label;
+
       const res = await fetch('/api/runs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           goal: form.goal.trim(),
           level: form.level,
+          pace: form.pace,
+          situation: form.situation,
           weekly_hours: form.weekly_hours,
           horizon_weeks: form.horizon_weeks,
-          label: form.label.trim() || undefined,
+          label: activeLabel,
         }),
       });
-      const data = await res.json() as { run_id: string; weeks_count: number; total_hours: number };
+      const data = await res.json() as { run_id?: string; weeks_count?: number; total_hours?: number; error?: string };
       if (!res.ok) {
-        addToast('Path generation failed', 'error');
+        addToast(data.error || 'Path generation failed', 'error');
         return;
       }
       addToast(`Generated ${data.weeks_count}-week plan (${data.total_hours} hours total)`, 'success');
-      await loadRunDetail(data.run_id);
-    } catch {
-      addToast('Failed to generate learning path', 'error');
+      if (data.run_id) {
+        await loadRunDetail(data.run_id);
+      }
+    } catch (err) {
+      addToast(`Failed to generate learning path: ${err instanceof Error ? err.message : 'Unknown error'}`, 'error');
     } finally {
       setBuilding(false);
     }
@@ -428,17 +517,23 @@ export default function Home() {
     try {
       const res = await fetch(`/api/runs/${currentDetail.id}/verify`, { method: 'POST' });
       const data = await res.json() as {
-        summary: { total: number; live_free: number; paid: number; broken: number; replacements_inserted: number };
-        run_status: string;
+        summary?: { total: number; live_free: number; paid: number; broken: number; replacements_inserted: number };
+        run_status?: string;
+        error?: string;
       };
-      if (!res.ok) { addToast('Verification failed', 'error'); return; }
-      addToast(
-        `Link audit complete: ${data.summary.live_free}/${data.summary.total} verified free (${data.summary.replacements_inserted} self-healed)`,
-        data.summary.replacements_inserted > 0 ? 'info' : 'success'
-      );
+      if (!res.ok) {
+        addToast(data.error || 'Verification failed', 'error');
+        return;
+      }
+      if (data.summary) {
+        addToast(
+          `Link audit complete: ${data.summary.live_free}/${data.summary.total} verified free (${data.summary.replacements_inserted} self-healed)`,
+          data.summary.replacements_inserted > 0 ? 'info' : 'success'
+        );
+      }
       await loadRunDetail(currentDetail.id);
-    } catch {
-      addToast('Verification failed', 'error');
+    } catch (err) {
+      addToast(`Verification failed: ${err instanceof Error ? err.message : 'Network error'}`, 'error');
     } finally {
       setVerifying(false);
     }
@@ -452,15 +547,18 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type }),
       });
-      const data = await res.json() as { message: string; week_id?: string };
-      if (!res.ok) { addToast('Failed to inject demo resource', 'error'); return; }
-      addToast(data.message, 'info');
+      const data = await res.json() as { message?: string; error?: string; week_id?: string };
+      if (!res.ok) {
+        addToast(data.error || 'Failed to inject demo resource', 'error');
+        return;
+      }
+      addToast(data.message || 'Demo resource injected', 'info');
       await loadRunDetail(currentDetail.id);
       if (data.week_id) {
         setExpandedWeeks(prev => new Set([...prev, data.week_id!]));
       }
-    } catch {
-      addToast('Failed to inject demo resource', 'error');
+    } catch (err) {
+      addToast(`Failed to inject demo resource: ${err instanceof Error ? err.message : 'Network error'}`, 'error');
     }
   };
 
@@ -473,19 +571,19 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action_id: actionId, decision }),
       });
-      const data = await res.json() as { message: string };
+      const data = await res.json() as { message?: string; error?: string };
       if (!res.ok) {
         if (res.status === 409) {
           addToast('Idempotency protected: Action already executed', 'info');
         } else {
-          addToast('Approval action failed', 'error');
+          addToast(data.error || 'Approval action failed', 'error');
         }
-        return;
+      } else {
+        addToast(data.message || 'Action completed successfully', 'success');
       }
-      addToast(data.message ?? 'Action completed', 'success');
       await loadRunDetail(currentDetail.id);
-    } catch {
-      addToast('Failed to execute action', 'error');
+    } catch (err) {
+      addToast(`Failed to execute action: ${err instanceof Error ? err.message : 'Network error'}`, 'error');
     } finally {
       setApproving(null);
     }
@@ -695,12 +793,24 @@ export default function Home() {
               </div>
               <div className="sources-grid">
                 {[
-                  'Coursera (Free Audit)',
+                  'Coursera (Free Audit Tier)',
                   'Kaggle Learn',
                   'Khan Academy',
                   'freeCodeCamp',
                   'MIT OpenCourseWare',
                   'MDN Web Docs',
+                  'Harvard University (CS50)',
+                  'Microsoft Learn',
+                  'Google Developers & web.dev',
+                  'Mode Analytics SQL',
+                  'Python Software Foundation',
+                  'PostgreSQL Documentation',
+                  'Fast.ai Practical Deep Learning',
+                  'Linux Foundation Free Training',
+                  'Docker Official Documentation',
+                  'Kubernetes Tutorials',
+                  'PortSwigger Web Security Academy',
+                  'OWASP Foundation',
                 ].map(provider => (
                   <div key={provider} className="source-pill-box">
                     <span>{provider}</span>
@@ -719,13 +829,14 @@ export default function Home() {
                     key={idx}
                     className={`preset-interactive-card ${p.featured ? 'featured-card' : ''}`}
                     onClick={() => {
-                      setForm({
+                      setForm(prev => ({
+                        ...prev,
                         goal: p.goal,
-                        level: p.level,
+                        level: p.level as SkillLevel,
                         weekly_hours: p.weekly_hours,
                         horizon_weeks: p.horizon_weeks,
                         label: p.label,
-                      });
+                      }));
                       addToast(`Loaded preset: ${p.title}`, 'info');
                     }}
                   >
@@ -765,17 +876,91 @@ export default function Home() {
                 </div>
                 <div className="surface-card-body">
                   <div className="input-block">
-                    <label className="input-label" htmlFor="goal-input">Learning Goal / Objective</label>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <label className="input-label" htmlFor="goal-input">Learning Goal / Objective</label>
+                      <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Type any tech ambition</span>
+                    </div>
                     <textarea
                       id="goal-input"
                       className="textarea-input"
-                      placeholder="e.g. I want to become a data analyst in 6 months with 5 hours a week"
+                      placeholder="e.g. I want to become a cybersecurity analyst in 4 months with 6 hours a week"
                       value={form.goal}
                       onChange={e => setForm(f => ({ ...f, goal: e.target.value }))}
                       rows={3}
                     />
+
+                    {/* AI Smart Goal Assistant */}
+                    {form.goal.trim().length >= 2 && (
+                      <div className="smart-goal-assistant">
+                        <div className="smart-assistant-header">
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <div className="smart-assistant-tag">
+                              <Sparkles size={11} />
+                              <span>AI Goal Analyzer</span>
+                            </div>
+                            {smartParams.recognized && (
+                              <span style={{ fontSize: 10, padding: '2px 7px', borderRadius: 4, background: 'rgba(56, 189, 248, 0.12)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+                                {smartParams.confidence}
+                              </span>
+                            )}
+                          </div>
+                          {smartParams.recognized ? (
+                            <div className="smart-assistant-detected">
+                              Standardized Role: <strong>{smartParams.domain_display}</strong>
+                              {smartParams.domain_category && (
+                                <span style={{ fontSize: 11, opacity: 0.8, marginLeft: 6 }}>· {smartParams.domain_category}</span>
+                              )}
+                            </div>
+                          ) : (
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
+                              {smartParams.guidance || 'Awaiting standardized role or skill...'}
+                            </div>
+                          )}
+                        </div>
+
+                        {smartParams.recognized && (
+                          <div className="smart-assistant-body">
+                            {smartParams.competencies && smartParams.competencies.length > 0 && (
+                              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 8 }}>
+                                <span style={{ fontSize: 10, color: 'var(--text-muted)', alignSelf: 'center', marginRight: 2 }}>Core Competencies:</span>
+                                {smartParams.competencies.map(comp => (
+                                  <span key={comp} style={{ fontSize: 10, background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: '#cbd5e1', borderRadius: 4, padding: '1px 6px' }}>
+                                    {comp}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            <div className="smart-chips-row">
+                              <span className="smart-param-chip" title="Recommended Level">📊 Level: {smartParams.level}</span>
+                              <span className="smart-param-chip" title="Recommended Duration">⏱️ {smartParams.horizon_weeks}w ({Math.round(smartParams.horizon_weeks / 4.33)} mo)</span>
+                              <span className="smart-param-chip" title="Recommended Weekly Hours">⏳ {smartParams.weekly_hours}h / wk</span>
+                            </div>
+                            <button
+                              type="button"
+                              className="btn-smart-apply"
+                              onClick={() => {
+                                setForm(f => ({
+                                  ...f,
+                                  level: smartParams.level,
+                                  weekly_hours: smartParams.weekly_hours,
+                                  horizon_weeks: smartParams.horizon_weeks,
+                                  label: smartParams.label,
+                                }));
+                                addToast(`Auto-tuned parameters: ${smartParams.level} · ${smartParams.horizon_weeks}w · ${smartParams.weekly_hours}h/wk`, 'info');
+                              }}
+                              title="Auto-tune level, duration, and weekly hours to match this ambition"
+                            >
+                              <Sparkles size={12} />
+                              <span>Auto-Tune Parameters</span>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
+                  {/* Row 1: Starting Level & Learner Cognitive Profile */}
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                     <div className="input-block">
                       <label className="input-label" htmlFor="level-select">Starting Level</label>
@@ -783,11 +968,43 @@ export default function Home() {
                         id="level-select"
                         className="select-input"
                         value={form.level}
-                        onChange={e => setForm(f => ({ ...f, level: e.target.value }))}
+                        onChange={e => setForm(f => ({ ...f, level: e.target.value as SkillLevel }))}
                       >
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
+                        <option value="beginner">Beginner (Zero / Minimal Tech)</option>
+                        <option value="intermediate">Intermediate (Some Foundation)</option>
+                        <option value="advanced">Advanced (Deep Dive / Scale)</option>
+                      </select>
+                    </div>
+
+                    <div className="input-block">
+                      <label className="input-label" htmlFor="pace-select">Learning Pace / Persona</label>
+                      <select
+                        id="pace-select"
+                        className="select-input"
+                        value={form.pace}
+                        onChange={e => setForm(f => ({ ...f, pace: e.target.value as LearnerPace }))}
+                      >
+                        <option value="balanced">🎯 Steady / Standard Pace</option>
+                        <option value="fast_track">⚡ Fast-Track / High-Velocity</option>
+                        <option value="deep_mastery">🌱 Gentle / Deep Mastery</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Row 2: Life Situation & Hours Per Week */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    <div className="input-block">
+                      <label className="input-label" htmlFor="situation-select">Schedule &amp; Situation</label>
+                      <select
+                        id="situation-select"
+                        className="select-input"
+                        value={form.situation}
+                        onChange={e => setForm(f => ({ ...f, situation: e.target.value as LifeSituation }))}
+                      >
+                        <option value="working_professional">💼 Working Professional (Evenings)</option>
+                        <option value="career_switcher">🚀 Career Switcher (Dedicated)</option>
+                        <option value="busy_caregiver">👶 Busy Parent (Micro-Sessions)</option>
+                        <option value="student">🎓 Student / Academic Sprint</option>
                       </select>
                     </div>
 
@@ -819,6 +1036,44 @@ export default function Home() {
                     <div className="range-legend">
                       <span>4 weeks</span>
                       <span>52 weeks (1 yr)</span>
+                    </div>
+
+                    {/* Workload Feasibility Diagnostic Advisor */}
+                    <div className={`feasibility-card feasibility-${feasibility.status}`}>
+                      <div className="feasibility-header">
+                        <div className="feasibility-status-badge">
+                          {feasibility.status === 'optimal' && <CheckCircle2 size={13} color="var(--status-live)" />}
+                          {feasibility.status === 'compressed' && <AlertTriangle size={13} color="var(--status-warn)" />}
+                          {feasibility.status === 'extended' && <Info size={13} color="var(--status-info)" />}
+                          <span>{feasibility.headline}</span>
+                        </div>
+                        <div className="feasibility-metrics-pill">
+                          {totalHours}h budget / ~{feasibility.benchmarkHours}h benchmark ({feasibility.coveragePercentage}% coverage)
+                        </div>
+                      </div>
+                      <div className="feasibility-advice-text">
+                        {feasibility.advice}
+                      </div>
+                      {feasibility.status !== 'optimal' && (
+                        <div style={{ marginTop: 4 }}>
+                          <button
+                            type="button"
+                            className="btn-smart-apply"
+                            style={{ fontSize: 11, padding: '3px 8px' }}
+                            onClick={() => {
+                              setForm(f => ({
+                                ...f,
+                                weekly_hours: feasibility.recommendedHoursPerWeek,
+                                horizon_weeks: feasibility.recommendedWeeks,
+                              }));
+                              addToast(`Auto-balanced: ${feasibility.recommendedWeeks} weeks @ ${feasibility.recommendedHoursPerWeek}h/wk`, 'success');
+                            }}
+                          >
+                            <Sparkles size={11} />
+                            <span>Auto-Balance Workload &amp; Duration ({feasibility.recommendedWeeks}w @ ${feasibility.recommendedHoursPerWeek}h/wk)</span>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
 

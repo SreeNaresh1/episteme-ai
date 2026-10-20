@@ -26,9 +26,11 @@ export function getDb(): Database.Database {
     }
   }
 
-  db = new Database(DB_PATH);
+  db = new Database(DB_PATH, { timeout: 10000 });
   try {
     db.pragma('journal_mode = WAL');
+    db.pragma('busy_timeout = 10000');
+    db.pragma('synchronous = NORMAL');
   } catch {
     db.pragma('journal_mode = DELETE');
   }
