@@ -45,7 +45,7 @@ export async function POST(
     // Auto-discover the pending action if action_id is not explicitly provided
     if (!action_id) {
       const pending = db.prepare(
-        "SELECT id FROM actions WHERE run_id = ? AND status = 'pending' ORDER BY created_at DESC LIMIT 1"
+        "SELECT id FROM actions WHERE run_id = ? AND (status = 'pending_approval' OR status = 'pending') ORDER BY created_at DESC LIMIT 1"
       ).get(id) as { id: string } | undefined;
       if (pending) {
         action_id = pending.id;
