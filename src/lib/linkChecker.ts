@@ -12,6 +12,8 @@
  * and (when applicable) a verified replacement resource.
  */
 
+import { discoverFreeWebAlternative } from './webDiscovery';
+
 export type LinkStatus = 'live_free' | 'live_unknown' | 'paid' | 'broken' | 'unknown';
 
 export interface LinkCheckResult {
@@ -31,6 +33,10 @@ export interface ReplacementResource {
   topic_tag: string;
   reason: string;
   verification?: LinkCheckResult;
+  discovery_method?: 'open_web_crawler' | 'open_syllabus_index' | 'curated_repository';
+  free_confidence_score?: number;
+  dom_evidence?: any;
+  search_query_used?: string;
 }
 
 // ─── Known paid-platform URL patterns ──────────────────────────────────────
@@ -409,7 +415,33 @@ export async function checkLink(
 ): Promise<LinkCheckResult> {
   const checked_at = new Date().toISOString();
 
-  // Step 1: Perform live HTTP reachability check first for all URLs
+  // Helper to obtain a dynamic open-web verified replacement
+  const getDiscoveredReplacement = async (reasonPrefix: string): Promise<ReplacementResource> => {
+    try {
+      const discovered = await discoverFreeWebAlternative(url, topicHint);
+      return {
+        title: discovered.title,
+        url: discovered.url,
+        platform: discovered.platform,
+        topic_tag: discovered.topic_tag,
+        reason: `${reasonPrefix} Discovered replacement via ${discovered.discovery_method}: ${discovered.title} (${discovered.platform}) with ${Math.round(discovered.free_confidence_score * 100)}% free confidence.`,
+        discovery_method: discovered.discovery_method,
+        free_confidence_score: discovered.free_confidence_score,
+        dom_evidence: discovered.dom_evidence,
+        search_query_used: discovered.search_query_used,
+      };
+    } catch {
+      const rep = pickReplacement(url, topicHint);
+      return {
+        ...rep,
+        reason: `${reasonPrefix} Replaced with verified free alternative: ${rep.title}.`,
+        discovery_method: 'curated_repository',
+        free_confidence_score: 1.0,
+      };
+    }
+  };
+
+  // Step 1: Perform live HTTP reachability check with modern anti-scraping headers
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 4000);
@@ -418,7 +450,11 @@ export async function checkLink(
       method: 'HEAD',
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Sec-Ch-Ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
       },
       redirect: 'follow',
     });
@@ -429,7 +465,7 @@ export async function checkLink(
 
     // 1. Explicit 404 or 5xx: Unreachable/broken regardless of domain
     if (http_status === 404 || http_status >= 500) {
-      const rep = pickReplacement(url, topicHint);
+      const replacement = await getDiscoveredReplacement(`Original resource returned HTTP ${http_status}.`);
       return {
         url,
         status: 'broken',
@@ -437,16 +473,13 @@ export async function checkLink(
         checked_at,
         is_free: false,
         classification_reason: `HTTP ${http_status} response. Resource is unavailable or does not exist.`,
-        replacement: {
-          ...rep,
-          reason: `Original resource returned HTTP ${http_status}. Replaced with a verified free alternative.`,
-        },
+        replacement,
       };
     }
 
     // 2. Paid platform heuristic (reachability verified: responded 2xx/3xx or 401/403 paywall)
     if (isKnownPaidPlatform(url) || isKnownPaidPlatform(finalUrl)) {
-      const rep = pickReplacement(url, topicHint);
+      const replacement = await getDiscoveredReplacement(`Original resource at ${url} requires paid subscription.`);
       return {
         url,
         status: 'paid',
@@ -455,16 +488,13 @@ export async function checkLink(
         is_free: false,
         classification_reason:
           'URL matches a known paid-subscription platform. Content requires purchase or subscription.',
-        replacement: {
-          ...rep,
-          reason: `Original resource at ${url} requires payment. Replaced with a verified free alternative.`,
-        },
+        replacement,
       };
     }
 
     // 3. Other 4xx responses on non-paid domains
     if (http_status >= 400) {
-      const rep = pickReplacement(url, topicHint);
+      const replacement = await getDiscoveredReplacement(`Original resource returned HTTP ${http_status}.`);
       return {
         url,
         status: 'broken',
@@ -472,10 +502,7 @@ export async function checkLink(
         checked_at,
         is_free: false,
         classification_reason: `HTTP ${http_status} response. Resource is unavailable or access-restricted.`,
-        replacement: {
-          ...rep,
-          reason: `Original resource returned HTTP ${http_status}. Replaced with a verified free alternative.`,
-        },
+        replacement,
       };
     }
 
@@ -504,8 +531,10 @@ export async function checkLink(
     };
   } catch (err) {
     // Network error, DNS failure (NXDOMAIN), or timeout
-    const rep = pickReplacement(url, topicHint);
     const isTimeout = err instanceof Error && err.name === 'AbortError';
+    const replacement = await getDiscoveredReplacement(
+      isTimeout ? 'Original resource timed out.' : 'Original resource unreachable due to network/DNS error.'
+    );
     return {
       url,
       status: 'broken',
@@ -515,10 +544,7 @@ export async function checkLink(
       classification_reason: isTimeout
         ? 'Request timed out after 4 s. Resource may be down or blocking automated requests.'
         : `Network error: ${err instanceof Error ? err.message : String(err)}`,
-      replacement: {
-        ...rep,
-        reason: `Original resource is unreachable. Replaced with a verified free alternative.`,
-      },
+      replacement,
     };
   }
 }

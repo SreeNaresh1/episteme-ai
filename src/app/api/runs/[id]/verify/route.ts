@@ -67,8 +67,9 @@ export async function POST(
     const insertReplacement = db.prepare(`
       INSERT INTO resources
         (id, week_id, run_id, title, url, platform, is_free, link_status,
-         link_checked_at, link_http_status, classification_reason, replaced_by, replacement_reason)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         link_checked_at, link_http_status, classification_reason, replaced_by, replacement_reason,
+         discovery_method, free_confidence, dom_evidence)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     const markOriginalReplaced = db.prepare(`
@@ -142,7 +143,10 @@ export async function POST(
               verified.verification.http_status ?? null,
               verified.verification.classification_reason,
               null,
-              null
+              null,
+              verified.discovery_method || 'open_web_crawler',
+              verified.free_confidence_score ?? 1.0,
+              JSON.stringify(verified.dom_evidence || {})
             );
             markOriginalReplaced.run(verified.url, verified.reason, res.id);
             summary.replacements_inserted++;

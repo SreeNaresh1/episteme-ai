@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 import { generateLearningPath, extractGoalParameters } from '@/lib/pathGenerator';
+import { generateMilestonesForWeeks } from '@/lib/learningOutcomes';
 
 function generateId() {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
@@ -120,10 +121,25 @@ export async function POST(req: NextRequest) {
       INSERT INTO resources (id, week_id, run_id, title, url, platform, is_free)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
+    const insertCheckpoint = db.prepare(`
+      INSERT INTO learning_checkpoints (
+        id, week_id, run_id, week_number, phase, milestone_title, deliverable,
+        verification_rubric, is_completed, completed_at, learner_notes, verification_score
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, NULL, NULL, NULL)
+    `);
 
     const insertAll = db.transaction(() => {
+      const weekRecordsForMilestones: Array<{ id: string; week_number: number; title: string; hours_allocated: number }> = [];
+
       for (const week of path.weeks) {
         const weekId = generateId();
+        weekRecordsForMilestones.push({
+          id: weekId,
+          week_number: week.week_number,
+          title: week.title,
+          hours_allocated: week.hours_allocated,
+        });
+
         insertWeek.run(weekId, runId, week.week_number, week.title, week.description, week.hours_allocated);
         for (const resource of week.resources) {
           insertResource.run(
@@ -131,6 +147,15 @@ export async function POST(req: NextRequest) {
             resource.is_free ? 1 : 0
           );
         }
+      }
+
+      // Generate and persist learning checkpoints
+      const checkpoints = generateMilestonesForWeeks(runId, weekRecordsForMilestones);
+      for (const c of checkpoints) {
+        insertCheckpoint.run(
+          c.id, c.week_id, c.run_id, c.week_number, c.phase, c.milestone_title,
+          c.deliverable, JSON.stringify(c.verification_rubric)
+        );
       }
     });
     insertAll();
