@@ -496,6 +496,18 @@ export default function PresentationPage() {
                 </Link>
 
                 <a
+                  href="/Episteme_AI_Concept_Document.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  download
+                  className="btn-secondary-light"
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '10px 16px', fontWeight: 600, background: '#f0fdf4', borderColor: '#86efac', color: '#166534' }}
+                >
+                  <Download size={14} />
+                  <span>Download Concept Document (PDF)</span>
+                </a>
+
+                <a
                   href="/Episteme_AI_Presentation.pptx"
                   download
                   className="btn-secondary-light"
@@ -553,6 +565,18 @@ export default function PresentationPage() {
               <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>
                 Slide {currentSlide + 1} of {slides.length}
               </span>
+
+              <a
+                href="/Episteme_AI_Concept_Document.pdf"
+                target="_blank"
+                rel="noreferrer"
+                download
+                className="btn-secondary-light"
+                style={{ fontSize: 12, padding: '6px 12px', background: '#f0fdf4', borderColor: '#86efac', color: '#166534', fontWeight: 600 }}
+                title="Download Concept Document PDF (Seva First Innovation Challenge)"
+              >
+                <Download size={13} /> Concept Doc (PDF)
+              </a>
 
               <a
                 href="/Episteme_AI_Presentation.pptx"

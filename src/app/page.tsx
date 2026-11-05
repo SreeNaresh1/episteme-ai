@@ -882,6 +882,18 @@ export default function Home() {
                 <span>Presentation</span>
                 <span style={{ fontSize: 9, padding: '1px 5px', borderRadius: 4, background: '#111110', color: '#fff', fontWeight: 800 }}>SLIDES</span>
               </Link>
+              <a
+                href="/Episteme_AI_Concept_Document.pdf"
+                target="_blank"
+                rel="noreferrer"
+                download
+                className="nav-link-btn"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none', color: '#166534', fontWeight: 700 }}
+                title="Download Official Concept Document PDF"
+              >
+                <span>Concept Doc</span>
+                <span style={{ fontSize: 9, padding: '1px 5px', borderRadius: 4, background: '#16a34a', color: '#fff', fontWeight: 800 }}>PDF</span>
+              </a>
             </nav>
 
             <div className="header-cta-group">
