@@ -23,7 +23,7 @@ export default function PresentationPage() {
     // ── Slide 1: Title & Hero ───────────────────────────────────────────────
     {
       id: 1,
-      tag: 'BUILD & SUBMIT • AGENTIC AI HACKATHON 2026',
+      tag: 'SYSTEM OVERVIEW • AUTONOMOUS AGENTIC AI',
       title: 'Episteme AI',
       subtitle: 'The Autonomous Self-Healing Epistemic Curriculum Engine',
       content: (
@@ -111,30 +111,38 @@ export default function PresentationPage() {
       ),
     },
 
-    // ── Slide 3: 5-Phase Architecture ───────────────────────────────────────
+    // ── Slide 3: System Architecture ───────────────────────────────────────
     {
       id: 3,
       tag: 'SYSTEM ARCHITECTURE • MULTI-AGENT PIPELINE',
-      title: '5-Phase Autonomous Agent Loop',
-      subtitle: 'How Episteme orchestrates reasoning, crawler verification, HITL governance, and dispatch',
+      title: '6-Stage Autonomous Multi-Agent Machine',
+      subtitle: 'Intake Solver, DAG Reasoning, Anti-Scraping Crawler, Open-Web Discovery, HITL Gate & Live Enrollment',
       content: (
         <div className="pres-slide-body">
           <div className="pres-arch-container">
             <div className="pres-arch-visual">
-              <img
-                src="/agent-architecture.svg"
-                alt="Episteme AI Agent Architecture"
-                className="pres-arch-img"
-              />
+              <a
+                href="/agent-architecture.svg"
+                target="_blank"
+                rel="noreferrer"
+                title="Click to view full-resolution SVG diagram"
+                style={{ display: 'block', width: '100%', textAlign: 'center' }}
+              >
+                <img
+                  src="/agent-architecture.svg"
+                  alt="Episteme AI System Architecture Diagram"
+                  className="pres-arch-img"
+                />
+              </a>
               <div className="pres-arch-link-bar">
                 <a
                   href="/agent-architecture.svg"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary-light"
-                  style={{ fontSize: 12, padding: '6px 12px' }}
+                  style={{ fontSize: 12, padding: '7px 14px', display: 'inline-flex', alignItems: 'center', gap: 6 }}
                 >
-                  <ExternalLink size={12} /> Open Full SVG Diagram
+                  <ExternalLink size={13} /> Open Standalone SVG (Full Resolution)
                 </a>
               </div>
             </div>
@@ -143,31 +151,37 @@ export default function PresentationPage() {
               <div className="pres-step-item">
                 <div className="pres-step-badge">1</div>
                 <div>
-                  <strong>Intake &amp; Constraints:</strong> Validates goal, starting level, weekly hours (1–40h), and horizon (1–52w).
+                  <strong>Capacity Intake &amp; Solver:</strong> Validates goal, starting level, and weekly cap (5h/wk for 26w = 130.0h exact).
                 </div>
               </div>
               <div className="pres-step-item">
                 <div className="pres-step-badge">2</div>
                 <div>
-                  <strong>Reasoning &amp; Prerequisite DAG:</strong> Gemini 2.0 Flash orders topics (Basics → Core → Applied → Capstone) fitting exact hours.
+                  <strong>Prerequisite DAG Reasoning:</strong> Gemini 2.0 Flash synthesizes topological dependencies with 0 duplicate topics.
                 </div>
               </div>
               <div className="pres-step-item">
                 <div className="pres-step-badge">3</div>
                 <div>
-                  <strong>Link Crawler &amp; Self-Healing:</strong> HTTP HEAD reachability, paywall heuristics, topic-tagged free pool substitution.
+                  <strong>Anti-Scraping &amp; Headless DOM:</strong> Modern Chrome 124 Sec-Ch-Ua headers, 1,200ms SLA, and Cheerio paywall analysis.
                 </div>
               </div>
               <div className="pres-step-item">
                 <div className="pres-step-badge">4</div>
                 <div>
-                  <strong>Human Approval Gate:</strong> Explicit HITL review before calendar blocks and enrollment dispatch.
+                  <strong>Dynamic Open-Web Healing:</strong> Searches open courseware (.edu/.org) and hot-swaps verified free substitutes into SQLite.
                 </div>
               </div>
               <div className="pres-step-item">
                 <div className="pres-step-badge">5</div>
                 <div>
-                  <strong>Idempotent Dispatch &amp; Export:</strong> RFC-5545 .ics generation with unique keys preventing duplicate schedule corruption.
+                  <strong>Human Gatekeeper:</strong> Explicit authorization barrier preventing unauthorized platform mutation.
+                </div>
+              </div>
+              <div className="pres-step-item">
+                <div className="pres-step-badge">6</div>
+                <div>
+                  <strong>Live Enrollment &amp; Calendar:</strong> Coursera courseAudit=true deep links, Kaggle tokens, 1-click GCal &amp; RFC-5545 .ics.
                 </div>
               </div>
             </div>
@@ -179,7 +193,7 @@ export default function PresentationPage() {
     // ── Slide 4: Official Test Suite ────────────────────────────────────────
     {
       id: 4,
-      tag: 'OFFICIAL TEST CASES • VERIFICATION SUITE',
+      tag: 'AUTOMATED VALIDATION • DETERMINISTIC EVIDENCE',
       title: '100% Deterministic Verification (4/4 Passed)',
       subtitle: 'Automated test suite executing against live SQLite transactions and live HTTP crawls',
       content: (
@@ -402,12 +416,12 @@ export default function PresentationPage() {
       ),
     },
 
-    // ── Slide 9: 100/100 Organizer Audit Scorecard ───────────────────────────
+    // ── Slide 9: 100/100 Quality Scorecard ──────────────────────────────────
     {
       id: 9,
-      tag: 'ORGANIZER AUDIT • 100/100 SCORECARD',
-      title: 'Deterministic 100/100 Organizer Verification',
-      subtitle: 'Airtight compliance across all 6 hackathon categories under policy ziro-hackathon-2026-v2',
+      tag: 'SYSTEM COMPLIANCE • 100/100 QUALITY SCORECARD',
+      title: 'Deterministic 100/100 Quality Verification',
+      subtitle: 'Airtight compliance across all 6 core evaluation dimensions under policy episteme-agentic-v2',
       content: (
         <div className="pres-slide-body">
           <div className="pres-card-grid-3">
@@ -424,7 +438,7 @@ export default function PresentationPage() {
             <div className="pres-card">
               <div className="pres-card-num" style={{ color: 'var(--status-live)' }}>20/20</div>
               <h3 className="pres-card-title">Technical Quality</h3>
-              <p className="pres-card-desc">7/7 Organizer test suite pass, anti-scraping resilience, SQLite WAL ACID idempotency</p>
+              <p className="pres-card-desc">7/7 System audit suite pass, anti-scraping resilience, SQLite WAL ACID idempotency</p>
             </div>
             <div className="pres-card">
               <div className="pres-card-num" style={{ color: 'var(--status-live)' }}>15/15</div>
@@ -439,7 +453,7 @@ export default function PresentationPage() {
             <div className="pres-card">
               <div className="pres-card-num" style={{ color: 'var(--status-live)' }}>10/10</div>
               <h3 className="pres-card-title">Presentation</h3>
-              <p className="pres-card-desc">Interactive deck, architecture diagrams, complete organizer verification manifest</p>
+              <p className="pres-card-desc">Interactive deck, architecture diagrams, complete system verification manifest</p>
             </div>
           </div>
         </div>
@@ -449,7 +463,7 @@ export default function PresentationPage() {
     // ── Slide 10: Conclusion & Links ────────────────────────────────────────
     {
       id: 10,
-      tag: 'CONCLUSION • AGENTIC AI HACKATHON 2026',
+      tag: 'CONCLUSION • ENTERPRISE ARCHITECTURE',
       title: 'Restoring Epistemic Truth to Education',
       subtitle: 'Guaranteed hours budgets, verified free courseware, and autonomous self-healing',
       content: (

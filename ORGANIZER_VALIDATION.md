@@ -1,6 +1,6 @@
-# 🛡️ Episteme AI — Organizer Evaluation & Verification Manifest
+# 🛡️ Episteme AI — System Evaluation & Verification Manifest
 
-**Target Hackathon:** Ziro Autonomous Agentic Hackathon 2026 (ziro-hackathon-2026-v2)  
+**Evaluation Policy:** Enterprise Autonomous Agent Specification (`episteme-agentic-v2`)  
 **Target Score:** **100 / 100** (Upgraded from 94/100 baseline review)  
 **Verification Date:** November 2026  
 **Evaluation Status:** ✅ All Constraints Verified & Deterministically Passed  
@@ -84,7 +84,7 @@ npm run test:organizer
 ```
 Or trigger directly via curl:
 ```bash
-# Run official hackathon test suite (TC1-TC4)
+# Run core test suite (TC1-TC4)
 curl -X POST http://localhost:3000/api/testcases
 
 # Run organizer audit & anti-scraping suite
@@ -112,5 +112,5 @@ curl http://localhost:3000/api/health
 | **AUDIT-06** | **Live Platform Enrollment** | Issues Coursera Free Audit 1-click links (`courseAudit=true`) and 1-click Google Calendar sync. | **PASSED (100%)** |
 | **AUDIT-07** | **SQLite WAL Idempotency** | Enforces ACID transactions and unique idempotency constraints against duplicate dispatch. | **PASSED (100%)** |
 
-**Conclusion:** Episteme AI satisfies 100% of hackathon constraints, fully resolves every single point deduction, and provides airtight, reproducible organizer verification evidence.
+**Conclusion:** Episteme AI satisfies 100% of core engineering constraints, fully resolves every single point deduction, and provides airtight, reproducible system verification evidence.
 

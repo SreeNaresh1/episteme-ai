@@ -179,7 +179,7 @@ interface RunDetail {
 // ── Presets ───────────────────────────────────────────────────────────────────
 const PRESET_GOALS = [
   {
-    badge: 'Official Hackathon Assignment',
+    badge: 'Autonomous Curriculum Specification',
     title: 'Data Analyst in 6mo @ 5h/wk',
     desc: 'The exact assigned problem statement. 26 weeks, 130 hours budget, 100% verified free resources.',
     goal: 'I want to become a data analyst in 6 months with 5 hours a week',
@@ -1776,9 +1776,9 @@ export default function Home() {
           <div style={{ paddingTop: 32 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
               <div>
-                <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>Official Test Cases</h2>
+                <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>Core Test Scenarios</h2>
                 <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-                  4 mandatory hackathon scenarios demonstrating budget fit, paywall detection, link repair, and rerun idempotency
+                  4 core validation scenarios demonstrating budget fit, paywall detection, link repair, and rerun idempotency
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
@@ -1903,11 +1903,11 @@ export default function Home() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                  <span className="clean-badge badge-live-green">HACKATHON POLICY: ziro-hackathon-2026-v2</span>
+                  <span className="clean-badge badge-live-green">SYSTEM POLICY: episteme-agentic-v2</span>
                   <span className="clean-badge badge-neutral-gray mono">TARGET SCORE: 100/100</span>
                 </div>
                 <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>
-                  Organizer Evaluation &amp; Anti-Scraping Defense Suite
+                  System Evaluation &amp; Anti-Scraping Defense Suite
                 </h2>
                 <div style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 760 }}>
                   Automated verification logs testing crawler resilience against bot protections,
@@ -1961,10 +1961,10 @@ export default function Home() {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 800, color: '#14532d' }}>
                   <CheckCircle2 size={16} color="var(--status-live)" />
-                  <span>Official Organizer Assessment: {organizerReport?.organizer_signoff?.recommended_score ?? '100 / 100'} (VERIFIED PERFECT PASS)</span>
+                  <span>System Evaluation Signoff: {organizerReport?.organizer_signoff?.recommended_score ?? '100 / 100'} (VERIFIED PERFECT PASS)</span>
                 </div>
                 <div style={{ fontSize: 12.5, color: '#166534', marginTop: 2 }}>
-                  All 4 hackathon criteria and all organizer review criticisms resolved with deterministic, reproducible test evidence.
+                  All 4 core evaluation criteria and all technical review points resolved with deterministic, reproducible test evidence.
                 </div>
               </div>
               <a
@@ -2099,7 +2099,7 @@ export default function Home() {
                 </h2>
                 <div style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 760 }}>
                   Weekly actionable deliverables, competency rubric tracking, and digital graduation certificate.
-                  Solves the hackathon requirement of proving real learning progression over time.
+                  Solves the core requirement of proving real learning progression over time.
                 </div>
               </div>
 
@@ -2328,7 +2328,7 @@ export default function Home() {
                   Upon 100% completion, Episteme issues a cryptographically hashed Graduation Certificate verifying real career outcomes.
                 </p>
                 <div style={{ marginTop: 12, padding: 12, background: 'var(--bg-subtle)', borderRadius: 8, fontSize: 12, fontFamily: 'JetBrains Mono' }}>
-                  Graduation: Cryptographic Certificate issued · 100/100 Hackathon Score
+                  Graduation: Cryptographic Certificate issued · 100/100 Evaluation Score
                 </div>
               </div>
             )}

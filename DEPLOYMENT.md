@@ -1,6 +1,6 @@
 # 🚀 Episteme AI — Live Deployment & Production Guide
 
-This guide details how to deploy and operate **Episteme AI** in production environments, satisfying the **Live User Deployment** hackathon requirement.
+This guide details how to deploy and operate **Episteme AI** in production environments, satisfying the **Live User Deployment** requirements.
 
 ---
 
@@ -10,7 +10,7 @@ The easiest way to run Episteme AI in an isolated, production-grade container wi
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/episteme-ai.git
+git clone https://github.com/SreeNaresh1/episteme-ai.git
 cd episteme-ai
 
 # (Optional) Export Gemini API Key if using generative AI features
@@ -33,7 +33,7 @@ Response:
 {
   "status": "healthy",
   "system": "Episteme AI — Autonomous Self-Healing Learning Path Engine",
-  "policy": "ziro-hackathon-2026-v2",
+  "policy": "episteme-agentic-v2",
   "database": {
     "status": "connected",
     "journal_mode": "WAL"

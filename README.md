@@ -1,23 +1,23 @@
 # Episteme AI — Autonomous Self-Healing Learning Path Engine
 
-[![Target Score 100/100](https://img.shields.io/badge/Organizer%20Score-100%2F100-059669?style=flat&logo=checkmarx&logoColor=white)](#-organizer-evaluation--100100-scorecard)
+[![Target Score 100/100](https://img.shields.io/badge/System%20Score-100%2F100-059669?style=flat&logo=checkmarx&logoColor=white)](#-system-evaluation--100100-scorecard)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.4.2-111110?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19.3.0-111110?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-111110?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Cheerio](https://img.shields.io/badge/Cheerio-1.2.0%20DOM%20Parser-E88C1F)](https://cheerio.js.org/)
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.0%20Flash-111110?logo=google&logoColor=white)](https://aistudio.google.com/)
 [![SQLite WAL](https://img.shields.io/badge/SQLite-WAL%20Stateful-111110?logo=sqlite&logoColor=white)](https://sqlite.org/)
-[![Verification Suite](https://img.shields.io/badge/Hackathon%20Tests-4%2F4%20Passed-111110)](#-official-scenarios--verification-evidence)
-[![Organizer Suite](https://img.shields.io/badge/Organizer%20Audit-7%2F7%20Passed-059669)](#-organizer-evaluation--anti-scraping-defense-suite)
+[![Verification Suite](https://img.shields.io/badge/Core%20Tests-4%2F4%20Passed-111110)](#-official-scenarios--verification-evidence)
+[![System Audit Suite](https://img.shields.io/badge/System%20Audit-7%2F7%20Passed-059669)](#-system-evaluation--anti-scraping-defense-suite)
 [![RFC 5545 & GCal](https://img.shields.io/badge/Calendar-RFC--5545%20%2B%20GCal-111110)](#-live-platform-enrollment--calendar-synchronization)
 
 > **Episteme** (Ancient Greek: *ἐπιστήμη* — justified, verified truth vs *δόξα* / unverified opinion) is an autonomous, agentic curriculum engineer. It transforms ambiguous career goals into strictly constrained, prerequisite-ordered weekly roadmaps powered exclusively by **100% verified free public courseware**, backed by **autonomous dynamic open-web self-healing**, **live automated platform enrollment**, and **human-governed calendar scheduling**.
 
 ---
 
-## 🏆 Organizer Evaluation & 100/100 Scorecard
+## 🏆 System Evaluation & 100/100 Scorecard
 
-Episteme AI achieves a deterministic **100/100 perfect score** under hackathon policy `ziro-hackathon-2026-v2`:
+Episteme AI achieves a deterministic **100/100 perfect score** under autonomous agent policy `episteme-agentic-v2`:
 
 | Criteria | Score | Verification & Implemented Improvements |
 | :--- | :---: | :--- |
@@ -112,9 +112,9 @@ Episteme AI operates as a coordinated multi-phase agent loop:
 
 ---
 
-## 🧪 Official Scenarios & Verification Evidence
+## 🧪 Core Validation Scenarios & Verification Evidence
 
-Episteme AI includes an automated, built-in test suite executing the 4 required hackathon scenarios against live database transactions. All 4 tests pass deterministically (4/4).
+Episteme AI includes an automated, built-in test suite executing the 4 core verification scenarios against live database transactions. All 4 tests pass deterministically (4/4).
 
 | Scenario ID | Test Scenario | Specification & Expected Behavior | Actual Automated Output | Status |
 | :--- | :--- | :--- | :--- | :---: |
@@ -125,9 +125,9 @@ Episteme AI includes an automated, built-in test suite executing the 4 required 
 
 ---
 
-## 🛡️ Organizer Evaluation & Anti-Scraping Defense Suite
+## 🛡️ System Evaluation & Anti-Scraping Defense Suite
 
-Run the full organizer compliance audit directly from the CLI or UI tab **"Organizer Audit (7/7)"**:
+Run the full system compliance audit directly from the CLI or UI tab **"System Audit (7/7)"**:
 
 ```bash
 npm run test:organizer
@@ -169,8 +169,8 @@ npm run test:organizer
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/episteme-ai.git
-cd episteme-ai/app
+git clone https://github.com/SreeNaresh1/episteme-ai.git
+cd episteme-ai
 
 # Install dependencies
 npm install
@@ -185,10 +185,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### 4. Running the Complete Verification Suite
 Trigger the full verification suite directly from the UI or run:
 ```bash
-# Official Hackathon Scenarios (TC1-TC4)
+# Core Validation Scenarios (TC1-TC4)
 curl -X POST http://localhost:3000/api/testcases
 
-# Organizer Evaluation & Anti-Scraping Defense Suite (7/7)
+# System Evaluation & Anti-Scraping Defense Suite (7/7)
 curl -X POST http://localhost:3000/api/organizer-audit
 
 # CLI Test Runner
@@ -200,7 +200,7 @@ npm run test:organizer
 ## 📁 Repository Directory Structure
 
 ```
-Ziro/
+episteme-ai/
 ├── app/
 │   ├── src/
 │   │   ├── app/
@@ -212,7 +212,7 @@ Ziro/
 │   │   │   │   │   │   ├── approve/    # HITL gate & live platform enrollment
 │   │   │   │   │   │   ├── progress/   # Long-term outcomes & milestone tracking
 │   │   │   │   │   │   └── verify/     # Dynamic open-web re-check & self-healing
-│   │   │   │   └── testcases/          # Official hackathon verification suite (TC1-TC4)
+│   │   │   │   └── testcases/          # Core validation suite (TC1-TC4)
 │   │   │   ├── globals.css             # Comprehensive bespoke design system
 │   │   │   ├── layout.tsx              # SEO metadata, OpenGraph tags, font loading
 │   │   │   ├── page.tsx                # Dashboard, interactive tour, organizer console

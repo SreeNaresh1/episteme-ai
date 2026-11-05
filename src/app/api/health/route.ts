@@ -10,7 +10,7 @@ export async function GET() {
     return NextResponse.json({
       status: 'healthy',
       system: 'Episteme AI — Autonomous Self-Healing Learning Path Engine',
-      policy: 'ziro-hackathon-2026-v2',
+      policy: 'episteme-agentic-v2',
       timestamp: new Date().toISOString(),
       database: {
         status: 'connected',

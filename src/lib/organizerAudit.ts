@@ -1,12 +1,11 @@
 /**
- * Organizer Evaluation & Anti-Scraping Defense Audit Suite
+ * Comprehensive System Evaluation & Anti-Scraping Defense Audit Suite
  *
- * Episteme AI — Official Hackathon Organizer Validation Engine
+ * Episteme AI — Autonomous System Verification Engine
  *
- * Runs deterministic, reproducible verification tests specifically designed
- * for hackathon judges and organizers to validate crawler reliability,
- * anti-scraping defense resilience, prerequisite DAG solver accuracy,
- * and live platform enrollment dispatch.
+ * Runs deterministic, reproducible verification tests
+ * to validate crawler reliability, anti-scraping defense resilience,
+ * prerequisite DAG solver accuracy, and live platform enrollment dispatch.
  */
 
 import { getDb } from './db';
@@ -398,11 +397,11 @@ export async function runOrganizerAudit(): Promise<OrganizerAuditReport> {
   const crawlerPass = crawlerChecks.filter(c => c.status === 'passed').length;
   const antiScrapingPassRate = crawlerChecks.length > 0 ? Math.round((crawlerPass / crawlerChecks.length) * 100) : 100;
 
-  const auditHash = `0x${Buffer.from(`AUDIT-ZIRO-2026:${totalChecks}:${passedCount}:${totalDuration}`).toString('hex').substring(0, 16)}`;
+  const auditHash = `0x${Buffer.from(`AUDIT-EPISTEME-V2:${totalChecks}:${passedCount}:${totalDuration}`).toString('hex').substring(0, 16)}`;
 
   return {
-    suite_name: 'Episteme AI Organizer Evaluation & Anti-Scraping Defense Suite',
-    policy: 'ziro-hackathon-2026-v2',
+    suite_name: 'Episteme AI System Evaluation & Anti-Scraping Defense Suite',
+    policy: 'episteme-agentic-v2',
     evaluated_at: new Date().toISOString(),
     total_checks: totalChecks,
     passed_checks: passedCount,

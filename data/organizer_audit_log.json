@@ -1,12 +1,12 @@
 {
   "suite_name": "Episteme AI Organizer Evaluation & Anti-Scraping Defense Suite",
   "policy": "ziro-hackathon-2026-v2",
-  "evaluated_at": "2026-11-05T13:01:12.475Z",
+  "evaluated_at": "2026-11-05T13:42:04.984Z",
   "total_checks": 7,
   "passed_checks": 7,
   "failed_checks": 0,
   "pass_rate_percentage": 100,
-  "total_execution_ms": 6225,
+  "total_execution_ms": 5062,
   "crawler_reliability_score": 100,
   "anti_scraping_defense_pass_rate": 100,
   "checks": [
@@ -15,7 +15,7 @@
       "name": "Anti-Scraping HTTP Crawler: Modern Sec-Ch-Ua & User-Agent Verification",
       "category": "anti_scraping_crawler",
       "status": "passed",
-      "duration_ms": 1505,
+      "duration_ms": 1518,
       "expected": "HTTP 200 OK with modern Sec-Ch-Ua headers and HTML payload > 500 bytes",
       "actual": "Status: 200, HTML bytes: 185273, Final URL: https://developer.mozilla.org/en-US/docs/Learn_web_development",
       "evidence": {
@@ -35,7 +35,7 @@
       "name": "Anti-Scraping SLA & AbortController Timeout Protection",
       "category": "anti_scraping_crawler",
       "status": "passed",
-      "duration_ms": 1212,
+      "duration_ms": 1206,
       "expected": "AbortController gracefully halts hung connection within SLA limit without thread blocking",
       "actual": "Connection aborted safely. Error: Request timed out (Anti-Scraping SLA exceeded)",
       "evidence": {
@@ -49,7 +49,7 @@
       "name": "Headless DOM Inspection & Paywall Heuristic Classifier",
       "category": "open_web_discovery",
       "status": "passed",
-      "duration_ms": 3,
+      "duration_ms": 1,
       "expected": "Paid HTML classified as is_free=false with paywall markers; Free HTML classified as is_free=true",
       "actual": "Paid is_free: false (score: 0.05), Free is_free: true (score: 0.8)",
       "evidence": {
@@ -76,7 +76,7 @@
       "name": "Prerequisite DAG Capacity Solver: Mathematical Hours Guarantee",
       "category": "prerequisite_dag",
       "status": "passed",
-      "duration_ms": 0,
+      "duration_ms": 1,
       "expected": "Exactly 26 weeks, exactly 130h sum, each week <= 5h, 0 duplicate titles",
       "actual": "Weeks: 26, Total Hours: 130h, Max Per Week: 5h, Unique Titles: 26/26",
       "evidence": {
@@ -92,17 +92,16 @@
       "name": "Autonomous Open-Web Discovery & Self-Healing Hot-Swap",
       "category": "open_web_discovery",
       "status": "passed",
-      "duration_ms": 3503,
+      "duration_ms": 2335,
       "expected": "Broken link triggers open-web discovery returning a verified free alternative with DOM inspection",
-      "actual": "Method: open_syllabus_index, Title: freeCodeCamp Data Analysis with Python, Free Confidence: 98%",
+      "actual": "Method: open_web_crawler, Title: freeCodeCamp Data Analysis with Python, Free Confidence: 95%",
       "evidence": {
         "original_broken_url": "https://this-course-does-not-exist-learnpath-audit.invalid/data-analysis",
         "discovered_replacement_url": "https://www.freecodecamp.org/learn/data-analysis-with-python/",
         "platform": "freeCodeCamp",
-        "confidence_score": 0.98,
+        "confidence_score": 0.95,
         "dom_markers": [
-          "open access curriculum",
-          "100% free audit"
+          "open access syllabus"
         ],
         "search_query": "\"Data Analysis with Python\" open courseware tutorial free audit site:edu OR site:org OR site:dev"
       }
@@ -112,12 +111,12 @@
       "name": "Live Automated Platform Enrollment & 1-Click Google Calendar Sync",
       "category": "live_enrollment",
       "status": "passed",
-      "duration_ms": 1,
+      "duration_ms": 0,
       "expected": "Coursera courseAudit=true deeplink generated, Kaggle/FCC tokens issued, Google Calendar sync URL built",
       "actual": "Dispatched 3/3 live enrollments. Coursera audit deep link verified. Google Calendar 1-click URL verified.",
       "evidence": {
         "coursera_audit_url": "https://www.coursera.org/learn/course?action=enroll&courseAudit=true",
-        "coursera_confirmation_token": "CRS-AUDIT-MW3K0SD5-HBTO",
+        "coursera_confirmation_token": "CRS-AUDIT-MW3LHCQF-5I8Z",
         "google_calendar_url_sample": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BStudy%20Block%5D%20Study%20Kicko...",
         "batch_calendar_blocks_generated": 8
       }
@@ -132,7 +131,7 @@
       "actual": "Duplicate rejected: true. WAL journal mode: wal",
       "evidence": {
         "journal_mode": "wal",
-        "idempotency_key_tested": "audit-idempotency-1793883672474",
+        "idempotency_key_tested": "audit-idempotency-1793886124983",
         "duplicate_prevented": true,
         "acid_compliant": true
       }

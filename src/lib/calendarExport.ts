@@ -63,7 +63,7 @@ export function generateIcsCalendar(
       )
       .join('\n');
 
-    const desc = `${week.description}\n\nWeekly Target: ${durationHours} hours\n\nCurated Free Resources:\n${resourceList}\n\nBuilt by Episteme AI (Agentic AI Hackathon 2026)`;
+    const desc = `${week.description}\n\nWeekly Target: ${durationHours} hours\n\nCurated Free Resources:\n${resourceList}\n\nBuilt by Episteme AI (Autonomous Learning Platform)`;
 
     lines.push(
       'BEGIN:VEVENT',

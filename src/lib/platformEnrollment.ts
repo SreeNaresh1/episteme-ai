@@ -64,7 +64,7 @@ export function generateGoogleCalendarUrl(
   const datesParam = `${formatGCalDate(startDate)}/${formatGCalDate(endDate)}`;
   const textParam = encodeURIComponent(`[Study Block] ${title}`);
   const detailsParam = encodeURIComponent(
-    `${description}\n\nAutomated by Episteme AI (Agentic AI Hackathon 2026)`
+    `${description}\n\nAutomated by Episteme AI (Autonomous Learning Platform)`
   );
 
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${textParam}&dates=${datesParam}&details=${detailsParam}`;

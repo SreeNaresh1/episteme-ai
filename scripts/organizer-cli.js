@@ -11,8 +11,8 @@ const http = require('http');
 
 async function main() {
   console.log('================================================================');
-  console.log('  EPISTEME AI — ORGANIZER EVALUATION & ANTI-SCRAPING AUDIT CLI');
-  console.log('  Policy: ziro-hackathon-2026-v2 | Target Score: 100/100');
+  console.log('  EPISTEME AI — SYSTEM EVALUATION & ANTI-SCRAPING AUDIT CLI');
+  console.log('  Policy: episteme-agentic-v2 | Target Score: 100/100');
   console.log('================================================================\n');
 
   console.log('>>> Checking Local Episteme API Gateway at http://localhost:3000/api/health ...');
@@ -45,7 +45,7 @@ async function main() {
   };
 
   try {
-    console.log('>>> Triggering Official Hackathon Test Cases (TC1-TC4)...');
+    console.log('>>> Triggering Core Deterministic Test Scenarios (TC1-TC4)...');
     const tcRes = await postData('/api/testcases');
     console.log(`[TC Suite Status] HTTP ${tcRes.status}`);
     if (tcRes.body && tcRes.body.results) {

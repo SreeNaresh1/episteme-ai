@@ -8,7 +8,7 @@ async function createPresentation() {
   pptx.layout = 'LAYOUT_16x9';
   pptx.title = 'Episteme AI — Autonomous Self-Healing Learning Path Engine';
   pptx.author = 'Episteme AI Team';
-  pptx.subject = 'Agentic AI Hackathon 2026';
+  pptx.subject = 'Enterprise Agentic AI 2026';
 
   // Editorial Palette: Whitish-Grey Background & Crisp Black/Charcoal Text
   const BG_COLOR = 'F4F4F1';      // Whitish-grey canvas
@@ -60,7 +60,7 @@ async function createPresentation() {
     slide.background = { color: BG_COLOR };
 
     // Tag Badge
-    slide.addText('BUILD & SUBMIT • AGENTIC AI HACKATHON 2026', {
+    slide.addText('SYSTEM OVERVIEW • ENTERPRISE AGENTIC AI 2026', {
       x: 0.8, y: 0.8, w: 6.5, h: 0.35,
       fontFace: FONT_HEAD, fontSize: 11, bold: true, color: TEXT_BLACK,
       fill: { color: BADGE_BG }, align: 'center', line: { color: CARD_BORDER, width: 1 }
@@ -337,7 +337,7 @@ async function createPresentation() {
   {
     const slide = pptx.addSlide();
     slide.background = { color: BG_COLOR };
-    addSlideHeader(slide, '04 • Verification Evidence', 'Official Hackathon Test Cases (4/4 Passed)', 'Automated, deterministic verification against live database transactions');
+    addSlideHeader(slide, '04 • Verification Evidence', 'Core Test Scenarios (4/4 Passed)', 'Automated, deterministic verification against live database transactions');
 
     const testCases = [
       {
@@ -612,15 +612,15 @@ async function createPresentation() {
       fill: { color: CARD_BG }, line: { color: CARD_BORDER, width: 1.5 }
     });
 
-    slide.addText('SUBMISSION REPOSITORY: https://github.com/SreeNaresh1/episteme-ai  •  AGENTIC AI HACKATHON 2026', {
+    slide.addText('REPOSITORY: https://github.com/SreeNaresh1/episteme-ai  •  ENTERPRISE AGENTIC AI 2026', {
       x: 1.0, y: 6.15, w: 11.3, h: 0.35,
       fontFace: FONT_HEAD, fontSize: 12, bold: true, color: TEXT_BLACK, align: 'center'
     });
   }
 
-  // Save the presentation file to both d:\Ziro\ and d:\Ziro\app\
-  const outPath1 = path.join(__dirname, '..', '..', 'Episteme_AI_Presentation.pptx');
-  const outPath2 = path.join(__dirname, 'Episteme_AI_Presentation.pptx');
+  // Save the presentation file to root, app/, and app/public/
+  const outPath1 = path.join(__dirname, 'Episteme_AI_Presentation.pptx');
+  const outPath2 = path.join(__dirname, 'public', 'Episteme_AI_Presentation.pptx');
 
   await pptx.writeFile({ fileName: outPath1 });
   await pptx.writeFile({ fileName: outPath2 });
