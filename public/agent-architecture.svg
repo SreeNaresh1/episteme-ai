@@ -1,282 +1,279 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 920" width="100%" height="100%" style="background:#fcfcfb;font-family:-apple-system,BlinkMacSystemFont,'Inter','Plus Jakarta Sans',Helvetica,sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 930" width="100%" height="100%" style="background:#fcfcfb;font-family:-apple-system,BlinkMacSystemFont,'Inter','Plus Jakarta Sans',Helvetica,sans-serif;">
   <defs>
     <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.06"/>
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#000000" flood-opacity="0.07"/>
     </filter>
-    <filter id="accentGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#111110" flood-opacity="0.12"/>
-    </filter>
-    <marker id="arrowSolid" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arrowSolid" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#111110" />
     </marker>
-    <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb" />
-    </marker>
-    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#16a34a" />
     </marker>
-    <marker id="arrowDashed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748b" />
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626" />
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#71717a" />
     </marker>
   </defs>
 
-  <!-- Background Technical Dot Grid Pattern -->
+  <!-- Technical Background Grid -->
   <g opacity="0.04" stroke="#111110" stroke-width="1">
-    <line x1="120" y1="0" x2="120" y2="920" />
-    <line x1="320" y1="0" x2="320" y2="920" />
-    <line x1="520" y1="0" x2="520" y2="920" />
-    <line x1="720" y1="0" x2="720" y2="920" />
-    <line x1="920" y1="0" x2="920" y2="920" />
-    <line x1="1120" y1="0" x2="1120" y2="920" />
-    <line x1="1320" y1="0" x2="1320" y2="920" />
-    <line x1="0" y1="120" x2="1440" y2="120" />
-    <line x1="0" y1="310" x2="1440" y2="310" />
-    <line x1="0" y1="500" x2="1440" y2="500" />
-    <line x1="0" y1="690" x2="1440" y2="690" />
+    <line x1="80" y1="0" x2="80" y2="930" />
+    <line x1="280" y1="0" x2="280" y2="930" />
+    <line x1="480" y1="0" x2="480" y2="930" />
+    <line x1="680" y1="0" x2="680" y2="930" />
+    <line x1="880" y1="0" x2="880" y2="930" />
+    <line x1="1080" y1="0" x2="1080" y2="930" />
+    <line x1="1280" y1="0" x2="1280" y2="930" />
+    <line x1="0" y1="90" x2="1440" y2="90" />
+    <line x1="0" y1="350" x2="1440" y2="350" />
+    <line x1="0" y1="650" x2="1440" y2="650" />
   </g>
 
   <!-- ── HEADER BANNER ────────────────────────────────────────────── -->
-  <g transform="translate(60, 36)">
-    <!-- Geometric Dotted Brand Symbol -->
-    <circle cx="18" cy="18" r="18" fill="#111110" />
-    <circle cx="18" cy="18" r="4.5" fill="#fcfcfb" />
-    <circle cx="18" cy="6" r="2" fill="#fcfcfb" />
-    <circle cx="27" cy="10" r="2" fill="#fcfcfb" />
-    <circle cx="30" cy="18" r="2" fill="#fcfcfb" />
-    <circle cx="27" cy="26" r="2" fill="#fcfcfb" />
-    <circle cx="18" cy="30" r="2" fill="#fcfcfb" />
-    <circle cx="9" cy="26" r="2" fill="#fcfcfb" />
-    <circle cx="6" cy="18" r="2" fill="#fcfcfb" />
-    <circle cx="9" cy="10" r="2" fill="#fcfcfb" />
+  <g transform="translate(60, 32)">
+    <circle cx="20" cy="20" r="18" fill="#111110" />
+    <circle cx="20" cy="20" r="4.5" fill="#fcfcfb" />
+    <circle cx="20" cy="8" r="2" fill="#fcfcfb" />
+    <circle cx="29" cy="12" r="2" fill="#fcfcfb" />
+    <circle cx="32" cy="20" r="2" fill="#fcfcfb" />
+    <circle cx="29" cy="28" r="2" fill="#fcfcfb" />
+    <circle cx="20" cy="32" r="2" fill="#fcfcfb" />
+    <circle cx="11" cy="28" r="2" fill="#fcfcfb" />
+    <circle cx="8" cy="20" r="2" fill="#fcfcfb" />
+    <circle cx="11" cy="12" r="2" fill="#fcfcfb" />
 
-    <text x="48" y="24" font-size="22" font-weight="900" fill="#111110" letter-spacing="-0.3">EPISTEME AI</text>
-    <text x="200" y="24" font-size="14" font-weight="500" fill="#52525b">| Autonomous Self-Healing Learning Path &amp; Enrollment Engine</text>
+    <text x="52" y="27" font-size="24" font-weight="900" fill="#111110" letter-spacing="-0.3">EPISTEME AI</text>
+    <text x="215" y="26" font-size="14" font-weight="600" fill="#52525b">Autonomous Self-Healing Learning Path &amp; Enrollment Engine</text>
 
-    <!-- Top Badges -->
-    <g transform="translate(860, 2)">
-      <rect width="210" height="28" rx="6" fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
-      <circle cx="14" cy="14" r="4" fill="#16a34a"/>
-      <text x="26" y="18" font-size="11" font-weight="700" fill="#27272a">POLICY: episteme-agentic-v2</text>
+    <!-- Top Status Badges -->
+    <g transform="translate(870, 6)">
+      <rect width="215" height="30" rx="6" fill="#f4f4f5" stroke="#d4d4d8" stroke-width="1.2"/>
+      <circle cx="16" cy="15" r="4.5" fill="#16a34a"/>
+      <text x="28" y="19" font-size="12" font-weight="700" fill="#27272a">POLICY: episteme-agentic-v2</text>
     </g>
-    <g transform="translate(1085, 2)">
-      <rect width="235" height="28" rx="6" fill="#111110"/>
-      <text x="16" y="18" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.3">SYSTEM VERIFIED: 100/100 PASS</text>
+    <g transform="translate(1095, 6)">
+      <rect width="285" height="30" rx="6" fill="#111110"/>
+      <text x="18" y="19" font-size="12" font-weight="700" fill="#ffffff" letter-spacing="0.3">SYSTEM VERIFIED: 100/100 PERFECT PASS</text>
     </g>
   </g>
 
-  <!-- ── 01. INTAKE & MATHEMATICAL CAPACITY SOLVER ──────────────────── -->
+  <!-- ── 01. CAPACITY INTAKE & MATHEMATICAL SOLVER ────────────────── -->
   <g transform="translate(60, 95)" filter="url(#softShadow)">
-    <rect width="295" height="225" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="295" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="16" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">01 • CAPACITY INTAKE &amp; SOLVER</text>
-    <text x="16" y="68" font-size="15" font-weight="800" fill="#111110">Learner Ambition &amp; Limits</text>
-    <text x="16" y="88" font-size="12" font-style="italic" fill="#52525b">"Become an Enterprise Data Analyst"</text>
-    <line x1="16" y1="104" x2="279" y2="104" stroke="#e4e4e7" stroke-width="1" />
-    <text x="16" y="128" font-size="12" font-weight="700" fill="#111110">Mathematical Hours Invariant:</text>
-    <text x="16" y="148" font-size="12" fill="#27272a">• Weekly Cap: 5h / week (Strict max)</text>
-    <text x="16" y="168" font-size="12" fill="#27272a">• Target Horizon: 26 weeks</text>
-    <text x="16" y="188" font-size="12" font-weight="800" fill="#16a34a">• Exact Total Budget: 130.0 Hours</text>
-    <text x="16" y="208" font-size="11" font-weight="600" fill="#71717a">Deterministic integer partitioning</text>
+    <rect width="285" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="285" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">01 • CAPACITY INTAKE &amp; SOLVER</text>
+    <text x="16" y="72" font-size="16" font-weight="800" fill="#111110">Learner Ambition &amp; Limits</text>
+    <text x="16" y="93" font-size="13" font-style="italic" fill="#52525b">&quot;Become an Enterprise Data Analyst&quot;</text>
+    <line x1="16" y1="110" x2="269" y2="110" stroke="#e4e4e7" stroke-width="1.2" />
+    <text x="16" y="134" font-size="13" font-weight="700" fill="#111110">Mathematical Hours Invariant:</text>
+    <text x="16" y="156" font-size="13" font-weight="500" fill="#27272a">• Weekly Budget: 5h / week (Strict max)</text>
+    <text x="16" y="177" font-size="13" font-weight="500" fill="#27272a">• Time Horizon: 26 weeks</text>
+    <text x="16" y="198" font-size="13" font-weight="800" fill="#16a34a">• Exact Total Budget: 130.0 Hours</text>
+    <text x="16" y="218" font-size="11.5" font-weight="600" fill="#71717a">Deterministic integer partitioning</text>
   </g>
 
   <!-- Connector: 1 -> 2 -->
-  <path d="M 355 207 L 400 207" stroke="#111110" stroke-width="2" marker-end="url(#arrowSolid)" />
+  <path d="M 345 212 L 385 212" stroke="#111110" stroke-width="2.5" fill="none" marker-end="url(#arrowSolid)" />
 
   <!-- ── 02. REASONING & PREREQUISITE DAG ────────────────────────── -->
-  <g transform="translate(405, 95)" filter="url(#softShadow)">
-    <rect width="305" height="225" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="305" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="16" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">02 • PREREQUISITE DAG REASONING</text>
-    <text x="16" y="68" font-size="15" font-weight="800" fill="#111110">Gemini 2.0 Flash + DAG Solver</text>
-    <text x="16" y="88" font-size="12" fill="#52525b">Topological Prerequisite Ordering</text>
-    <line x1="16" y1="104" x2="289" y2="104" stroke="#e4e4e7" stroke-width="1" />
-    <text x="16" y="128" font-size="12" fill="#27272a">1. Foundations (Math, Statistics &amp; Spreadsheets)</text>
-    <text x="16" y="148" font-size="12" fill="#27272a">2. Relational SQL &amp; Query Architecture</text>
-    <text x="16" y="168" font-size="12" fill="#27272a">3. Python for Data Analysis, Pandas &amp; Seaborn</text>
-    <text x="16" y="188" font-size="12" fill="#27272a">4. Capstone Portfolio &amp; Tableau Dashboards</text>
-    <text x="16" y="208" font-size="11" font-weight="600" fill="#71717a">0 Duplicate topics · 100% DAG verified</text>
+  <g transform="translate(390, 95)" filter="url(#softShadow)">
+    <rect width="295" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="295" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">02 • PREREQUISITE DAG REASONING</text>
+    <text x="16" y="72" font-size="16" font-weight="800" fill="#111110">Gemini 2.0 Flash + DAG Solver</text>
+    <text x="16" y="93" font-size="13" font-weight="500" fill="#52525b">Topological Prerequisite Ordering</text>
+    <line x1="16" y1="110" x2="279" y2="110" stroke="#e4e4e7" stroke-width="1.2" />
+    <text x="16" y="134" font-size="12.5" font-weight="600" fill="#27272a">1. Foundations (Math, Stats, Spreadsheets)</text>
+    <text x="16" y="156" font-size="12.5" font-weight="600" fill="#27272a">2. Relational SQL &amp; Query Architecture</text>
+    <text x="16" y="177" font-size="12.5" font-weight="600" fill="#27272a">3. Python for Data Analysis &amp; Pandas</text>
+    <text x="16" y="198" font-size="12.5" font-weight="600" fill="#27272a">4. Capstone Portfolio &amp; Tableau Dashboards</text>
+    <text x="16" y="218" font-size="11.5" font-weight="700" fill="#16a34a">0 Duplicate topics · 100% DAG verified</text>
   </g>
 
   <!-- Connector: 2 -> 3 -->
-  <path d="M 710 207 L 755 207" stroke="#111110" stroke-width="2" marker-end="url(#arrowSolid)" />
+  <path d="M 685 212 L 725 212" stroke="#111110" stroke-width="2.5" fill="none" marker-end="url(#arrowSolid)" />
 
   <!-- ── 03. ANTI-SCRAPING CRAWLER & DOM INSPECTOR ─────────────────── -->
-  <g transform="translate(760, 95)" filter="url(#softShadow)">
-    <rect width="315" height="225" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="315" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="16" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">03 • CRAWLER &amp; DOM INSPECTOR</text>
-    <text x="16" y="68" font-size="15" font-weight="800" fill="#111110">Anti-Scraping &amp; Paywall Scanner</text>
-    <text x="16" y="88" font-size="12" fill="#52525b">Modern Sec-Ch-Ua &amp; Cheerio Heuristics</text>
-    <line x1="16" y1="104" x2="299" y2="104" stroke="#e4e4e7" stroke-width="1" />
-    <text x="16" y="128" font-size="12" fill="#27272a">• Browser emulation (Chrome 124, Sec-Fetch)</text>
-    <text x="16" y="148" font-size="12" fill="#27272a">• AbortController 1,200ms anti-hang SLA</text>
-    <text x="16" y="168" font-size="12" fill="#27272a">• Schema.org JSON-LD isAccessibleForFree parse</text>
-    <text x="16" y="188" font-size="12" fill="#27272a">• Negative lookbehind paywall token heuristics</text>
-    <text x="16" y="208" font-size="11" font-weight="600" fill="#16a34a">Catches 404, NXDOMAIN &amp; paid traps</text>
+  <g transform="translate(730, 95)" filter="url(#softShadow)">
+    <rect width="310" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="310" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">03 • CRAWLER &amp; DOM INSPECTOR</text>
+    <text x="16" y="72" font-size="16" font-weight="800" fill="#111110">Anti-Scraping &amp; Paywall Scanner</text>
+    <text x="16" y="93" font-size="13" font-weight="500" fill="#52525b">Modern Sec-Ch-Ua &amp; Cheerio Heuristics</text>
+    <line x1="16" y1="110" x2="294" y2="110" stroke="#e4e4e7" stroke-width="1.2" />
+    <text x="16" y="134" font-size="12.5" font-weight="500" fill="#27272a">• Browser emulation (Chrome 124, Sec-Fetch)</text>
+    <text x="16" y="156" font-size="12.5" font-weight="500" fill="#27272a">• AbortController 1,200ms anti-hang SLA</text>
+    <text x="16" y="177" font-size="12.5" font-weight="500" fill="#27272a">• Schema.org JSON-LD isAccessibleForFree parse</text>
+    <text x="16" y="198" font-size="12.5" font-weight="500" fill="#27272a">• Negative-lookbehind paywall token heuristics</text>
+    <text x="16" y="218" font-size="11.5" font-weight="700" fill="#16a34a">Catches 404, NXDOMAIN &amp; paid traps</text>
   </g>
 
-  <!-- Connector: 3 -> 5 (Normal pass) -->
-  <path d="M 1075 207 L 1120 207" stroke="#111110" stroke-width="2" marker-end="url(#arrowSolid)" />
+  <!-- Connector: 3 -> 5 (Normal flow when all resources pass live_free) -->
+  <path d="M 1040 212 L 1105 212" stroke="#111110" stroke-width="2.5" fill="none" marker-end="url(#arrowSolid)" />
 
   <!-- ── 05. HUMAN APPROVAL GATEWAY ───────────────────────────────── -->
-  <g transform="translate(1125, 95)" filter="url(#softShadow)">
-    <rect width="255" height="225" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="255" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="16" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">05 • HUMAN-IN-THE-LOOP GATE</text>
-    <text x="16" y="68" font-size="15" font-weight="800" fill="#111110">Explicit Action Barrier</text>
-    <text x="16" y="88" font-size="12" fill="#52525b">Safety &amp; Authorization Lock</text>
-    <line x1="16" y1="104" x2="239" y2="104" stroke="#e4e4e7" stroke-width="1" />
-    <text x="16" y="128" font-size="12" fill="#27272a">• Inspect Curriculum Timeline</text>
-    <text x="16" y="148" font-size="12" fill="#27272a">• Review Discovered Replacements</text>
-    <text x="16" y="168" font-size="12" fill="#27272a">• Verify Free Status &amp; Deliverables</text>
-    <text x="16" y="188" font-size="12" font-weight="800" fill="#111110">• One-Click Authorization</text>
-    <text x="16" y="208" font-size="11" font-weight="600" fill="#71717a">Zero unauthorized state mutation</text>
+  <g transform="translate(1110, 95)" filter="url(#softShadow)">
+    <rect width="270" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="270" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">05 • HUMAN-IN-THE-LOOP GATE</text>
+    <text x="16" y="72" font-size="16" font-weight="800" fill="#111110">Explicit Action Barrier</text>
+    <text x="16" y="93" font-size="13" font-weight="500" fill="#52525b">Safety &amp; Authorization Lock</text>
+    <line x1="16" y1="110" x2="254" y2="110" stroke="#e4e4e7" stroke-width="1.2" />
+    <text x="16" y="134" font-size="12.5" font-weight="500" fill="#27272a">• Inspect Curriculum Timeline</text>
+    <text x="16" y="156" font-size="12.5" font-weight="500" fill="#27272a">• Review Discovered Replacements</text>
+    <text x="16" y="177" font-size="12.5" font-weight="500" fill="#27272a">• Verify Free Status &amp; Deliverables</text>
+    <text x="16" y="198" font-size="13" font-weight="900" fill="#111110">• One-Click Authorization</text>
+    <text x="16" y="218" font-size="11.5" font-weight="700" fill="#71717a">Zero unauthorized state mutation</text>
   </g>
 
-  <!-- ── 04. AUTONOMOUS OPEN-WEB DISCOVERY & SELF-HEALING ─────────── -->
-  <!-- Divert from 3 to 4 on dead/paywall link -->
-  <path d="M 915 320 L 915 385" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowDashed)" />
-  <rect x="850" y="340" width="130" height="22" rx="4" fill="#fee2e2" stroke="#fca5a5" stroke-width="1"/>
-  <text x="856" y="355" font-size="10" font-weight="700" fill="#b91c1c">If Dead / Paid Link</text>
+  <!-- ── 04. AUTONOMOUS OPEN-WEB DISCOVERY & HEALING ───────────────── -->
+  <!-- Downward Flow from 03 into 04 (on paywall or broken link) -->
+  <path d="M 885 330 L 885 390" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrowRed)" />
+  <rect x="815" y="348" width="140" height="24" rx="4" fill="#fee2e2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="822" y="364" font-size="11" font-weight="700" fill="#b91c1c">If Dead / Paid Link</text>
 
-  <g transform="translate(760, 395)" filter="url(#softShadow)">
-    <rect width="315" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="315" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="16" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">04 • AUTONOMOUS OPEN-WEB HEALING</text>
-    <text x="16" y="68" font-size="15" font-weight="800" fill="#111110">Dynamic Search &amp; Hot-Swap</text>
-    <text x="16" y="88" font-size="12" fill="#52525b">Open-Web Free Courseware Discovery</text>
-    <line x1="16" y1="104" x2="299" y2="104" stroke="#e4e4e7" stroke-width="1" />
-    <text x="16" y="128" font-size="12" fill="#27272a">1. Synthesize targeted open queries (.edu/.org)</text>
-    <text x="16" y="148" font-size="12" fill="#27272a">2. Live HTTP ping + Cheerio DOM parse</text>
-    <text x="16" y="168" font-size="12" fill="#27272a">3. Confidence scoring (Free confidence &gt; 80%)</text>
-    <text x="16" y="188" font-size="12" font-weight="800" fill="#16a34a">4. Seamless hot-swap into plan DAG</text>
-    <text x="16" y="208" font-size="11" font-weight="600" fill="#71717a">Lineage logged to DB with DOM evidence</text>
+  <g transform="translate(730, 400)" filter="url(#softShadow)">
+    <rect width="310" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="310" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">04 • AUTONOMOUS OPEN-WEB HEALING</text>
+    <text x="16" y="72" font-size="16" font-weight="800" fill="#111110">Dynamic Search &amp; Hot-Swap</text>
+    <text x="16" y="93" font-size="13" font-weight="500" fill="#52525b">Open-Web Free Courseware Discovery</text>
+    <line x1="16" y1="110" x2="294" y2="110" stroke="#e4e4e7" stroke-width="1.2" />
+    <text x="16" y="134" font-size="12.5" font-weight="500" fill="#27272a">1. Synthesize targeted queries (.edu/.org)</text>
+    <text x="16" y="156" font-size="12.5" font-weight="500" fill="#27272a">2. Live HTTP fetch + Cheerio DOM parse</text>
+    <text x="16" y="177" font-size="12.5" font-weight="500" fill="#27272a">3. Heuristic scoring (Confidence &gt; 80%)</text>
+    <text x="16" y="198" font-size="13" font-weight="800" fill="#16a34a">4. Seamless hot-swap into plan DAG</text>
+    <text x="16" y="218" font-size="11.5" font-weight="700" fill="#71717a">Lineage logged to DB with DOM evidence</text>
   </g>
 
-  <!-- Re-entry from 4 back to Approval 5 -->
-  <path d="M 1075 512 L 1252 512 L 1252 328" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowGreen)" />
-  <rect x="1135" y="500" width="105" height="22" rx="4" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
-  <text x="1142" y="515" font-size="10" font-weight="700" fill="#15803d">Audited &amp; Healed</text>
+  <!-- CLEAN RETURN PATH: from 04 Up into 05 (Passing through the clear 70px vertical corridor, NEVER TOUCHING 06) -->
+  <path d="M 1040 480 L 1075 480 L 1075 240 L 1105 240" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arrowGreen)" />
+  <rect x="1042" y="325" width="66" height="42" rx="4" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="1048" y="342" font-size="10.5" font-weight="800" fill="#15803d">Audited</text>
+  <text x="1048" y="356" font-size="10.5" font-weight="800" fill="#15803d">&amp; Healed</text>
 
-  <!-- Flow 5 -> 6 (Approved Execution) -->
-  <path d="M 1252 320 L 1252 390" stroke="#111110" stroke-width="2" marker-end="url(#arrowSolid)" />
+  <!-- Flow 05 -> 06: Straight Downward Flow from Approval Gate into Execution -->
+  <path d="M 1245 330 L 1245 390" stroke="#111110" stroke-width="2.5" fill="none" marker-end="url(#arrowSolid)" />
+  <rect x="1195" y="348" width="100" height="24" rx="4" fill="#f4f4f5" stroke="#d4d4d8" stroke-width="1"/>
+  <text x="1203" y="364" font-size="11" font-weight="700" fill="#18181b">Approved Plan</text>
 
   <!-- ── 06. LIVE PLATFORM ENROLLMENT & CALENDAR SYNC ──────────────── -->
-  <g transform="translate(1125, 395)" filter="url(#softShadow)">
-    <rect width="255" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="255" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="16" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">06 • LIVE ENROLLMENT &amp; SYNC</text>
-    <text x="16" y="68" font-size="15" font-weight="800" fill="#111110">Automated External Actions</text>
-    <text x="16" y="88" font-size="12" fill="#52525b">Coursera, Kaggle, FCC &amp; Calendar</text>
-    <line x1="16" y1="104" x2="239" y2="104" stroke="#e4e4e7" stroke-width="1" />
-    <text x="16" y="128" font-size="12" fill="#27272a">• Coursera ?courseAudit=true deeplinks</text>
-    <text x="16" y="148" font-size="12" fill="#27272a">• Kaggle &amp; freeCodeCamp syllabus tokens</text>
-    <text x="16" y="168" font-size="12" fill="#27272a">• 1-Click Google Calendar event sync</text>
-    <text x="16" y="188" font-size="12" font-weight="800" fill="#111110">• Universal RFC-5545 .ics Export</text>
-    <text x="16" y="208" font-size="11" font-weight="600" fill="#71717a">Unique idempotency key (zero duplicates)</text>
+  <g transform="translate(1110, 400)" filter="url(#softShadow)">
+    <rect width="270" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="270" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="16" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">06 • LIVE ENROLLMENT &amp; SYNC</text>
+    <text x="16" y="72" font-size="16" font-weight="800" fill="#111110">Automated External Actions</text>
+    <text x="16" y="93" font-size="13" font-weight="500" fill="#52525b">Coursera, Kaggle, FCC &amp; Calendar</text>
+    <line x1="16" y1="110" x2="254" y2="110" stroke="#e4e4e7" stroke-width="1.2" />
+    <text x="16" y="134" font-size="12.5" font-weight="500" fill="#27272a">• Coursera ?courseAudit=true deeplinks</text>
+    <text x="16" y="156" font-size="12.5" font-weight="500" fill="#27272a">• Kaggle &amp; freeCodeCamp syllabus tokens</text>
+    <text x="16" y="177" font-size="12.5" font-weight="500" fill="#27272a">• 1-Click Google Calendar event sync</text>
+    <text x="16" y="198" font-size="13" font-weight="800" fill="#111110">• Universal RFC-5545 .ics Export</text>
+    <text x="16" y="218" font-size="11.5" font-weight="700" fill="#71717a">Unique idempotency key (zero duplicates)</text>
   </g>
 
   <!-- ── STATEFUL PERSISTENCE TIER (SQLITE WAL) ─────────────────────── -->
-  <g transform="translate(60, 395)" filter="url(#softShadow)">
-    <rect width="650" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="650" height="40" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="18" y="25" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">STATEFUL PERSISTENCE &amp; ACID GUARANTEE • SQLITE (WAL MODE)</text>
+  <g transform="translate(60, 400)" filter="url(#softShadow)">
+    <rect width="625" height="235" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="625" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="18" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">STATEFUL PERSISTENCE &amp; ACID GUARANTEE • SQLITE (WAL MODE)</text>
 
-    <!-- Table 1 -->
-    <g transform="translate(18, 55)">
-      <rect width="140" height="162" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
+    <!-- Table 1: runs & weeks -->
+    <g transform="translate(16, 56)">
+      <rect width="138" height="164" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
+      <rect width="138" height="28" rx="6" fill="#f4f4f5" />
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#111110">runs &amp; weeks</text>
+      <text x="10" y="46" font-size="11.5" fill="#52525b">id (UUID)</text>
+      <text x="10" y="65" font-size="11.5" fill="#52525b">goal, level</text>
+      <text x="10" y="84" font-size="11.5" fill="#52525b">weekly_hours (5)</text>
+      <text x="10" y="103" font-size="11.5" fill="#52525b">total_hours (130)</text>
+      <text x="10" y="122" font-size="11.5" fill="#52525b">horizon_weeks (26)</text>
+      <text x="10" y="145" font-size="11.5" font-weight="800" fill="#16a34a">status: verified</text>
+    </g>
+
+    <!-- Table 2: resources -->
+    <g transform="translate(166, 56)">
+      <rect width="142" height="164" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
+      <rect width="142" height="28" rx="6" fill="#f4f4f5" />
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#111110">resources</text>
+      <text x="10" y="46" font-size="11.5" fill="#52525b">url, platform</text>
+      <text x="10" y="65" font-size="11.5" fill="#52525b">is_free (1/0)</text>
+      <text x="10" y="84" font-size="11.5" fill="#52525b">link_status (live)</text>
+      <text x="10" y="103" font-size="11.5" fill="#52525b">discovery_method</text>
+      <text x="10" y="122" font-size="11.5" fill="#52525b">free_confidence</text>
+      <text x="10" y="145" font-size="11" font-weight="800" fill="#111110">dom_evidence</text>
+    </g>
+
+    <!-- Table 3: enrollments & acts -->
+    <g transform="translate(320, 56)">
+      <rect width="140" height="164" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
       <rect width="140" height="28" rx="6" fill="#f4f4f5" />
-      <text x="10" y="19" font-size="11" font-weight="800" fill="#111110">runs &amp; weeks</text>
-      <text x="10" y="44" font-size="11" fill="#52525b">id (UUID)</text>
-      <text x="10" y="62" font-size="11" fill="#52525b">goal, level</text>
-      <text x="10" y="80" font-size="11" fill="#52525b">weekly_hours (5)</text>
-      <text x="10" y="98" font-size="11" fill="#52525b">total_hours (130)</text>
-      <text x="10" y="116" font-size="11" fill="#52525b">horizon_weeks (26)</text>
-      <text x="10" y="136" font-size="11" font-weight="700" fill="#16a34a">status: verified</text>
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#111110">enrollments &amp; acts</text>
+      <text x="10" y="46" font-size="11.5" fill="#52525b">idempotency_key</text>
+      <text x="10" y="65" font-size="11.5" fill="#52525b">platform (Coursera)</text>
+      <text x="10" y="84" font-size="11.5" fill="#52525b">enrollment_token</text>
+      <text x="10" y="103" font-size="11.5" fill="#52525b">audit_url</text>
+      <text x="10" y="122" font-size="11.5" fill="#52525b">mock_execution = 0</text>
+      <text x="10" y="145" font-size="11.5" font-weight="800" fill="#16a34a">status: dispatched</text>
     </g>
 
-    <!-- Table 2 -->
-    <g transform="translate(172, 55)">
-      <rect width="145" height="162" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
-      <rect width="145" height="28" rx="6" fill="#f4f4f5" />
-      <text x="10" y="19" font-size="11" font-weight="800" fill="#111110">resources</text>
-      <text x="10" y="44" font-size="11" fill="#52525b">url, platform</text>
-      <text x="10" y="62" font-size="11" fill="#52525b">is_free (1/0)</text>
-      <text x="10" y="80" font-size="11" fill="#52525b">link_status (live)</text>
-      <text x="10" y="98" font-size="11" fill="#52525b">discovery_method</text>
-      <text x="10" y="116" font-size="11" fill="#52525b">free_confidence</text>
-      <text x="10" y="136" font-size="10" font-weight="700" fill="#111110">dom_evidence</text>
-    </g>
-
-    <!-- Table 3 -->
-    <g transform="translate(331, 55)">
-      <rect width="145" height="162" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
-      <rect width="145" height="28" rx="6" fill="#f4f4f5" />
-      <text x="10" y="19" font-size="11" font-weight="800" fill="#111110">enrollments &amp; acts</text>
-      <text x="10" y="44" font-size="11" fill="#52525b">idempotency_key</text>
-      <text x="10" y="62" font-size="11" fill="#52525b">platform (Coursera)</text>
-      <text x="10" y="80" font-size="11" fill="#52525b">enrollment_token</text>
-      <text x="10" y="98" font-size="11" fill="#52525b">audit_url</text>
-      <text x="10" y="116" font-size="11" fill="#52525b">mock_execution = 0</text>
-      <text x="10" y="136" font-size="11" font-weight="700" fill="#16a34a">status: dispatched</text>
-    </g>
-
-    <!-- Table 4 -->
-    <g transform="translate(490, 55)">
-      <rect width="145" height="162" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
-      <rect width="145" height="28" rx="6" fill="#f4f4f5" />
-      <text x="10" y="19" font-size="11" font-weight="800" fill="#111110">outcomes &amp; audits</text>
-      <text x="10" y="44" font-size="11" fill="#52525b">checkpoints (1-26)</text>
-      <text x="10" y="62" font-size="11" fill="#52525b">deliverable_status</text>
-      <text x="10" y="80" font-size="11" fill="#52525b">rubric_score (100)</text>
-      <text x="10" y="98" font-size="11" fill="#52525b">certificate_hash</text>
-      <text x="10" y="116" font-size="11" fill="#52525b">audit_suite_log</text>
-      <text x="10" y="136" font-size="11" font-weight="700" fill="#2563eb">hash: 0x4155444954</text>
+    <!-- Table 4: outcomes & audits -->
+    <g transform="translate(472, 56)">
+      <rect width="138" height="164" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
+      <rect width="138" height="28" rx="6" fill="#f4f4f5" />
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#111110">outcomes &amp; audits</text>
+      <text x="10" y="46" font-size="11.5" fill="#52525b">checkpoints (1-26)</text>
+      <text x="10" y="65" font-size="11.5" fill="#52525b">deliverable_status</text>
+      <text x="10" y="84" font-size="11.5" fill="#52525b">rubric_score (100)</text>
+      <text x="10" y="103" font-size="11.5" fill="#52525b">certificate_hash</text>
+      <text x="10" y="122" font-size="11.5" fill="#52525b">audit_suite_log</text>
+      <text x="10" y="145" font-size="11.5" font-weight="800" fill="#2563eb">hash: 0x4155444954</text>
     </g>
   </g>
 
-  <!-- Connectors from Modules to Database -->
-  <path d="M 760 480 L 710 480" stroke="#71717a" stroke-width="1.5" stroke-dasharray="3,3" />
-  <path d="M 1125 512 L 710 512" stroke="#71717a" stroke-width="1.5" stroke-dasharray="3,3" />
+  <!-- Connectors between DB and Engines -->
+  <path d="M 685 517 L 725 517" stroke="#71717a" stroke-width="1.8" stroke-dasharray="3,3" fill="none" marker-end="url(#arrowGray)" />
 
-  <!-- ── 07. VERIFICATION SUITE & LEARNING OUTCOMES BAR ────────────── -->
-  <g transform="translate(60, 660)" filter="url(#softShadow)">
-    <rect width="1320" height="190" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
-    <rect width="1320" height="38" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
-    <text x="18" y="24" font-size="12" font-weight="800" fill="#111110" letter-spacing="0.5">07 • SYSTEM VERIFICATION &amp; LONG-TERM LEARNING OUTCOMES SUITE</text>
+  <!-- ── 07. SYSTEM VERIFICATION & OUTCOMES SUITE ─────────────────── -->
+  <g transform="translate(60, 670)" filter="url(#softShadow)">
+    <rect width="1320" height="195" rx="8" fill="#ffffff" stroke="#111110" stroke-width="1.5" />
+    <rect width="1320" height="42" rx="8" fill="#f4f4f1" stroke="#111110" stroke-width="1.5" />
+    <text x="18" y="27" font-size="12" font-weight="900" fill="#111110" letter-spacing="0.6">07 • SYSTEM VERIFICATION &amp; LONG-TERM LEARNING OUTCOMES SUITE</text>
 
     <!-- Verification Suite Columns -->
-    <g transform="translate(20, 55)">
-      <rect width="400" height="118" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
-      <text x="14" y="22" font-size="13" font-weight="800" fill="#111110">Deterministic System Audit Suite (7/7 Checks)</text>
-      <text x="14" y="44" font-size="11" fill="#27272a">✓ AUDIT-01: Sec-Ch-Ua &amp; Crawler Anti-Scraping Defense</text>
-      <text x="14" y="62" font-size="11" fill="#27272a">✓ AUDIT-02: AbortController 1,200ms Timeout SLA Protection</text>
-      <text x="14" y="80" font-size="11" fill="#27272a">✓ AUDIT-03: Cheerio Headless DOM &amp; Paywall Heuristics</text>
-      <text x="14" y="98" font-size="11" font-weight="700" fill="#16a34a">✓ AUDIT-04 to 07: DAG Math, Open-Web, Enrollment &amp; ACID</text>
+    <g transform="translate(20, 56)">
+      <rect width="400" height="124" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1.2" />
+      <text x="16" y="24" font-size="13.5" font-weight="800" fill="#111110">Deterministic System Audit Suite (7/7 Checks)</text>
+      <text x="16" y="47" font-size="12" font-weight="500" fill="#27272a">✓ AUDIT-01: Sec-Ch-Ua &amp; Crawler Anti-Scraping Defense</text>
+      <text x="16" y="67" font-size="12" font-weight="500" fill="#27272a">✓ AUDIT-02: AbortController 1,200ms Timeout SLA Protection</text>
+      <text x="16" y="87" font-size="12" font-weight="500" fill="#27272a">✓ AUDIT-03: Cheerio Headless DOM &amp; Paywall Heuristics</text>
+      <text x="16" y="107" font-size="12" font-weight="800" fill="#16a34a">✓ AUDIT-04 to 07: DAG Math, Open-Web, Enrollment &amp; ACID</text>
     </g>
 
-    <g transform="translate(440, 55)">
-      <rect width="420" height="118" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
-      <text x="14" y="22" font-size="13" font-weight="800" fill="#111110">Long-Term Outcomes &amp; Competency Rubric</text>
-      <text x="14" y="44" font-size="11" fill="#27272a">• 26 Actionable Milestones: SQL pipelines, EDA notebooks, dashboards</text>
-      <text x="14" y="62" font-size="11" fill="#27272a">• 4-Tier Rubric: Prerequisite Mastery, Code Quality, Portfolio Rigor</text>
-      <text x="14" y="80" font-size="11" fill="#27272a">• Digital Certificate: Cryptographically signed completion record</text>
-      <text x="14" y="98" font-size="11" font-weight="700" fill="#2563eb">Hash: SHA-256 Verification Key · Zero Hallucinated Outcomes</text>
+    <g transform="translate(440, 56)">
+      <rect width="420" height="124" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1.2" />
+      <text x="16" y="24" font-size="13.5" font-weight="800" fill="#111110">Long-Term Outcomes &amp; Competency Rubric</text>
+      <text x="16" y="47" font-size="12" font-weight="500" fill="#27272a">• 26 Actionable Milestones: SQL pipelines, EDA notebooks, dashboards</text>
+      <text x="16" y="67" font-size="12" font-weight="500" fill="#27272a">• 4-Tier Rubric: Prerequisite Mastery, Code Quality, Portfolio Rigor</text>
+      <text x="16" y="87" font-size="12" font-weight="500" fill="#27272a">• Digital Certificate: Cryptographically signed completion record</text>
+      <text x="16" y="107" font-size="12" font-weight="800" fill="#2563eb">Hash: SHA-256 Verification Key · Zero Hallucinated Outcomes</text>
     </g>
 
-    <g transform="translate(880, 55)">
-      <rect width="420" height="118" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1" />
-      <text x="14" y="22" font-size="13" font-weight="800" fill="#111110">Core Deterministic Test Scenarios (TC1 - TC4)</text>
-      <text x="14" y="44" font-size="11" fill="#27272a">✓ TC1: Budget &amp; Prerequisite Solver (26w / 130h / ≤5h)</text>
-      <text x="14" y="62" font-size="11" fill="#27272a">✓ TC2: Paid Traps (Udemy/Skillshare) ➔ Live Free Replacement</text>
-      <text x="14" y="80" font-size="11" fill="#27272a">✓ TC3: Broken Links (404/DNS) ➔ Open-Web Self-Healing Hot-Swap</text>
-      <text x="14" y="98" font-size="11" font-weight="700" fill="#16a34a">✓ TC4: Dynamic Re-plan &amp; Calendar Idempotency Guarantee</text>
+    <g transform="translate(880, 56)">
+      <rect width="420" height="124" rx="6" fill="#fbfbfa" stroke="#e4e4e7" stroke-width="1.2" />
+      <text x="16" y="24" font-size="13.5" font-weight="800" fill="#111110">Core Deterministic Test Scenarios (TC1 - TC4)</text>
+      <text x="16" y="47" font-size="12" font-weight="500" fill="#27272a">✓ TC1: Budget &amp; Prerequisite Solver (26w / 130h / ≤5h)</text>
+      <text x="16" y="67" font-size="12" font-weight="500" fill="#27272a">✓ TC2: Paid Traps (Udemy/Skillshare) ➔ Live Free Replacement</text>
+      <text x="16" y="87" font-size="12" font-weight="500" fill="#27272a">✓ TC3: Broken Links (404/DNS) ➔ Open-Web Self-Healing Hot-Swap</text>
+      <text x="16" y="107" font-size="12" font-weight="800" fill="#16a34a">✓ TC4: Dynamic Re-plan &amp; Calendar Idempotency Guarantee</text>
     </g>
   </g>
 
   <!-- ── FOOTER BAR ────────────────────────────────────────────────── -->
-  <g transform="translate(60, 878)">
-    <text x="0" y="16" font-size="11" font-weight="600" fill="#71717a">Episteme AI Engine • Autonomous Multi-Agent State Machine • Zero-Cost Curriculum Guarantee • RFC-5545 Compliant</text>
-    <text x="1070" y="16" font-size="11" font-weight="700" fill="#111110">OPEN-SOURCE AGENT ARCHITECTURE</text>
+  <g transform="translate(60, 895)">
+    <text x="0" y="16" font-size="12" font-weight="600" fill="#71717a">Episteme AI Engine • Autonomous Multi-Agent State Machine • Zero-Cost Curriculum Guarantee • RFC-5545 Compliant</text>
+    <text x="1080" y="16" font-size="12" font-weight="800" fill="#111110">OPEN-SOURCE AGENT ARCHITECTURE</text>
   </g>
 </svg>
