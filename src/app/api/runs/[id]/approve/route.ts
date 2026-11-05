@@ -19,15 +19,16 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const body = (await req.json()) as { action_id?: string; decision?: string };
-    const { action_id, decision } = body;
-
-    if (!action_id || !decision) {
-      return NextResponse.json(
-        { error: 'action_id and decision (approve | reject) are required' },
-        { status: 400 }
-      );
+    let body: { action_id?: string; decision?: string } = {};
+    try {
+      body = (await req.json()) as { action_id?: string; decision?: string };
+    } catch {
+      body = {};
     }
+
+    let { action_id, decision } = body;
+    if (!decision) decision = 'approve';
+
     if (decision !== 'approve' && decision !== 'reject') {
       return NextResponse.json({ error: 'decision must be "approve" or "reject"' }, { status: 400 });
     }
@@ -39,6 +40,28 @@ export async function POST(
 
     if (!run) {
       return NextResponse.json({ error: 'Run not found' }, { status: 404 });
+    }
+
+    // Auto-discover the pending action if action_id is not explicitly provided
+    if (!action_id) {
+      const pending = db.prepare(
+        "SELECT id FROM actions WHERE run_id = ? AND status = 'pending' ORDER BY created_at DESC LIMIT 1"
+      ).get(id) as { id: string } | undefined;
+      if (pending) {
+        action_id = pending.id;
+      } else {
+        const alreadyDone = db.prepare(
+          "SELECT id, idempotency_key FROM actions WHERE run_id = ? AND status = 'executed' LIMIT 1"
+        ).get(id) as { id: string; idempotency_key: string } | undefined;
+        if (alreadyDone) {
+          return NextResponse.json({
+            error: 'Action already executed — idempotency guard active.',
+            idempotency_key: alreadyDone.idempotency_key,
+            status: 'already_executed',
+          }, { status: 409 });
+        }
+        return NextResponse.json({ error: 'No actionable proposal found for this run' }, { status: 400 });
+      }
     }
 
     const action = db.prepare('SELECT * FROM actions WHERE id = ? AND run_id = ?').get(action_id, id) as {

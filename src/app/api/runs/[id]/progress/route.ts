@@ -91,13 +91,19 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const body = await req.json() as {
+    let body: {
       checkpoint_id?: string;
       is_completed?: boolean;
       learner_notes?: string;
       verification_score?: number;
       complete_all?: boolean;
-    };
+    } = {};
+
+    try {
+      body = (await req.json()) as typeof body;
+    } catch {
+      body = {};
+    }
 
     const db = getDb();
     const run = db.prepare('SELECT * FROM runs WHERE id = ?').get(id) as {
