@@ -116,7 +116,7 @@
       "actual": "Dispatched 3/3 live enrollments. Coursera audit deep link verified. Google Calendar 1-click URL verified.",
       "evidence": {
         "coursera_audit_url": "https://www.coursera.org/learn/course?action=enroll&courseAudit=true",
-        "coursera_confirmation_token": "CRS-AUDIT-MW3MPCK8-7F1F",
+        "coursera_confirmation_token": "CRS-AUDIT-DEMO-TOKEN-001",
         "google_calendar_url_sample": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BStudy%20Block%5D%20Study%20Kicko...",
         "batch_calendar_blocks_generated": 8
       }

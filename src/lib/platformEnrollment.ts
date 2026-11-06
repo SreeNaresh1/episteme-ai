@@ -41,9 +41,8 @@ export interface PlatformEnrollmentSummary {
 }
 
 function generateToken(prefix: string): string {
-  const ts = Date.now().toString(36).toUpperCase();
-  const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
-  return `${prefix}-${ts}-${rand}`;
+  const ts = Date.now().toString(10).slice(-6);
+  return `${prefix}-DEMO-TOKEN-${ts}`;
 }
 
 /**
