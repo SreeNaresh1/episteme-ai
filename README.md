@@ -1,3 +1,24 @@
+<div align="center">
+
+```
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║    ███████╗██████╗ ██╗███████╗████████╗███████╗███╗   ███╗███████╗           ║
+║    ██╔════╝██╔══██╗██║██╔════╝╚══██╔══╝██╔════╝████╗ ████║██╔════╝           ║
+║    █████╗  ██████╔╝██║███████╗   ██║   █████╗  ██╔████╔██║█████╗             ║
+║    ██╔══╝  ██╔═══╝ ██║╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║██╔══╝             ║
+║    ███████╗██║     ██║███████║   ██║   ███████╗██║ ╚═╝ ██║███████╗           ║
+║    ╚══════╝╚═╝     ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝╚══════╝           ║
+║                                                                              ║
+║          AI  ·  Autonomous Self-Healing Learning Path Engine                 ║
+║                                                                              ║
+║    ἐπιστήμη  —  justified, verified truth  •  not mere opinion (δόξα)        ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+```
+
+</div>
+
 # Episteme AI — Autonomous Self-Healing Learning Path Engine
 
 [![Target Score 100/100](https://img.shields.io/badge/System%20Score-100%2F100-059669?style=flat&logo=checkmarx&logoColor=white)](#-system-evaluation--100100-scorecard)
@@ -10,6 +31,8 @@
 [![Verification Suite](https://img.shields.io/badge/Core%20Tests-4%2F4%20Passed-111110)](#-official-scenarios--verification-evidence)
 [![System Audit Suite](https://img.shields.io/badge/System%20Audit-7%2F7%20Passed-059669)](#-system-evaluation--anti-scraping-defense-suite)
 [![RFC 5545 & GCal](https://img.shields.io/badge/Calendar-RFC--5545%20%2B%20GCal-111110)](#-live-platform-enrollment--calendar-synchronization)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 > **Episteme** (Ancient Greek: *ἐπιστήμη* — justified, verified truth vs *δόξα* / unverified opinion) is an autonomous, agentic curriculum engineer. It transforms ambiguous career goals into strictly constrained, prerequisite-ordered weekly roadmaps powered exclusively by **100% verified free public courseware**, backed by **autonomous dynamic open-web self-healing**, **live automated platform enrollment**, and **human-governed calendar scheduling**.
 
@@ -239,6 +262,18 @@ episteme-ai/
 ├── ORGANIZER_VALIDATION.md             # Exhaustive organizer verification manifest
 └── README.md
 ```
+
+---
+
+## 🤝 Contributing & Community
+
+Episteme AI welcomes contributions of all kinds — bug reports, feature ideas, documentation improvements, and code.
+
+- 📖 Read the [Contributing Guide](CONTRIBUTING.md) to get started
+- 🐛 [Report a Bug](.github/ISSUE_TEMPLATE/bug_report.md) | ✨ [Request a Feature](.github/ISSUE_TEMPLATE/feature_request.md)
+- 💬 [Start a Discussion](https://github.com/SreeNaresh1/episteme-ai/discussions)
+- 🛡️ [Security Policy](SECURITY.md) | ♿ [Accessibility Statement](ACCESSIBILITY.md)
+- ⭐ **If Episteme AI helped you, please star the repo** — it helps others discover it!
 
 ---
 
