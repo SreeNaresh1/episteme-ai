@@ -897,6 +897,18 @@ export default function Home() {
             </nav>
 
             <div className="header-cta-group">
+              <a
+                href="https://github.com/SreeNaresh1/episteme-ai"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-secondary-light"
+                style={{ padding: '6px 12px', fontSize: 12, textDecoration: 'none' }}
+                title="View source code on GitHub"
+              >
+                <ExternalLink size={12} />
+                <span>GitHub</span>
+              </a>
+
               <button
                 id="header-walkthrough-btn"
                 className="btn-secondary-light"
@@ -2403,7 +2415,15 @@ export default function Home() {
                 prerequisite-ordered weekly roadmaps using 100% verified free public courseware.
               </p>
               <div className="footer-copyright-note">
-                © {new Date().getFullYear()} Episteme AI. All rights reserved.
+                © {new Date().getFullYear()} Episteme AI · MIT Licensed ·{' '}
+                <a
+                  href="https://github.com/SreeNaresh1/episteme-ai"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: 'inherit', textDecoration: 'underline' }}
+                >
+                  Open Source on GitHub
+                </a>
               </div>
             </div>
 

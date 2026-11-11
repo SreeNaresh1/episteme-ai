@@ -17,65 +17,60 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
+**Live Demo (no login required):** [episteme-ai-one.vercel.app](https://episteme-ai-one.vercel.app)
+
 </div>
 
 # Episteme AI — Autonomous Self-Healing Learning Path Engine
 
-[![Target Score 100/100](https://img.shields.io/badge/System%20Score-100%2F100-059669?style=flat&logo=checkmarx&logoColor=white)](#-system-evaluation--100100-scorecard)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-059669?style=flat&logo=vercel&logoColor=white)](https://episteme-ai-one.vercel.app)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.4.2-111110?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19.3.0-111110?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-111110?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Cheerio](https://img.shields.io/badge/Cheerio-1.2.0%20DOM%20Parser-E88C1F)](https://cheerio.js.org/)
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.0%20Flash-111110?logo=google&logoColor=white)](https://aistudio.google.com/)
 [![SQLite WAL](https://img.shields.io/badge/SQLite-WAL%20Stateful-111110?logo=sqlite&logoColor=white)](https://sqlite.org/)
-[![Verification Suite](https://img.shields.io/badge/Core%20Tests-4%2F4%20Passed-111110)](#-official-scenarios--verification-evidence)
-[![System Audit Suite](https://img.shields.io/badge/System%20Audit-7%2F7%20Passed-059669)](#-system-evaluation--anti-scraping-defense-suite)
-[![RFC 5545 & GCal](https://img.shields.io/badge/Calendar-RFC--5545%20%2B%20GCal-111110)](#-live-platform-enrollment--calendar-synchronization)
+[![Core Tests](https://img.shields.io/badge/Core%20Tests-4%2F4%20Passed-111110)](#-core-validation-scenarios--verification-evidence)
+[![Audit Suite](https://img.shields.io/badge/Audit%20Suite-7%2F7%20Passed-059669)](#-automated-verification--audit-suite)
+[![RFC 5545 & GCal](https://img.shields.io/badge/Calendar-RFC--5545%20%2B%20GCal-111110)](#-system-architecture)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-> **Episteme** (Ancient Greek: *ἐπιστήμη* — justified, verified truth vs *δόξα* / unverified opinion) is an autonomous, agentic curriculum engineer. It transforms ambiguous career goals into strictly constrained, prerequisite-ordered weekly roadmaps powered exclusively by **100% verified free public courseware**, backed by **autonomous dynamic open-web self-healing**, **live automated platform enrollment**, and **human-governed calendar scheduling**.
+> **Episteme** (Ancient Greek: *ἐπιστήμη* — justified, verified truth vs. *δόξα* / unverified opinion) turns career goals into strictly time-bounded, prerequisite-ordered weekly roadmaps built exclusively from **free public courseware**, backed by **Cheerio DOM paywall & dead-link detection**, **curated self-healing swaps**, and **approval-gated calendar & audit-link dispatch**.
 
 ---
 
-## 🏆 System Evaluation & 100/100 Scorecard
+## ⚡ Core Engineering Guarantees
 
-Episteme AI achieves a deterministic **100/100 perfect score** under autonomous agent policy `episteme-agentic-v2`:
-
-| Criteria | Score | Verification & Implemented Improvements |
-| :--- | :---: | :--- |
-| **Problem fit & usefulness** | **20 / 20** | Enforces exact weekly hours (26w × 5h = 130h); added **Long-Term Learning Outcomes Tracking** with weekly milestone deliverables, competency rubric calculations, and 1-click Docker deployment. |
-| **Agentic capability** | **25 / 25** | Upgraded from local calendar export to **Live Automated Platform Enrollment** across Coursera (Free Audit deep link + token dispatch), Kaggle Learn, and freeCodeCamp, with **1-Click Google Calendar event sync**. |
-| **Technical implementation**| **20 / 20** | Added official **Organizer Evaluation & Anti-Scraping Defense Suite** (`/api/organizer-audit` & `npm run test:organizer`), validating crawler reliability against anti-bot defenses, timeout SLAs, and SQLite WAL ACID idempotency. |
-| **Innovation** | **15 / 15** | Implemented **Dynamic Open-Web Discovery & Headless Cheerio DOM Crawler**, parsing Schema.org `isAccessibleForFree` JSON-LD, inspecting paywalls vs free markers, and hot-swapping open-web alternatives. |
-| **User experience** | **10 / 10** | Built an **Interactive In-App Guided Demo Tour** directly in the dashboard, enabling automated AI judges and human organizers to directly observe real-time execution responsiveness. |
-| **Presentation** | **10 / 10** | Interactive presentation deck at `/presentation`, complete system architecture diagrams, and comprehensive organizer verification manifests (`ORGANIZER_VALIDATION.md`). |
-| **TOTAL** | **100 / 100** | **Deterministic 100% Pass Across All Constraints** |
+| Capability | Implementation | Code Location |
+| :--- | :--- | :--- |
+| **Strict Hours Budget** | Validates Gemini JSON output against exact week counts, per-week hour caps, total hour sums, and an approved free-URL allowlist, with a deterministic 52-week fallback if validation fails or no API key is configured. | [`pathGenerator.ts`](src/lib/pathGenerator.ts) |
+| **Paywall & 404 Detection** | Checks URL reachability using browser headers and `AbortController` timeouts, inspects JSON-LD `isAccessibleForFree` / zero-price `offers`, and scores paywall regexes against free-audit markers via Cheerio. | [`linkChecker.ts`](src/lib/linkChecker.ts), [`webDiscovery.ts`](src/lib/webDiscovery.ts) |
+| **Self-Healing Replacements** | Matches topic-tagged candidates from the curated free-courseware index (`REPLACEMENT_POOL`), live-crawls the top match with Cheerio, and persists replacement reasons in SQLite. | [`webDiscovery.ts`](src/lib/webDiscovery.ts) |
+| **Approval Gate & Idempotency** | Keeps proposed enrollments and calendar blocks in `pending_approval` behind a SQLite `UNIQUE(idempotency_key)` constraint so retries never duplicate events. | [`db.ts`](src/lib/db.ts), [`platformEnrollment.ts`](src/lib/platformEnrollment.ts) |
+| **Calendar & Deep-Link Dispatch** | Generates Coursera Free Audit deep links (`?action=enroll&courseAudit=true`), Google Calendar intent URLs, and RFC-5545 `.ics` exports alongside local tracking records. | [`platformEnrollment.ts`](src/lib/platformEnrollment.ts), [`calendarExport.ts`](src/lib/calendarExport.ts) |
+| **Milestones & Progress Tracking** | Tracks weekly deliverables and competency rubrics across phases, generating a completion certificate with a deterministic hex reference ID. | [`learningOutcomes.ts`](src/lib/learningOutcomes.ts) |
 
 ---
 
-## 🌟 The Epistemic Philosophy: Why the Name?
+## 🌟 Why Episteme?
 
-In antiquity, Plato and Aristotle contrasted **Episteme** (*proven, mathematically grounded understanding*) with **Doxa** (*untested opinion and illusion*). 
+Most AI study planners suffer from three recurring failure modes:
+- Courses labeled "free" that hit a credit-card paywall mid-curriculum.
+- Hallucinated or dead 404 links.
+- Unbounded workloads that ignore real-world weekly availability.
 
-The modern online learning landscape is saturated with *Doxa*:
-- Courses marketed as "free" that abruptly demand a credit card on Week 3.
-- Outdated syllabi with broken 404 links and obsolete APIs.
-- Generic AI chatbots hallucinating unbudgeted, unrealistic, 40-hour weekly workloads.
-
-**Episteme AI restores epistemic rigor to education**:
-1. **Mathematical Hours Guarantee**: Strictly bounds weekly study time to the user's budget (e.g., exactly 5h/week for 26 weeks = 130 hours).
-2. **Autonomous Paywall Heuristics**: Detects monetization traps via Cheerio DOM parsing before the learner ever visits the page.
-3. **Dynamic Open-Web Discovery**: Searches the open web, crawls candidate pages with anti-scraping headers, verifies `isAccessibleForFree` Schema.org markers, and hot-swaps verified zero-cost replacements.
-4. **Live Automated Platform Enrollment**: Dispatches authenticated Free Audit deep links (Coursera `courseAudit=true`, Kaggle, freeCodeCamp) with cryptographic confirmation tokens.
-5. **Human-in-the-Loop Gatekeeper**: Never performs irreversible actions without explicit user consent.
-6. **Strict Idempotency**: Prevents duplicate calendar blocks or repeated schedule corruption across retries or plan updates.
+**Episteme AI addresses these at the pipeline level**:
+1. **Constrained Planning**: Every generated roadmap satisfies exact weekly capacity (e.g., 5h/week for 26 weeks = 130h) and restricts LLM URL selection to an approved free-resource pool.
+2. **DOM-Level Verification**: Instead of trusting HTTP `200 OK` alone, Cheerio strips layout noise and inspects Schema.org metadata plus paywall signals before a link stays in a plan.
+3. **Human-in-the-Loop Gatekeeper**: External actions wait in `pending_approval` until explicitly approved by the user.
+4. **Idempotent Persistence**: SQLite transactions and unique idempotency keys prevent duplicate calendar dispatches across reruns.
 
 ---
 
 ## 📐 System Architecture
 
-Episteme AI operates as a coordinated multi-phase agent loop:
+Episteme AI operates as a multi-phase pipeline:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -84,52 +79,52 @@ Episteme AI operates as a coordinated multi-phase agent loop:
                                     │
     1. INTAKE & CONSTRAINTS         ▼
     ┌────────────────────────────────────────────────────────────────────┐
-    │ Goal: "Become a Data Analyst" | Level: Beginner                   │
+    │ Goal: "Become a Data Analyst" | Level: Beginner                    │
     │ Time Constraints: 5h / week × 26 weeks = 130 Total Hours Budget    │
     └────────────────────────────────────────────────────────────────────┘
                                     │
     2. REASONING & PREREQUISITE DAG ▼
     ┌────────────────────────────────────────────────────────────────────┐
-    │ Gemini 2.0 Flash / Semantic Knowledge Base                         │
+    │ Gemini 2.0 Flash (allowlist-constrained) + 52-week fallback mapper │
     │ Orders topics: Foundations → Relational SQL → Python → Capstone    │
-    │ Distributes time budget precisely across 26 discrete weekly modules│
+    │ Validates exact week count, hours cap, and approved URLs           │
     └────────────────────────────────────────────────────────────────────┘
                                     │
-    3. LINK VERIFICATION & ANTI-SCRAPING AUDIT
+    3. LINK VERIFICATION & DOM INSPECTION
     ┌────────────────────────────────────────────────────────────────────┐
-    │ Resilient HTTP Crawler & Cheerio DOM Inspector                     │
-    │ • Checks HTTP Reachability with modern Chrome 124 Sec-Ch-Ua headers│
-    │ • Evaluates Paywall Signatures vs Free Audit Patterns              │
-    │ • Validates Schema.org isAccessibleForFree JSON-LD                 │
+    │ Resilient HTTP Fetcher & Cheerio DOM Inspector                     │
+    │ • Checks HTTP reachability with AbortController timeout SLAs       │
+    │ • Evaluates paywall signatures vs. free-audit markers              │
+    │ • Validates Schema.org isAccessibleForFree / offers.price JSON-LD  │
     └────────────────────────────────────────────────────────────────────┘
                                     │
                                     ├─── [Broken Link or Paywall Found?]
                                     │               │
-                                    │               ▼ (DYNAMIC SELF-HEALING)
+                                    │               ▼ (SELF-HEALING SWAP)
                                     │   ┌────────────────────────────────┐
-                                    │   │ Dynamic Open-Web Search        │
-                                    │   │ Headless Cheerio DOM Parse     │
+                                    │   │ Topic-Matched Courseware Index │
+                                    │   │ Live Cheerio DOM Verification  │
                                     │   │ Hot-Swap in DB & Store Reason  │
                                     │   └────────────────────────────────┘
                                     ▼
     4. HUMAN APPROVAL GATEWAY (HITL)
     ┌────────────────────────────────────────────────────────────────────┐
     │ Displays proposed actions, exact resource URLs, and hours          │
-    │ Requires user approval prior to enrollment & calendar dispatch     │
+    │ Requires explicit user approval before enrollment/calendar dispatch│
     └────────────────────────────────────────────────────────────────────┘
                                     │
-    5. LIVE DISPATCH & CALENDAR SYNC ▼
+    5. DEEP-LINK DISPATCH & CALENDAR SYNC ▼
     ┌────────────────────────────────────────────────────────────────────┐
-    │ • Dispatches Coursera Free Audit (courseAudit=true) & Kaggle tokens│
-    │ • 1-Click Google Calendar event template sync                      │
-    │ • RFC-5545 Standard .ics Universal Calendar Export                 │
-    │ • Stateful SQLite tracking with UNIQUE idempotency key protection  │
+    │ • Coursera Free Audit (?action=enroll&courseAudit=true) & Kaggle   │
+    │ • 1-Click Google Calendar event template URLs                      │
+    │ • RFC-5545 standard .ics calendar export                           │
+    │ • SQLite tracking with UNIQUE idempotency_key guard                │
     └────────────────────────────────────────────────────────────────────┘
                                     │
-    6. LONG-TERM OUTCOMES & PROGRESS ▼
+    6. OUTCOMES & PROGRESS TRACKING ▼
     ┌────────────────────────────────────────────────────────────────────┐
-    │ • Weekly actionable milestone deliverables & competency rubrics    │
-    │ • Cryptographic Graduation Certificate with SHA hash verification │
+    │ • Weekly milestone deliverables & competency rubrics               │
+    │ • Completion certificate with deterministic hex reference ID       │
     └────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -137,20 +132,20 @@ Episteme AI operates as a coordinated multi-phase agent loop:
 
 ## 🧪 Core Validation Scenarios & Verification Evidence
 
-Episteme AI includes an automated, built-in test suite executing the 4 core verification scenarios against live database transactions. All 4 tests pass deterministically (4/4).
+Episteme AI includes an automated test suite (`/api/testcases`) executing 4 core validation scenarios against SQLite transactions:
 
-| Scenario ID | Test Scenario | Specification & Expected Behavior | Actual Automated Output | Status |
+| Scenario ID | Test Scenario | Specification & Expected Behavior | Automated Output Summary | Status |
 | :--- | :--- | :--- | :--- | :---: |
-| **TC1** | **6 Months at 5 h/week** | Curriculum must fit exact 26-week horizon at 5 h/week (130h total budget) with 100% valid free resources. | `Weeks generated: 26/26. Total hours: 130/130 (exact match). Per-week limit (≤5h) respected: true. All URLs valid & free.` | **PASSED** |
-| **TC2** | **Course Becomes Paid** | Detect paywalled course URLs (e.g. Udemy/Pluralsight), flag status, and replace with verified free alternative. | `Paid course detected: true (status=paid). Classification: Paid platform pattern. Replacement proposed & verified live_free: freeCodeCamp Data Analysis with Python. Persisted to DB.` | **PASSED** |
-| **TC3** | **Broken Link / 404** | Detect dead/broken URL (NXDOMAIN / HTTP error), discover replacement via open web, verify replacement is live & free, hot-swap plan. | `Broken link detected: true (status=broken). Classification: Network error: fetch failed. Replacement verified (status=live_free). Replaced in plan.` | **PASSED** |
-| **TC4** | **Rerun / Idempotency** | On rerun or plan replay, only missing sessions are appended; duplicate calendar actions prevented via idempotency key. | `Total weeks: 4. Completed: 2. Missing added: 2. Idempotency guard active: calendar action already executed. Duplicate prevented: true. Sessions before: 2, after: 4.` | **PASSED** |
+| **TC1** | **6 Months at 5 h/week** | Curriculum must fit exact 26-week horizon at 5 h/week (130h total budget) with valid free resources. | `Weeks generated: 26/26. Total hours: 130/130 (exact match). Per-week limit (≤5h) respected: true.` | **PASSED** |
+| **TC2** | **Course Becomes Paid** | Detect paywalled course URLs (e.g. Udemy/Pluralsight), flag status, and swap with verified free alternative. | `Paid course detected: true (status=paid). Replacement proposed & verified live_free: freeCodeCamp Data Analysis with Python.` | **PASSED** |
+| **TC3** | **Broken Link / 404** | Detect unreachable URL, match replacement from free courseware index, verify live status, hot-swap plan. | `Broken link detected: true (status=broken). Replacement verified (status=live_free). Replaced in plan.` | **PASSED** |
+| **TC4** | **Rerun / Idempotency** | On rerun, append only missing sessions and prevent duplicate calendar actions via `idempotency_key`. | `Total weeks: 4. Completed: 2. Missing added: 2. Duplicate prevented: true.` | **PASSED** |
 
 ---
 
-## 🛡️ System Evaluation & Anti-Scraping Defense Suite
+## 🛡️ Automated Verification & Audit Suite
 
-Run the full system compliance audit directly from the CLI or UI tab **"System Audit (7/7)"**:
+Run the 7-check verification suite from the CLI or the dashboard UI:
 
 ```bash
 npm run test:organizer
@@ -158,28 +153,26 @@ npm run test:organizer
 
 | Check ID | Check Name | Specification | Status |
 | :--- | :--- | :--- | :---: |
-| `AUDIT-CRAWLER-01` | **Anti-Scraping Crawler** | Modern Sec-Ch-Ua & Chrome 124 browser headers bypass anti-bot shields | **PASSED** |
-| `AUDIT-CRAWLER-02` | **Crawler Timeout SLA** | AbortController halts blackhole requests safely within 1200ms SLA | **PASSED** |
-| `AUDIT-DOM-03` | **Cheerio DOM Paywalls** | Classifies Schema.org JSON-LD and detects paywall patterns with high precision | **PASSED** |
-| `AUDIT-DAG-04` | **Prerequisite DAG Solver**| Enforces strict prerequisite topology from foundations to capstone with 0 duplicate modules | **PASSED** |
-| `AUDIT-DISCOVERY-05` | **Open-Web Discovery** | Discovers alternative resources via dynamic search queries and verifies free status | **PASSED** |
-| `AUDIT-ENROLL-06` | **Live Platform Enrollment** | Issues Coursera Free Audit 1-click links (`courseAudit=true`) and 1-click Google Calendar sync | **PASSED** |
-| `AUDIT-ACID-07` | **SQLite WAL Idempotency** | Enforces ACID transactions and unique idempotency constraints against duplicate dispatch | **PASSED** |
+| `AUDIT-CRAWLER-01` | **HTTP Header Resilience** | Sends browser `User-Agent` and `Sec-Ch-Ua` headers during reachability checks | **PASSED** |
+| `AUDIT-CRAWLER-02` | **Crawler Timeout SLA** | `AbortController` aborts stalled requests within configured SLA | **PASSED** |
+| `AUDIT-DOM-03` | **Cheerio DOM Paywalls** | Parses Schema.org JSON-LD and scores paywall vs. free-audit text markers | **PASSED** |
+| `AUDIT-DAG-04` | **Prerequisite Ordering** | Verifies sequential topology from foundations to capstone with zero duplicate modules | **PASSED** |
+| `AUDIT-DISCOVERY-05` | **Fallback Discovery** | Matches topic-tagged alternatives and verifies free status via Cheerio | **PASSED** |
+| `AUDIT-ENROLL-06` | **Audit Deep Links & Sync** | Builds Coursera `courseAudit=true` deep links and Google Calendar intent URLs | **PASSED** |
+| `AUDIT-ACID-07` | **SQLite Idempotency** | Enforces `UNIQUE(idempotency_key)` constraint against duplicate dispatch | **PASSED** |
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Layer | Technology | Rationale |
+| Layer | Technology | Role |
 | :--- | :--- | :--- |
-| **Framework** | Next.js 16.4.2 (App Router & Turbopack) | Server-rendered API routes, client-side reactive dashboard, sub-second compile |
-| **UI & Styling** | React 19, Vanilla CSS Design System, Lucide Icons | Ultra-fast rendering, zero Tailwind lock-in, typography & micro-interactions |
-| **AI Reasoning** | Google Gemini 2.0 Flash (`@google/generative-ai`) | Prerequisite topology ordering, weekly time decomposition, course semantic tagging |
-| **Persistence** | SQLite with Write-Ahead Logging (`better-sqlite3`) | Stateful, ACID-compliant runs, actions, resources, and audit evidence |
-| **DOM Inspection**| Cheerio v1.2.0 | Server-side headless HTML parser for Schema.org JSON-LD & paywall token heuristics |
-| **Crawler** | Anti-Scraping Modern Sec-Ch-Ua Client | Rotating User-Agents, gzip/br decompression, non-blocking timeout abort SLAs |
-| **Enrollment** | Live Platform Dispatch Engine | Coursera Free Audit 1-click deeplinks, Kaggle Learn & freeCodeCamp tokens |
-| **Scheduling** | 1-Click Google Calendar & RFC-5545 `.ics` | Direct web calendar intent generation + universal .ics export |
+| **Framework** | Next.js 16.4.2 (App Router & Turbopack) | Server-rendered API routes, reactive dashboard, and interactive slide deck |
+| **UI & Styling** | React 19, Tailwind CSS v4 + CSS Variables, Lucide Icons | Editorial design system, responsive tables, and interactive tour |
+| **AI Reasoning** | Google Gemini 2.0 Flash (`@google/generative-ai`) | Allowlist-constrained curriculum ordering (falls back cleanly when unset) |
+| **Persistence** | SQLite via `better-sqlite3` (WAL locally, `/tmp` on Vercel) | Stateful runs, weeks, resources, approval actions, and idempotency keys |
+| **DOM Inspection** | Cheerio v1.2.0 | Server-side HTML parsing for Schema.org JSON-LD & paywall heuristics |
+| **Scheduling** | Google Calendar Intent URLs & RFC-5545 `.ics` | 1-click event links plus universal iCalendar export |
 
 ---
 
@@ -187,7 +180,7 @@ npm run test:organizer
 
 ### 1. Prerequisites
 - Node.js 18.18+ or 20+
-- npm or yarn
+- npm (note: `better-sqlite3` compiles a native addon if prebuilds aren't available for your OS/Node version)
 
 ### 2. Installation
 ```bash
@@ -197,6 +190,9 @@ cd episteme-ai
 
 # Install dependencies
 npm install
+
+# Optional: add GEMINI_API_KEY in .env.local for LLM generation
+# (Without a key, Episteme AI uses its deterministic 52-week curriculum builder)
 ```
 
 ### 3. Running the Development Server
@@ -205,16 +201,16 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 4. Running the Complete Verification Suite
-Trigger the full verification suite directly from the UI or run:
+### 4. Running the Verification Suites
+Trigger the suites from the UI or via CLI:
 ```bash
 # Core Validation Scenarios (TC1-TC4)
 curl -X POST http://localhost:3000/api/testcases
 
-# System Evaluation & Anti-Scraping Defense Suite (7/7)
+# Automated Verification Suite (7/7)
 curl -X POST http://localhost:3000/api/organizer-audit
 
-# CLI Test Runner
+# CLI Runner
 npm run test:organizer
 ```
 
@@ -224,50 +220,63 @@ npm run test:organizer
 
 ```
 episteme-ai/
-├── app/
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── api/
-│   │   │   │   ├── health/             # System health & engine probe
-│   │   │   │   ├── organizer-audit/    # Official organizer evaluation suite (7/7 checks)
-│   │   │   │   ├── runs/               # Create and list learning path runs
-│   │   │   │   │   ├── [id]/           # Run detail view
-│   │   │   │   │   │   ├── approve/    # HITL gate & live platform enrollment
-│   │   │   │   │   │   ├── progress/   # Long-term outcomes & milestone tracking
-│   │   │   │   │   │   └── verify/     # Dynamic open-web re-check & self-healing
-│   │   │   │   └── testcases/          # Core validation suite (TC1-TC4)
-│   │   │   ├── globals.css             # Comprehensive bespoke design system
-│   │   │   ├── layout.tsx              # SEO metadata, OpenGraph tags, font loading
-│   │   │   ├── page.tsx                # Dashboard, interactive tour, organizer console
-│   │   │   └── presentation/           # Interactive presentation slide deck
-│   │   └── lib/
-│   │       ├── calendarExport.ts       # RFC-5545 iCalendar (.ics) generator
-│   │       ├── db.ts                   # SQLite schema, tables, queries & WAL mode
-│   │       ├── learningOutcomes.ts     # Long-term outcomes & graduation certificate
-│   │       ├── linkChecker.ts          # Paywall detection & HTTP crawler
-│   │       ├── organizerAudit.ts       # 7-check organizer verification suite
-│   │       ├── pathGenerator.ts        # Gemini 2.0 Flash prompt & curriculum DAG
-│   │       ├── platformEnrollment.ts   # Live Coursera Free Audit & GCal dispatcher
-│   │       └── webDiscovery.ts         # Dynamic open-web discovery & Cheerio DOM parser
-│   ├── data/
-│   │   ├── learningpath.db             # Stateful SQLite database (WAL mode)
-│   │   └── organizer_audit_log.json    # Cryptographic organizer test execution log
-│   ├── scripts/
-│   │   └── organizer-cli.js            # CLI runner for organizer verification
-│   ├── package.json
-│   └── tsconfig.json
-├── Dockerfile                          # Production container configuration
-├── docker-compose.yml                  # 1-Click containerized deployment
-├── DEPLOYMENT.md                       # Production deployment guide
-├── ORGANIZER_VALIDATION.md             # Exhaustive organizer verification manifest
-└── README.md
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   └── PULL_REQUEST_TEMPLATE.md
+├── data/
+│   └── organizer_audit_log.json        # Audit suite execution log
+├── public/                             # Static assets, icons & architecture SVG
+├── scripts/
+│   ├── concept_document.html           # Printable concept document source
+│   ├── generate-icons.js
+│   └── organizer-cli.js                # CLI runner for the 7-check audit suite
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── health/                 # System health probe
+│   │   │   ├── organizer-audit/        # 7-check verification suite endpoint
+│   │   │   ├── runs/                   # Create and list learning path runs
+│   │   │   │   └── [id]/
+│   │   │   │       ├── approve/        # HITL gate & deep-link/calendar dispatch
+│   │   │   │       ├── inject-demo/    # Demo broken/paid URL injection for testing
+│   │   │   │       ├── progress/       # Milestones & completion tracking
+│   │   │   │       └── verify/         # Live re-check & self-healing swap
+│   │   │   └── testcases/              # Core validation suite (TC1-TC4)
+│   │   ├── presentation/               # Interactive presentation slide deck
+│   │   ├── globals.css                 # Tailwind v4 + editorial CSS variables
+│   │   ├── layout.tsx                  # Metadata & font loading
+│   │   └── page.tsx                    # Dashboard & interactive walkthrough
+│   └── lib/
+│       ├── curricula/                  # Curated 52-week domain curricula
+│       ├── calendarExport.ts           # RFC-5545 iCalendar (.ics) generator
+│       ├── db.ts                       # SQLite schema & WAL/serverless setup
+│       ├── learningOutcomes.ts         # Milestones, rubrics & completion cert
+│       ├── linkChecker.ts              # Paid/free patterns & HTTP link checker
+│       ├── organizerAudit.ts           # 7-check audit runner
+│       ├── pathGenerator.ts            # Gemini prompt, validator & fallback
+│       ├── platformEnrollment.ts       # Audit deep links & GCal URL builder
+│       └── webDiscovery.ts             # Cheerio DOM paywall & JSON-LD inspector
+├── ACCESSIBILITY.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── DEPLOYMENT.md
+├── Dockerfile
+├── LICENSE
+├── ORGANIZER_VALIDATION.md
+├── SECURITY.md
+├── docker-compose.yml
+├── next.config.ts
+├── package.json
+└── tsconfig.json
 ```
 
 ---
 
 ## 🤝 Contributing & Community
 
-Episteme AI welcomes contributions of all kinds — bug reports, feature ideas, documentation improvements, and code.
+Episteme AI welcomes contributions of all kinds — bug reports, paywall heuristic improvements, new free curricula, documentation updates, and PRs.
 
 - 📖 Read the [Contributing Guide](CONTRIBUTING.md) to get started
 - 🐛 [Report a Bug](.github/ISSUE_TEMPLATE/bug_report.md) | ✨ [Request a Feature](.github/ISSUE_TEMPLATE/feature_request.md)
@@ -278,5 +287,7 @@ Episteme AI welcomes contributions of all kinds — bug reports, feature ideas, 
 ---
 
 ## 🛡️ License & Fair Use
+
+Code in this repository is licensed under the [MIT License](LICENSE).
 
 All external course syllabi, documentation, tutorials, and trademarked names (Coursera®, Kaggle®, Khan Academy®, freeCodeCamp®, MIT OpenCourseWare®, Harvard CS50®, MDN Web Docs®) belong to their respective institutions. **Episteme AI** acts as an open-access aggregator and scheduler verifying zero-cost auditability under educational fair-use guidance.
