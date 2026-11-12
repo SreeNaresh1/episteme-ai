@@ -590,11 +590,11 @@ export default function Home() {
       const res = await fetch('/api/organizer-audit', { method: 'POST' });
       const data = await res.json() as { report: OrganizerAuditReport; error?: string };
       if (!res.ok) {
-        addToast(data.error || 'Organizer audit failed', 'error');
+        addToast(data.error || 'System audit failed', 'error');
         return;
       }
       setOrganizerReport(data.report);
-      addToast(`Organizer Audit Complete: ${data.report.passed_checks}/${data.report.total_checks} passed (100% Score)`, 'success');
+      addToast(`System Audit Complete: ${data.report.passed_checks}/${data.report.total_checks} checks passed`, 'success');
     } catch (err) {
       addToast(`Audit error: ${err instanceof Error ? err.message : 'Network error'}`, 'error');
     } finally {
@@ -803,7 +803,7 @@ export default function Home() {
       const res = await fetch('/api/testcases', { method: 'POST' });
       const data = await res.json() as { results: Array<{ status: string }>; total: number; passed: number };
       if (!res.ok) { addToast('Test run failed', 'error'); return; }
-      addToast(`Official Test Suite: ${data.passed}/${data.total} passed`, data.passed === data.total ? 'success' : 'info');
+      addToast(`Validation Suite: ${data.passed}/${data.total} passed`, data.passed === data.total ? 'success' : 'info');
       await loadTestResults();
     } catch {
       addToast('Test run failed', 'error');
@@ -839,7 +839,7 @@ export default function Home() {
             >
               <EpistemeBrandLogo />
               <span className="brand-text">Episteme</span>
-              <span className="brand-sub-badge">Agentic AI 2026</span>
+              <span className="brand-sub-badge">Open Source</span>
             </button>
 
             <nav className="header-nav">
@@ -853,47 +853,27 @@ export default function Home() {
                 className={`nav-link-btn ${tab === 'runs' ? 'active' : ''}`}
                 onClick={() => setTab('runs')}
               >
-                All Runs &amp; Evidence
+                Saved Roadmaps
+              </button>
+              <button
+                className={`nav-link-btn ${tab === 'outcomes' ? 'active' : ''}`}
+                onClick={() => { setTab('outcomes'); loadOutcomes(); }}
+              >
+                Milestones
               </button>
               <button
                 className={`nav-link-btn ${tab === 'testcases' ? 'active' : ''}`}
                 onClick={() => setTab('testcases')}
               >
-                Official Test Cases (4/4)
+                Validation Tests
               </button>
               <button
                 className={`nav-link-btn ${tab === 'organizer_audit' ? 'active' : ''}`}
                 onClick={() => setTab('organizer_audit')}
               >
                 <ShieldCheck size={13} color="var(--status-live)" style={{ marginRight: 4 }} />
-                Organizer Audit (7/7)
+                System Audit
               </button>
-              <button
-                className={`nav-link-btn ${tab === 'outcomes' ? 'active' : ''}`}
-                onClick={() => { setTab('outcomes'); loadOutcomes(); }}
-              >
-                Outcomes &amp; Milestones
-              </button>
-              <Link
-                href="/presentation"
-                className="nav-link-btn"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}
-              >
-                <span>Presentation</span>
-                <span style={{ fontSize: 9, padding: '1px 5px', borderRadius: 4, background: '#111110', color: '#fff', fontWeight: 800 }}>SLIDES</span>
-              </Link>
-              <a
-                href="/Episteme_AI_Concept_Document.pdf"
-                target="_blank"
-                rel="noreferrer"
-                download
-                className="nav-link-btn"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none', color: '#166534', fontWeight: 700 }}
-                title="Download Official Concept Document PDF"
-              >
-                <span>Concept Doc</span>
-                <span style={{ fontSize: 9, padding: '1px 5px', borderRadius: 4, background: '#16a34a', color: '#fff', fontWeight: 800 }}>PDF</span>
-              </a>
             </nav>
 
             <div className="header-cta-group">
@@ -976,7 +956,7 @@ export default function Home() {
                     onClick={() => setTab('testcases')}
                   >
                     <ShieldCheck size={14} />
-                    <span>Inspect 4 Test Scenarios</span>
+                    <span>Run Self-Tests (4/4)</span>
                   </button>
                 </div>
               </div>
@@ -1525,7 +1505,7 @@ export default function Home() {
                       </div>
                       <div className="approval-gate-desc">{action.description}</div>
                       <div className="approval-gate-note">
-                        <strong>Official Brief Compliance:</strong> Irreversible external actions (live platform enrollment and calendar block synchronization) require explicit human consent. Upon approval, Episteme AI executes live enrollment dispatch across Coursera Free Audit (via <code>courseAudit=true</code>), Kaggle Learn, and freeCodeCamp, generating verified confirmation tokens and Google Calendar synchronization URLs.
+                        <strong>Human-in-the-Loop Gate:</strong> External actions (free-audit link dispatch and calendar block generation) require explicit approval. Once approved, Episteme AI provisions Coursera Free Audit deep links (<code>courseAudit=true</code>), Kaggle/freeCodeCamp enrollment links, and Google Calendar sync URLs.
                       </div>
                       <div className="approval-btns-row">
                         <button
@@ -1572,7 +1552,7 @@ export default function Home() {
                                 Live Platform Enrollments ({currentDetail.enrollment_records.length} Platforms)
                               </div>
                               <div style={{ fontSize: 12, color: '#166534', marginTop: 2 }}>
-                                Cryptographic confirmation tokens &amp; 1-click Coursera Free Audit deeplinks provisioned
+                                Reference tokens &amp; 1-click Coursera Free Audit deep links provisioned
                               </div>
                             </div>
                             <div style={{ display: 'flex', gap: 8 }}>
@@ -1927,16 +1907,16 @@ export default function Home() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                  <span className="clean-badge badge-live-green">SYSTEM POLICY: episteme-agentic-v2</span>
-                  <span className="clean-badge badge-neutral-gray mono">TARGET SCORE: 100/100</span>
+                  <span className="clean-badge badge-live-green">SYSTEM DIAGNOSTICS</span>
+                  <span className="clean-badge badge-neutral-gray mono">7/7 CHECKS</span>
                 </div>
                 <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>
-                  System Evaluation &amp; Anti-Scraping Defense Suite
+                  System Diagnostics &amp; Crawler Verification
                 </h2>
                 <div style={{ fontSize: 14, color: 'var(--text-secondary)', maxWidth: 760 }}>
-                  Automated verification logs testing crawler resilience against bot protections,
-                  headless Cheerio DOM paywall inspection, prerequisite DAG mathematical constraints,
-                  and live platform enrollment dispatch.
+                  Automated self-checks testing HTTP header resilience and timeout SLAs,
+                  Cheerio DOM &amp; Schema.org paywall inspection, prerequisite hour-budget constraints,
+                  and SQLite idempotency guards.
                 </div>
               </div>
 
@@ -1947,7 +1927,7 @@ export default function Home() {
                   onClick={handleRunOrganizerAudit}
                   disabled={runningAudit}
                 >
-                  {runningAudit ? <><span className="spinner-icon" />Executing 7 Audit Checks…</> : <><ShieldCheck size={14} />Run Full Organizer Audit (7/7)</>}
+                  {runningAudit ? <><span className="spinner-icon" />Executing 7 Audit Checks…</> : <><ShieldCheck size={14} />Run System Audit (7/7)</>}
                 </button>
               </div>
             </div>
@@ -1964,19 +1944,19 @@ export default function Home() {
                 <div className="audit-metric-num" style={{ color: '#0284c7' }}>
                   {organizerReport ? `${organizerReport.crawler_reliability_score}%` : '100%'}
                 </div>
-                <div className="audit-metric-lbl">Crawler Reliability SLA</div>
+                <div className="audit-metric-lbl">Crawler Timeout SLA</div>
               </div>
               <div className="audit-metric-card">
                 <div className="audit-metric-num" style={{ color: '#7c3aed' }}>
                   {organizerReport ? `${organizerReport.anti_scraping_defense_pass_rate}%` : '100%'}
                 </div>
-                <div className="audit-metric-lbl">Anti-Scraping Defense</div>
+                <div className="audit-metric-lbl">Header &amp; DOM Checks</div>
               </div>
               <div className="audit-metric-card">
                 <div className="audit-metric-num" style={{ fontSize: 18, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
                   {organizerReport?.organizer_signoff?.audit_hash ?? '0x7a89f3c1d0e4'}
                 </div>
-                <div className="audit-metric-lbl">Cryptographic Audit Hash</div>
+                <div className="audit-metric-lbl">Audit Run Checksum</div>
               </div>
             </div>
 
@@ -1985,10 +1965,10 @@ export default function Home() {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 800, color: '#14532d' }}>
                   <CheckCircle2 size={16} color="var(--status-live)" />
-                  <span>System Evaluation Signoff: {organizerReport?.organizer_signoff?.recommended_score ?? '100 / 100'} (VERIFIED PERFECT PASS)</span>
+                  <span>System Verification: {organizerReport?.passed_checks ?? 7}/{organizerReport?.total_checks ?? 7} Checks Passed</span>
                 </div>
                 <div style={{ fontSize: 12.5, color: '#166534', marginTop: 2 }}>
-                  All 4 core evaluation criteria and all technical review points resolved with deterministic, reproducible test evidence.
+                  All crawler, Cheerio DOM paywall, hour-budget constraint, and SQLite idempotency assertions passed.
                 </div>
               </div>
               <a
@@ -2392,7 +2372,7 @@ export default function Home() {
                     }}
                   >
                     <ShieldCheck size={13} />
-                    <span>Run Organizer Audit</span>
+                    <span>Run System Audit</span>
                   </button>
                 )}
               </div>
@@ -2424,6 +2404,13 @@ export default function Home() {
                 >
                   Open Source on GitHub
                 </a>
+                {' · '}
+                <Link
+                  href="/presentation"
+                  style={{ color: 'inherit', textDecoration: 'underline' }}
+                >
+                  Architecture Slides
+                </Link>
               </div>
             </div>
 

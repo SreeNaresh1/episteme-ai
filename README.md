@@ -24,6 +24,7 @@
 # Episteme AI — Autonomous Self-Healing Learning Path Engine
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-059669?style=flat&logo=vercel&logoColor=white)](https://episteme-ai-one.vercel.app)
+[![CI](https://github.com/SreeNaresh1/episteme-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/SreeNaresh1/episteme-ai/actions/workflows/ci.yml)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.4.2-111110?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19.3.0-111110?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-111110?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -37,6 +38,23 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 > **Episteme** (Ancient Greek: *ἐπιστήμη* — justified, verified truth vs. *δόξα* / unverified opinion) turns career goals into strictly time-bounded, prerequisite-ordered weekly roadmaps built exclusively from **free public courseware**, backed by **Cheerio DOM paywall & dead-link detection**, **curated self-healing swaps**, and **approval-gated calendar & audit-link dispatch**.
+
+![Episteme AI Dashboard](public/screenshots/dashboard-preview.png)
+
+---
+
+## 🛠️ Try the Paywall & Free-Course Verifier (CLI / API)
+
+Want to test the Cheerio DOM + Schema.org `isAccessibleForFree` detector on any course URL in 5 seconds without booting the full app?
+
+```bash
+# CLI (runs directly via Node + Cheerio)
+npm run check-url -- https://docs.python.org/3/tutorial/
+npm run check-url -- https://example.com --json
+
+# Or query the live API
+curl "https://episteme-ai-one.vercel.app/api/verify-url?url=https://docs.python.org/3/tutorial/"
+```
 
 ---
 
@@ -224,11 +242,17 @@ episteme-ai/
 │   ├── ISSUE_TEMPLATE/
 │   │   ├── bug_report.md
 │   │   └── feature_request.md
+│   ├── workflows/
+│   │   └── ci.yml                      # TypeScript, Cheerio self-test & Next.js build CI
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── data/
 │   └── organizer_audit_log.json        # Audit suite execution log
-├── public/                             # Static assets, icons & architecture SVG
+├── docs/
+│   ├── Episteme_AI_Presentation.pptx   # Architecture presentation deck
+│   └── ORGANIZER_VALIDATION.md         # Validation manifest
+├── public/                             # Static assets, icons, screenshots & SVG
 ├── scripts/
+│   ├── check-url.mjs                   # Standalone CLI paywall & Schema.org inspector
 │   ├── concept_document.html           # Printable concept document source
 │   ├── generate-icons.js
 │   └── organizer-cli.js                # CLI runner for the 7-check audit suite
@@ -243,7 +267,8 @@ episteme-ai/
 │   │   │   │       ├── inject-demo/    # Demo broken/paid URL injection for testing
 │   │   │   │       ├── progress/       # Milestones & completion tracking
 │   │   │   │       └── verify/         # Live re-check & self-healing swap
-│   │   │   └── testcases/              # Core validation suite (TC1-TC4)
+│   │   │   ├── testcases/              # Core validation suite (TC1-TC4)
+│   │   │   └── verify-url/             # Public URL & Cheerio DOM paywall API
 │   │   ├── presentation/               # Interactive presentation slide deck
 │   │   ├── globals.css                 # Tailwind v4 + editorial CSS variables
 │   │   ├── layout.tsx                  # Metadata & font loading
@@ -256,15 +281,15 @@ episteme-ai/
 │       ├── linkChecker.ts              # Paid/free patterns & HTTP link checker
 │       ├── organizerAudit.ts           # 7-check audit runner
 │       ├── pathGenerator.ts            # Gemini prompt, validator & fallback
+│       ├── paywallInspector.mjs        # Shared Cheerio DOM & JSON-LD paywall inspector
 │       ├── platformEnrollment.ts       # Audit deep links & GCal URL builder
-│       └── webDiscovery.ts             # Cheerio DOM paywall & JSON-LD inspector
+│       └── webDiscovery.ts             # Topic-matched replacement & DOM verification
 ├── ACCESSIBILITY.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── DEPLOYMENT.md
 ├── Dockerfile
 ├── LICENSE
-├── ORGANIZER_VALIDATION.md
 ├── SECURITY.md
 ├── docker-compose.yml
 ├── next.config.ts

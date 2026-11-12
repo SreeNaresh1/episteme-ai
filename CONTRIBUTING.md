@@ -47,7 +47,7 @@ Use the **[Feature Request](.github/ISSUE_TEMPLATE/feature_request.md)** templat
 ### Improving Documentation
 
 Documentation improvements are always welcome! You can:
-- Fix typos or unclear wording in `README.md`, `DEPLOYMENT.md`, or `ORGANIZER_VALIDATION.md`
+- Fix typos or unclear wording in `README.md`, `DEPLOYMENT.md`, or `docs/ORGANIZER_VALIDATION.md`
 - Add usage examples or diagrams
 - Translate documentation (open an issue first to coordinate)
 

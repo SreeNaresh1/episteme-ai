@@ -113,18 +113,20 @@ code, pre, .mono {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   height: 72px;
 }
 
 .brand-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   text-decoration: none;
   cursor: pointer;
   background: transparent;
   border: none;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .brand-glyph {
@@ -154,18 +156,19 @@ code, pre, .mono {
   background: var(--bg-subtle);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xs);
+  white-space: nowrap;
 }
 
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 16px;
 }
 
 .nav-link-btn {
   background: transparent;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-secondary);
   cursor: pointer;
@@ -174,6 +177,7 @@ code, pre, .mono {
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .nav-link-btn:hover {
@@ -189,23 +193,25 @@ code, pre, .mono {
 .header-cta-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .btn-header-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 18px;
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
   background: var(--text-primary);
   color: var(--text-inverse);
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--text-primary);
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .btn-header-cta:hover {
@@ -300,6 +306,7 @@ code, pre, .mono {
   border: 1px solid var(--border-light);
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .btn-secondary-light:hover:not(:disabled) {
