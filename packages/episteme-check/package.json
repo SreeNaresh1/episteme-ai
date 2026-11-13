@@ -1,0 +1,57 @@
+{
+  "name": "episteme-check",
+  "version": "1.0.0",
+  "description": "Fast paywall & Schema.org isAccessibleForFree detector for learning resources and course URLs",
+  "bin": {
+    "episteme-check": "./bin/episteme-check.js"
+  },
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "type": "module",
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node bin/episteme-check.js --self-test",
+    "start": "node bin/episteme-check.js"
+  },
+  "keywords": [
+    "paywall",
+    "paywall-detector",
+    "courseware",
+    "free-courses",
+    "schema-org",
+    "cheerio",
+    "education",
+    "episteme-ai",
+    "learning-path",
+    "open-courseware"
+  ],
+  "author": "Sree Naresh A <https://github.com/SreeNaresh1>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SreeNaresh1/episteme-ai.git",
+    "directory": "packages/episteme-check"
+  },
+  "bugs": {
+    "url": "https://github.com/SreeNaresh1/episteme-ai/issues"
+  },
+  "homepage": "https://github.com/SreeNaresh1/episteme-ai#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
