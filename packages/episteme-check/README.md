@@ -95,3 +95,4 @@ console.log(inspection.is_accessible_for_free_schema); // true
 ## 📜 License
 
 MIT © [Sree Naresh A](https://github.com/SreeNaresh1) — Part of [Episteme AI](https://github.com/SreeNaresh1/episteme-ai).
+
