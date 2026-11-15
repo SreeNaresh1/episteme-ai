@@ -2,27 +2,20 @@ import json
 import re
 import urllib.parse
 import bs4
+import gradio as gr
 import requests
 
-# Polyfill for huggingface_hub deprecation of HfFolder in Gradio 4
+# ZeroGPU integration (required for Hugging Face ZeroGPU tier)
 try:
-    import huggingface_hub
-    if not hasattr(huggingface_hub, "HfFolder"):
-        class HfFolder:
-            @staticmethod
-            def get_token():
-                return None
-            @staticmethod
-            def save_token(token):
-                pass
-            @staticmethod
-            def delete_token():
-                pass
-        huggingface_hub.HfFolder = HfFolder
-except Exception:
-    pass
+    import spaces
+    has_spaces = True
+except ImportError:
+    has_spaces = False
 
-import gradio as gr
+def gpu_guard(func):
+    if has_spaces and hasattr(spaces, "GPU"):
+        return spaces.GPU(func)
+    return func
 
 MODERN_USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -86,6 +79,7 @@ VETTED_CURRICULA = {
     ],
 }
 
+@gpu_guard
 def inspect_url(target_url: str):
     target_url = (target_url or "").strip()
     if not target_url or not target_url.startswith(("http://", "https://")):
@@ -192,6 +186,7 @@ def inspect_url(target_url: str):
         return f"❌ Inspection failed: {str(e)}", "{}"
 
 
+@gpu_guard
 def build_roadmap(career_goal: str, hours_per_week: int, duration_weeks: int, level: str):
     goal = (career_goal or "Full Stack Developer").strip()
     total_hours = hours_per_week * duration_weeks
@@ -231,12 +226,7 @@ def build_roadmap(career_goal: str, hours_per_week: int, duration_weeks: int, le
     return out
 
 
-try:
-    demo = gr.Blocks(title="Episteme AI - Learning Path Engine", theme=gr.themes.Soft(primary_hue="indigo"))
-except Exception:
-    demo = gr.Blocks(title="Episteme AI - Learning Path Engine")
-
-with demo:
+with gr.Blocks(title="Episteme AI - Learning Path Engine") as demo:
     gr.Markdown("""
 # 🎓 Episteme AI
 ### Autonomous Learning Path Engine & Live Paywall Verifier
@@ -282,8 +272,4 @@ Built with ❤️ by <a href="https://github.com/SreeNaresh1">Sree Naresh A</a> 
 """)
 
 if __name__ == "__main__":
-    launch_kwargs = {"server_name": "0.0.0.0", "server_port": 7860}
-    try:
-        demo.launch(**launch_kwargs, ssr_mode=False)
-    except TypeError:
-        demo.launch(**launch_kwargs)
+    demo.launch()
