@@ -1,0 +1,38 @@
+name: 'Episteme Paywall & Free Course Verifier'
+description: 'Detect hidden course paywalls and verify 100% free open courseware using Cheerio DOM and Schema.org metadata'
+author: 'Sree Naresh A'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  url:
+    description: 'Single course or documentation URL to inspect'
+    required: false
+    default: ''
+  urls:
+    description: 'Newline-separated list of URLs to inspect in batch'
+    required: false
+    default: ''
+  fail-on-paywall:
+    description: 'Fail the CI step with exit code 1 if a paywall is detected'
+    required: false
+    default: 'true'
+
+outputs:
+  all-free:
+    description: 'Whether all audited URLs were verified 100% free (true/false)'
+  total-checked:
+    description: 'Total number of URLs audited'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run Episteme Paywall & Free Course Verifier
+      shell: bash
+      run: |
+        node "${{ github.action_path }}/runner.mjs"
+      env:
+        INPUT_URL: ${{ inputs.url }}
+        INPUT_URLS: ${{ inputs.urls }}
+        INPUT_FAIL_ON_PAYWALL: ${{ inputs.fail-on-paywall }}
