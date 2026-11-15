@@ -212,7 +212,12 @@ def build_roadmap(career_goal: str, hours_per_week: int, duration_weeks: int, le
     return out
 
 
-with gr.Blocks(title="Episteme AI - Learning Path Engine", theme=gr.themes.Soft(primary_hue="indigo")) as demo:
+try:
+    demo = gr.Blocks(title="Episteme AI - Learning Path Engine", theme=gr.themes.Soft(primary_hue="indigo"))
+except Exception:
+    demo = gr.Blocks(title="Episteme AI - Learning Path Engine")
+
+with demo:
     gr.Markdown("""
 # 🎓 Episteme AI
 ### Autonomous Learning Path Engine & Live Paywall Verifier
@@ -258,4 +263,8 @@ Built with ❤️ by <a href="https://github.com/SreeNaresh1">Sree Naresh A</a> 
 """)
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    launch_kwargs = {"server_name": "0.0.0.0", "server_port": 7860}
+    try:
+        demo.launch(**launch_kwargs, ssr_mode=False)
+    except TypeError:
+        demo.launch(**launch_kwargs)
