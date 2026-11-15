@@ -2,8 +2,27 @@ import json
 import re
 import urllib.parse
 import bs4
-import gradio as gr
 import requests
+
+# Polyfill for huggingface_hub deprecation of HfFolder in Gradio 4
+try:
+    import huggingface_hub
+    if not hasattr(huggingface_hub, "HfFolder"):
+        class HfFolder:
+            @staticmethod
+            def get_token():
+                return None
+            @staticmethod
+            def save_token(token):
+                pass
+            @staticmethod
+            def delete_token():
+                pass
+        huggingface_hub.HfFolder = HfFolder
+except Exception:
+    pass
+
+import gradio as gr
 
 MODERN_USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
